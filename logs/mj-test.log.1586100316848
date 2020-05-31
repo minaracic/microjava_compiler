@@ -1,0 +1,231 @@
+INFO  17:24:54,484 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  17:24:54,535 - #2 program
+INFO  17:24:54,535 - #45 P
+INFO  17:24:54,535 - #7 const
+INFO  17:24:54,536 - #45 int
+INFO  17:24:54,536 - #45 size
+INFO  17:24:54,537 - #5 =
+INFO  17:24:54,537 - #42 10
+INFO  17:24:54,537 - #8 ;
+INFO  17:24:54,538 - #11 abstract
+INFO  17:24:54,539 - #15 class
+INFO  17:24:54,539 - #45 Tab
+INFO  17:24:54,539 - #3 {
+INFO  17:24:54,540 - #45 int
+INFO  17:24:54,541 - #45 size
+INFO  17:24:54,541 - #8 ;
+INFO  17:24:54,542 - #3 {
+INFO  17:24:54,542 - #11 abstract
+INFO  17:24:54,544 - #45 int
+INFO  17:24:54,544 - #45 getp
+INFO  17:24:54,544 - #13 (
+INFO  17:24:54,544 - #45 int
+INFO  17:24:54,544 - #45 i
+INFO  17:24:54,545 - #14 )
+INFO  17:24:54,547 - #11 abstract
+INFO  17:24:54,548 - #45 int
+INFO  17:24:54,549 - #45 getn
+INFO  17:24:54,549 - #13 (
+INFO  17:24:54,549 - #45 int
+INFO  17:24:54,549 - #45 i
+INFO  17:24:54,549 - #14 )
+INFO  17:24:54,549 - #45 int
+INFO  17:24:54,549 - #45 getSize
+INFO  17:24:54,549 - #13 (
+INFO  17:24:54,549 - #14 )
+INFO  17:24:54,550 - #3 {
+INFO  17:24:54,550 - #21 return
+INFO  17:24:54,551 - #45 size
+INFO  17:24:54,551 - #8 ;
+INFO  17:24:54,551 - #4 }
+INFO  17:24:54,552 - #4 }
+INFO  17:24:54,552 - #4 }
+INFO  17:24:54,553 - #15 class
+INFO  17:24:54,553 - #45 Table
+INFO  17:24:54,553 - #12 extends
+INFO  17:24:54,553 - #45 Tab
+INFO  17:24:54,553 - #3 {
+INFO  17:24:54,553 - #4 }
+ERROR 17:24:54,553 - 
+Sintaksna greska na liniji 13
+INFO  17:24:54,553 - #45 Table
+INFO  17:24:54,553 - #45 val
+INFO  17:24:54,554 - #8 ;
+INFO  17:24:54,554 - #3 {
+INFO  17:24:54,554 - #38 void
+INFO  17:24:54,554 - #45 main
+ERROR 17:24:54,555 - Izvrsen oporavak do ; u liniji 11
+INFO  17:24:54,556 - #13 (
+INFO  17:24:54,557 - #14 )
+INFO  17:24:54,557 - #45 int
+INFO  17:24:54,557 - #45 x
+INFO  17:24:54,557 - #6 ,
+INFO  17:24:54,557 - #45 i
+INFO  17:24:54,560 - #8 ;
+INFO  17:24:54,561 - #45 char
+INFO  17:24:54,561 - #45 c
+INFO  17:24:54,561 - #8 ;
+INFO  17:24:54,561 - #3 {
+INFO  17:24:54,561 - #4 }
+INFO  17:24:54,561 - #4 }
+INFO  17:24:54,564 - Program(
+ P
+  DeclListVarDecl(
+    DeclListAbstractClass(
+      DeclListConstDecl(
+        NoDeclList(
+        ) [NoDeclList]
+        ConstDecl(
+          Type(
+           int
+          ) [Type]
+         size
+          NUMBER(
+           10
+          ) [NUMBER]
+          NoConstValueList(
+          ) [NoConstValueList]
+        ) [ConstDecl]
+      ) [DeclListConstDecl]
+      AbstractClassWithMethods(
+       Tab
+        NoExtendsDecl(
+        ) [NoExtendsDecl]
+        WithVarDeclList(
+          NoVarDeclList(
+          ) [NoVarDeclList]
+          VarList(
+            Type(
+             int
+            ) [Type]
+           size
+            NoVarDeclListList(
+            ) [NoVarDeclListList]
+          ) [VarList]
+        ) [WithVarDeclList]
+        MethodList(
+          AbstractList(
+            AbstractList(
+              NoMethodOrAbstractMethodDeclList(
+              ) [NoMethodOrAbstractMethodDeclList]
+              AbstractMethodDecl(
+                TypeOrVoidType(
+                  Type(
+                   int
+                  ) [Type]
+                ) [TypeOrVoidType]
+               getp
+                WithFormPars(
+                  FormPars(
+                    Type(
+                     int
+                    ) [Type]
+                   i
+                    NoParent(
+                    ) [NoParent]
+                    NoFormParsList(
+                    ) [NoFormParsList]
+                  ) [FormPars]
+                ) [WithFormPars]
+              ) [AbstractMethodDecl]
+            ) [AbstractList]
+            AbstractMethodDecl(
+              TypeOrVoidType(
+                Type(
+                 int
+                ) [Type]
+              ) [TypeOrVoidType]
+             getn
+              WithFormPars(
+                FormPars(
+                  Type(
+                   int
+                  ) [Type]
+                 i
+                  NoParent(
+                  ) [NoParent]
+                  NoFormParsList(
+                  ) [NoFormParsList]
+                ) [FormPars]
+              ) [WithFormPars]
+            ) [AbstractMethodDecl]
+          ) [AbstractList]
+          MethodDecl(
+            TypeOrVoidType(
+              Type(
+               int
+              ) [Type]
+            ) [TypeOrVoidType]
+           getSize
+            NoFormPars(
+            ) [NoFormPars]
+            NoVarDeclList(
+            ) [NoVarDeclList]
+            WithStatementList(
+              NoStatementList(
+              ) [NoStatementList]
+              Return(
+                WithExpr(
+                  ExprTerm(
+                    TermFactor(
+                      FactorDesignator(
+                        DesignatorIdent(
+                         size
+                        ) [DesignatorIdent]
+                      ) [FactorDesignator]
+                    ) [TermFactor]
+                  ) [ExprTerm]
+                ) [WithExpr]
+              ) [Return]
+            ) [WithStatementList]
+          ) [MethodDecl]
+        ) [MethodList]
+      ) [AbstractClassWithMethods]
+    ) [DeclListAbstractClass]
+    VarDeclDerived2(
+    ) [VarDeclDerived2]
+  ) [DeclListVarDecl]
+  WithMethodDeclList(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      TypeOrVoidVoid(
+      ) [TypeOrVoidVoid]
+     main
+      NoFormPars(
+      ) [NoFormPars]
+      WithVarDeclList(
+        WithVarDeclList(
+          NoVarDeclList(
+          ) [NoVarDeclList]
+          VarList(
+            Type(
+             int
+            ) [Type]
+           x
+            WithVarDeclListList(
+              NoVarDeclListList(
+              ) [NoVarDeclListList]
+             i
+              NoParent(
+              ) [NoParent]
+            ) [WithVarDeclListList]
+          ) [VarList]
+        ) [WithVarDeclList]
+        VarList(
+          Type(
+           char
+          ) [Type]
+         c
+          NoVarDeclListList(
+          ) [NoVarDeclListList]
+        ) [VarList]
+      ) [WithVarDeclList]
+      NoStatementList(
+      ) [NoStatementList]
+    ) [MethodDecl]
+  ) [WithMethodDeclList]
+) [Program]
+INFO  17:24:54,584 - ===================================
+INFO  17:24:54,593 -  Print count calls = 0
+INFO  17:24:54,593 -  Deklarisanih promenljivih ima = 1

@@ -1,0 +1,140 @@
+INFO  00:47:10,568 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  00:47:10,653 - #2 program
+INFO  00:47:10,653 - #50 test302
+INFO  00:47:10,654 - #50 int
+INFO  00:47:10,656 - #50 x
+INFO  00:47:10,657 - #8 ;
+INFO  00:47:10,659 - #50 int
+INFO  00:47:10,659 - #50 a
+INFO  00:47:10,659 - #8 ;
+INFO  00:47:10,659 - #3 {
+INFO  00:47:10,659 - #38 void
+INFO  00:47:10,660 - #50 main
+INFO  00:47:10,660 - #13 (
+INFO  00:47:10,661 - #14 )
+INFO  00:47:10,662 - #3 {
+INFO  00:47:10,663 - #50 x
+INFO  00:47:10,664 - #5 =
+INFO  00:47:10,664 - #47 2
+INFO  00:47:10,665 - #8 ;
+INFO  00:47:10,665 - #50 x
+INFO  00:47:10,666 - #42 +=
+INFO  00:47:10,666 - #47 2
+INFO  00:47:10,668 - #8 ;
+INFO  00:47:10,668 - #22 print
+INFO  00:47:10,668 - #13 (
+INFO  00:47:10,668 - #50 x
+INFO  00:47:10,668 - #14 )
+INFO  00:47:10,668 - #8 ;
+INFO  00:47:10,668 - #4 }
+INFO  00:47:10,669 - #4 }
+INFO  00:47:10,685 - Program(
+  ProgName(
+   test302
+  ) [ProgName]
+  DeclListVarDecl(
+    DeclListVarDecl(
+      NoDeclList(
+      ) [NoDeclList]
+      VarList(
+        ConstType(
+          Type(
+           int
+          ) [Type]
+        ) [ConstType]
+       x
+        NoVarDeclListList(
+        ) [NoVarDeclListList]
+      ) [VarList]
+    ) [DeclListVarDecl]
+    VarList(
+      ConstType(
+        Type(
+         int
+        ) [Type]
+      ) [ConstType]
+     a
+      NoVarDeclListList(
+      ) [NoVarDeclListList]
+    ) [VarList]
+  ) [DeclListVarDecl]
+  WithMethodDeclList(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      FunctionVoid(
+       main
+      ) [FunctionVoid]
+      NoFormPars(
+      ) [NoFormPars]
+      NoVarDeclList(
+      ) [NoVarDeclList]
+      WithStatementList(
+        WithStatementList(
+          WithStatementList(
+            NoStatementList(
+            ) [NoStatementList]
+            StatementDesignator(
+              DesignatorAssign(
+                DesignatorIdent(
+                 x
+                ) [DesignatorIdent]
+                Assignop(
+                ) [Assignop]
+                ExprTerm(
+                  TermFactor(
+                    FactorConst(
+                      NUMBER(
+                       2
+                      ) [NUMBER]
+                    ) [FactorConst]
+                  ) [TermFactor]
+                ) [ExprTerm]
+              ) [DesignatorAssign]
+            ) [StatementDesignator]
+          ) [WithStatementList]
+          StatementDesignator(
+            DesignatorAssign(
+              DesignatorIdent(
+               x
+              ) [DesignatorIdent]
+              AssignAddopR(
+                PLUSEQ(
+                ) [PLUSEQ]
+              ) [AssignAddopR]
+              ExprTerm(
+                TermFactor(
+                  FactorConst(
+                    NUMBER(
+                     2
+                    ) [NUMBER]
+                  ) [FactorConst]
+                ) [TermFactor]
+              ) [ExprTerm]
+            ) [DesignatorAssign]
+          ) [StatementDesignator]
+        ) [WithStatementList]
+        Print(
+          ExprTerm(
+            TermFactor(
+              FactorDesignator(
+                DesignatorIdent(
+                 x
+                ) [DesignatorIdent]
+              ) [FactorDesignator]
+            ) [TermFactor]
+          ) [ExprTerm]
+        ) [Print]
+      ) [WithStatementList]
+    ) [MethodDecl]
+  ) [WithMethodDeclList]
+) [Program]
+INFO  00:47:10,686 - ==================SEMANTICKA OBRADA=================
+INFO  00:47:10,724 - Deklarisana promenljiva x na liniji 2
+INFO  00:47:10,724 - Deklarisana promenljiva a na liniji 3
+INFO  00:47:10,725 - Deklarisana metoda main na liniji 6
+INFO  00:47:10,725 - ==================SINTAKSNA ANALIZA=================
+INFO  00:47:10,725 - Ukupno deklarisanih globalnih promenljivih:		2
+INFO  00:47:10,726 - Ukupno deklarisanih globalnih nizova:			0
+INFO  00:47:10,726 - Ukupno deklarisanih globalnih konstanti:			0
+INFO  00:47:10,726 - Ukupno deklarisanih lokalnih promenljivih u main metodi:	0

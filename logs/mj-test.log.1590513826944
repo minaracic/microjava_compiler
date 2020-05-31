@@ -1,0 +1,112 @@
+INFO  14:30:33,477 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  14:30:33,547 - #2 program
+INFO  14:30:33,548 - #45 test302
+INFO  14:30:33,548 - #7 const
+INFO  14:30:33,549 - #45 int
+INFO  14:30:33,549 - #45 jedan
+INFO  14:30:33,552 - #5 =
+INFO  14:30:33,552 - #42 1
+INFO  14:30:33,552 - #8 ;
+INFO  14:30:33,553 - #3 {
+INFO  14:30:33,555 - #45 int
+INFO  14:30:33,557 - #45 sum
+INFO  14:30:33,557 - #13 (
+INFO  14:30:33,557 - #45 int
+INFO  14:30:33,557 - #45 z
+INFO  14:30:33,557 - #6 ,
+INFO  14:30:33,560 - #45 int
+INFO  14:30:33,560 - #45 d
+INFO  14:30:33,560 - #14 )
+INFO  14:30:33,562 - #3 {
+INFO  14:30:33,563 - #21 return
+INFO  14:30:33,564 - #45 z
+INFO  14:30:33,564 - #35 +
+INFO  14:30:33,565 - #45 d
+INFO  14:30:33,567 - #8 ;
+INFO  14:30:33,567 - #4 }
+INFO  14:30:33,568 - #4 }
+INFO  14:30:33,587 - Program(
+  ProgramName(
+   test302
+  ) [ProgramName]
+  DeclListConstDecl(
+    NoDeclList(
+    ) [NoDeclList]
+    ConstDecl(
+      ConstType(
+        Type(
+         int
+        ) [Type]
+      ) [ConstType]
+     jedan
+      NUMBER(
+       1
+      ) [NUMBER]
+      NoConstValueList(
+      ) [NoConstValueList]
+    ) [ConstDecl]
+  ) [DeclListConstDecl]
+  WithMethodDeclList(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      TypeOrVoidType(
+        Type(
+         int
+        ) [Type]
+      ) [TypeOrVoidType]
+     sum
+      WithFormPars(
+        FormPars(
+          Type(
+           int
+          ) [Type]
+         z
+          NoParent(
+          ) [NoParent]
+          WithFormParsList(
+            NoFormParsList(
+            ) [NoFormParsList]
+            Type(
+             int
+            ) [Type]
+           d
+            NoParent(
+            ) [NoParent]
+          ) [WithFormParsList]
+        ) [FormPars]
+      ) [WithFormPars]
+      NoVarDeclList(
+      ) [NoVarDeclList]
+      WithStatementList(
+        NoStatementList(
+        ) [NoStatementList]
+        Return(
+          WithExpr(
+            ExprAdd(
+              ExprTerm(
+                TermFactor(
+                  FactorDesignator(
+                    DesignatorIdent(
+                     z
+                    ) [DesignatorIdent]
+                  ) [FactorDesignator]
+                ) [TermFactor]
+              ) [ExprTerm]
+              AddopPls(
+              ) [AddopPls]
+              TermFactor(
+                FactorDesignator(
+                  DesignatorIdent(
+                   d
+                  ) [DesignatorIdent]
+                ) [FactorDesignator]
+              ) [TermFactor]
+            ) [ExprAdd]
+          ) [WithExpr]
+        ) [Return]
+      ) [WithStatementList]
+    ) [MethodDecl]
+  ) [WithMethodDeclList]
+) [Program]
+INFO  14:30:33,587 - ===================================

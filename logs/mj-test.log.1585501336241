@@ -1,0 +1,50 @@
+INFO  19:00:49,788 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  19:00:49,848 - #2 program
+INFO  19:00:49,849 - #45 P
+INFO  19:00:49,849 - #7 const
+INFO  19:00:49,851 - #45 int
+INFO  19:00:49,851 - #45 size
+INFO  19:00:49,854 - #5 =
+INFO  19:00:49,854 - #42 10
+INFO  19:00:49,854 - #8 ;
+INFO  19:00:49,862 - #11 abstract
+INFO  19:00:49,890 - #15 class
+INFO  19:00:49,890 - #45 Tab
+INFO  19:00:49,890 - #3 {
+INFO  19:00:49,894 - #45 int
+INFO  19:00:49,898 - #45 size
+INFO  19:00:49,899 - #8 ;
+INFO  19:00:49,922 - #3 {
+INFO  19:00:49,922 - #11 abstract
+INFO  19:00:49,925 - #45 int
+INFO  19:00:49,926 - #45 getp
+INFO  19:00:49,926 - #13 (
+INFO  19:00:49,926 - #45 int
+INFO  19:00:49,926 - #45 i
+INFO  19:00:49,927 - #14 )
+INFO  19:00:49,939 - #8 ;
+ERROR 19:00:49,939 - 
+Sintaksna greska na liniji 7
+INFO  19:00:49,940 - #11 abstract
+INFO  19:00:49,940 - #45 int
+INFO  19:00:49,940 - #45 getn
+INFO  19:00:49,941 - #13 (
+INFO  19:00:49,941 - #45 int
+INFO  19:00:49,941 - #45 i
+INFO  19:00:49,941 - #14 )
+INFO  19:00:49,941 - #8 ;
+INFO  19:00:49,941 - #45 int
+INFO  19:00:49,942 - #45 getSize
+INFO  19:00:49,942 - #13 (
+ERROR 19:00:49,942 - Izvrsen oporavak do ; u liniji 6
+ERROR 19:00:49,944 - 
+Sintaksna greska na liniji 9
+INFO  19:00:49,944 - #14 )
+INFO  19:00:49,944 - #3 {
+INFO  19:00:49,944 - #21 return
+INFO  19:00:49,945 - #45 size
+INFO  19:00:49,945 - #8 ;
+INFO  19:00:49,945 - #4 }
+INFO  19:00:49,945 - #4 }
+INFO  19:00:49,945 - #4 }
+ERROR 19:00:49,945 - Fatalna greska, parsiranje se ne moze nastaviti na liniji 11

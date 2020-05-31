@@ -1,0 +1,19 @@
+INFO  19:05:47,315 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  19:05:47,371 - #2 program
+INFO  19:05:47,371 - #45 P
+INFO  19:05:47,371 - #45 int
+INFO  19:05:47,372 - #45 a
+INFO  19:05:47,373 - #8 ;
+INFO  19:05:47,374 - #45 int
+INFO  19:05:47,375 - #45 b
+INFO  19:05:47,375 - #8 ;
+INFO  19:05:47,375 - #3 {
+INFO  19:05:47,375 - #38 void
+INFO  19:05:47,376 - #45 main
+INFO  19:05:47,376 - #13 (
+INFO  19:05:47,376 - #14 )
+INFO  19:05:47,377 - #3 {
+INFO  19:05:47,378 - #22 print
+INFO  19:05:47,379 - #13 (
+INFO  19:05:47,379 - #43 "mina"
+INFO  19:05:47,379 - #14 )

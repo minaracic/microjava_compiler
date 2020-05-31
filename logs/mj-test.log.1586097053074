@@ -1,0 +1,57 @@
+INFO  16:30:04,602 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  16:30:04,654 - #2 program
+INFO  16:30:04,654 - #45 P
+INFO  16:30:04,655 - #45 int
+INFO  16:30:04,657 - #45 a
+INFO  16:30:04,659 - #6 ,
+INFO  16:30:04,660 - #45 b
+INFO  16:30:04,660 - #6 ,
+INFO  16:30:04,661 - #45 c
+INFO  16:30:04,662 - #9 [
+INFO  16:30:04,662 - #10 ]
+INFO  16:30:04,662 - #8 ;
+INFO  16:30:04,662 - #45 int
+INFO  16:30:04,663 - #45 f
+INFO  16:30:04,663 - #8 ;
+INFO  16:30:04,663 - #3 {
+INFO  16:30:04,663 - #4 }
+INFO  16:30:04,665 - Program(
+ P
+  DeclListVarDecl(
+    DeclListVarDecl(
+      NoDeclList(
+      ) [NoDeclList]
+      VarList(
+        Type(
+         int
+        ) [Type]
+       a
+        WithVarDeclListList(
+          WithVarDeclListList(
+            NoVarDeclListList(
+            ) [NoVarDeclListList]
+           b
+            NoParent(
+            ) [NoParent]
+          ) [WithVarDeclListList]
+         c
+          WithBracket(
+          ) [WithBracket]
+        ) [WithVarDeclListList]
+      ) [VarList]
+    ) [DeclListVarDecl]
+    VarList(
+      Type(
+       int
+      ) [Type]
+     f
+      NoVarDeclListList(
+      ) [NoVarDeclListList]
+    ) [VarList]
+  ) [DeclListVarDecl]
+  NoMethodDeclList(
+  ) [NoMethodDeclList]
+) [Program]
+INFO  16:30:04,665 - ===================================
+INFO  16:30:04,669 -  Print count calls = 0
+INFO  16:30:04,669 -  Deklarisanih promenljivih ima = 0

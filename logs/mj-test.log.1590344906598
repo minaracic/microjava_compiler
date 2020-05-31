@@ -1,0 +1,129 @@
+INFO  20:05:08,648 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  20:05:08,712 - #2 program
+INFO  20:05:08,712 - #45 test302
+INFO  20:05:08,712 - #7 const
+INFO  20:05:08,713 - #45 int
+INFO  20:05:08,714 - #45 jedan
+INFO  20:05:08,715 - #5 =
+INFO  20:05:08,715 - #42 1
+INFO  20:05:08,716 - #8 ;
+INFO  20:05:08,717 - #3 {
+INFO  20:05:08,718 - #45 int
+INFO  20:05:08,719 - #45 sum
+INFO  20:05:08,720 - #13 (
+INFO  20:05:08,720 - #45 int
+INFO  20:05:08,720 - #45 z
+INFO  20:05:08,720 - #6 ,
+INFO  20:05:08,722 - #45 int
+INFO  20:05:08,723 - #45 d
+INFO  20:05:08,723 - #14 )
+INFO  20:05:08,724 - #3 {
+INFO  20:05:08,724 - #21 return
+INFO  20:05:08,725 - #45 z
+INFO  20:05:08,725 - #35 +
+INFO  20:05:08,725 - #45 d
+INFO  20:05:08,726 - #8 ;
+INFO  20:05:08,727 - #4 }
+INFO  20:05:08,727 - #38 void
+INFO  20:05:08,728 - #45 main
+INFO  20:05:08,728 - #13 (
+INFO  20:05:08,729 - #14 )
+INFO  20:05:08,729 - #3 {
+INFO  20:05:08,729 - #4 }
+INFO  20:05:08,729 - #4 }
+INFO  20:05:08,740 - Program(
+  ProgramName(
+   test302
+  ) [ProgramName]
+  DeclListConstDecl(
+    NoDeclList(
+    ) [NoDeclList]
+    ConstDecl(
+      Type(
+       int
+      ) [Type]
+     jedan
+      NUMBER(
+       1
+      ) [NUMBER]
+      NoConstValueList(
+      ) [NoConstValueList]
+    ) [ConstDecl]
+  ) [DeclListConstDecl]
+  WithMethodDeclList(
+    WithMethodDeclList(
+      NoMethodDeclList(
+      ) [NoMethodDeclList]
+      MethodDecl(
+        TypeOrVoidType(
+          Type(
+           int
+          ) [Type]
+        ) [TypeOrVoidType]
+       sum
+        WithFormPars(
+          FormPars(
+            Type(
+             int
+            ) [Type]
+           z
+            NoParent(
+            ) [NoParent]
+            WithFormParsList(
+              NoFormParsList(
+              ) [NoFormParsList]
+              Type(
+               int
+              ) [Type]
+             d
+              NoParent(
+              ) [NoParent]
+            ) [WithFormParsList]
+          ) [FormPars]
+        ) [WithFormPars]
+        NoVarDeclList(
+        ) [NoVarDeclList]
+        WithStatementList(
+          NoStatementList(
+          ) [NoStatementList]
+          Return(
+            WithExpr(
+              ExprAdd(
+                ExprTerm(
+                  TermFactor(
+                    FactorDesignator(
+                      DesignatorIdent(
+                       z
+                      ) [DesignatorIdent]
+                    ) [FactorDesignator]
+                  ) [TermFactor]
+                ) [ExprTerm]
+                AddopPls(
+                ) [AddopPls]
+                TermFactor(
+                  FactorDesignator(
+                    DesignatorIdent(
+                     d
+                    ) [DesignatorIdent]
+                  ) [FactorDesignator]
+                ) [TermFactor]
+              ) [ExprAdd]
+            ) [WithExpr]
+          ) [Return]
+        ) [WithStatementList]
+      ) [MethodDecl]
+    ) [WithMethodDeclList]
+    MethodDecl(
+      TypeOrVoidVoid(
+      ) [TypeOrVoidVoid]
+     main
+      NoFormPars(
+      ) [NoFormPars]
+      NoVarDeclList(
+      ) [NoVarDeclList]
+      NoStatementList(
+      ) [NoStatementList]
+    ) [MethodDecl]
+  ) [WithMethodDeclList]
+) [Program]
+INFO  20:05:08,741 - ===================================

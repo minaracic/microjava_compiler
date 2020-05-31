@@ -1,0 +1,118 @@
+INFO  14:00:35,336 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  14:00:35,393 - #2 program
+INFO  14:00:35,393 - #45 test302
+INFO  14:00:35,393 - #7 const
+INFO  14:00:35,394 - #45 int
+INFO  14:00:35,395 - #45 jedan
+INFO  14:00:35,397 - #5 =
+INFO  14:00:35,397 - #42 1
+INFO  14:00:35,397 - #8 ;
+INFO  14:00:35,398 - #3 {
+INFO  14:00:35,399 - #45 int
+INFO  14:00:35,401 - #45 sum
+INFO  14:00:35,401 - #13 (
+INFO  14:00:35,401 - #45 int
+INFO  14:00:35,401 - #45 z
+INFO  14:00:35,402 - #6 ,
+INFO  14:00:35,404 - #45 int
+INFO  14:00:35,405 - #45 d
+INFO  14:00:35,405 - #14 )
+INFO  14:00:35,406 - #3 {
+INFO  14:00:35,407 - #21 return
+INFO  14:00:35,408 - #45 z
+INFO  14:00:35,408 - #35 +
+INFO  14:00:35,409 - #45 d
+INFO  14:00:35,410 - #8 ;
+INFO  14:00:35,411 - #4 }
+INFO  14:00:35,411 - #4 }
+INFO  14:00:35,427 - Program(
+  ProgramName(
+   test302
+  ) [ProgramName]
+  DeclListConstDecl(
+    NoDeclList(
+    ) [NoDeclList]
+    ConstDecl(
+      ConstDeclType(
+        Type(
+         int
+        ) [Type]
+      ) [ConstDeclType]
+     jedan
+      NUMBER(
+       1
+      ) [NUMBER]
+      NoConstValueList(
+      ) [NoConstValueList]
+    ) [ConstDecl]
+  ) [DeclListConstDecl]
+  WithMethodDeclList(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      TypeOrVoidType(
+        Type(
+         int
+        ) [Type]
+      ) [TypeOrVoidType]
+     sum
+      WithFormPars(
+        FormPars(
+          Type(
+           int
+          ) [Type]
+         z
+          NoParent(
+          ) [NoParent]
+          WithFormParsList(
+            NoFormParsList(
+            ) [NoFormParsList]
+            Type(
+             int
+            ) [Type]
+           d
+            NoParent(
+            ) [NoParent]
+          ) [WithFormParsList]
+        ) [FormPars]
+      ) [WithFormPars]
+      NoVarDeclList(
+      ) [NoVarDeclList]
+      WithStatementList(
+        NoStatementList(
+        ) [NoStatementList]
+        Return(
+          WithExpr(
+            ExprAdd(
+              ExprTerm(
+                TermFactor(
+                  FactorDesignator(
+                    DesignatorIdent(
+                     z
+                    ) [DesignatorIdent]
+                  ) [FactorDesignator]
+                ) [TermFactor]
+              ) [ExprTerm]
+              AddopPls(
+              ) [AddopPls]
+              TermFactor(
+                FactorDesignator(
+                  DesignatorIdent(
+                   d
+                  ) [DesignatorIdent]
+                ) [FactorDesignator]
+              ) [TermFactor]
+            ) [ExprAdd]
+          ) [WithExpr]
+        ) [Return]
+      ) [WithStatementList]
+    ) [MethodDecl]
+  ) [WithMethodDeclList]
+) [Program]
+INFO  14:00:35,427 - ===================================
+INFO  14:00:35,431 - ConstType
+INFO  14:00:35,431 - rs.ac.bg.etf.pp1.ast.ConstDeclType@50040f0c
+INFO  14:00:35,431 - rs.etf.pp1.symboltable.concepts.Struct@2dda6444
+INFO  14:00:35,432 -  Print count calls = 0
+INFO  14:00:35,432 -  Deklarisanih promenljivih ima = 0
+INFO  14:00:35,432 -  Addop ima = 0

@@ -1,0 +1,141 @@
+INFO  15:00:40,526 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  15:00:40,588 - #2 program
+INFO  15:00:40,588 - #45 test302
+INFO  15:00:40,589 - #7 const
+INFO  15:00:40,590 - #45 int
+INFO  15:00:40,590 - #45 jedan
+INFO  15:00:40,593 - #8 ;
+ERROR 15:00:40,593 - 
+Sintaksna greska na liniji 2
+INFO  15:00:40,593 - #7 const
+INFO  15:00:40,593 - #45 char
+INFO  15:00:40,594 - #45 v
+ERROR 15:00:40,595 - Izvrsen oporavak do ; u liniji 2
+INFO  15:00:40,595 - #8 ;
+ERROR 15:00:40,596 - 
+Sintaksna greska na liniji 3
+INFO  15:00:40,596 - #45 int
+INFO  15:00:40,596 - #45 a
+INFO  15:00:40,596 - #8 ;
+ERROR 15:00:40,596 - Izvrsen oporavak do ; u liniji 3
+INFO  15:00:40,598 - #45 int
+INFO  15:00:40,599 - #45 as
+INFO  15:00:40,600 - #6 ,
+INFO  15:00:40,600 - #45 aba
+INFO  15:00:40,600 - #9 [
+INFO  15:00:40,600 - #10 ]
+INFO  15:00:40,600 - #6 ,
+INFO  15:00:40,601 - #45 abas
+INFO  15:00:40,601 - #9 [
+INFO  15:00:40,601 - #10 ]
+INFO  15:00:40,601 - #6 ,
+INFO  15:00:40,601 - #45 va
+INFO  15:00:40,602 - #8 ;
+INFO  15:00:40,603 - #7 const
+INFO  15:00:40,603 - #45 char
+INFO  15:00:40,603 - #45 c
+INFO  15:00:40,603 - #8 ;
+ERROR 15:00:40,603 - 
+Sintaksna greska na liniji 7
+INFO  15:00:40,603 - #3 {
+INFO  15:00:40,603 - #38 void
+INFO  15:00:40,603 - #45 main
+ERROR 15:00:40,603 - Izvrsen oporavak do ; u liniji 7
+INFO  15:00:40,604 - #13 (
+INFO  15:00:40,605 - #45 int
+INFO  15:00:40,605 - #45 a
+INFO  15:00:40,605 - #14 )
+INFO  15:00:40,607 - #3 {
+INFO  15:00:40,608 - #4 }
+INFO  15:00:40,610 - #4 }
+INFO  15:00:40,622 - Program(
+  ProgName(
+   test302
+  ) [ProgName]
+  DeclListVarDecl(
+    DeclListVarDecl(
+      DeclListVarDecl(
+        DeclListVarDecl(
+          DeclListVarDecl(
+            NoDeclList(
+            ) [NoDeclList]
+            VarDeclDerived2(
+            ) [VarDeclDerived2]
+          ) [DeclListVarDecl]
+          VarDeclDerived2(
+          ) [VarDeclDerived2]
+        ) [DeclListVarDecl]
+        VarList(
+          ConstType(
+            Type(
+             int
+            ) [Type]
+          ) [ConstType]
+         a
+          NoVarDeclListList(
+          ) [NoVarDeclListList]
+        ) [VarList]
+      ) [DeclListVarDecl]
+      VarList(
+        ConstType(
+          Type(
+           int
+          ) [Type]
+        ) [ConstType]
+       as
+        VarDeclSingle(
+          VarArray(
+            VarArray(
+              NoVarDeclListList(
+              ) [NoVarDeclListList]
+              ArrayInit(
+               aba
+              ) [ArrayInit]
+            ) [VarArray]
+            ArrayInit(
+             abas
+            ) [ArrayInit]
+          ) [VarArray]
+         va
+        ) [VarDeclSingle]
+      ) [VarList]
+    ) [DeclListVarDecl]
+    VarDeclDerived2(
+    ) [VarDeclDerived2]
+  ) [DeclListVarDecl]
+  WithMethodDeclList(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      FunctionVoid(
+       main
+      ) [FunctionVoid]
+      WithFormPars(
+        FormPars(
+          Type(
+           int
+          ) [Type]
+         a
+          NoParent(
+          ) [NoParent]
+          NoFormParsList(
+          ) [NoFormParsList]
+        ) [FormPars]
+      ) [WithFormPars]
+      NoVarDeclList(
+      ) [NoVarDeclList]
+      NoStatementList(
+      ) [NoStatementList]
+    ) [MethodDecl]
+  ) [WithMethodDeclList]
+) [Program]
+INFO  15:00:40,623 - ==================SEMANTICKA OBRADA=================
+INFO  15:00:40,626 - Deklarisana promenljiva a na liniji 4
+INFO  15:00:40,626 - Deklarisana promenljiva aba na liniji 5
+INFO  15:00:40,626 - Deklarisana promenljiva abas na liniji 5
+INFO  15:00:40,626 - Deklarisana promenljiva va na liniji 4
+INFO  15:00:40,626 - Deklarisana promenljiva as na liniji 5
+INFO  15:00:40,626 - ==================SINTAKSNA ANALIZA=================
+INFO  15:00:40,627 - Ukupno deklarisanih globalnih promenljivih:	3
+INFO  15:00:40,627 - Ukupno deklarisanih globalnih nizova:		2
+INFO  15:00:40,627 - Ukupno deklarisanih globalnih konstanti:		0

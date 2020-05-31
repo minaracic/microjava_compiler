@@ -1,0 +1,35 @@
+INFO  14:30:20,187 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  14:30:20,264 - #2 program
+INFO  14:30:20,265 - #45 test302
+INFO  14:30:20,265 - #7 const
+INFO  14:30:20,267 - #45 int
+INFO  14:30:20,267 - #45 jedan
+INFO  14:30:20,268 - #5 =
+INFO  14:30:20,269 - #42 1
+INFO  14:30:20,271 - #8 ;
+INFO  14:30:20,272 - #45 char
+INFO  14:30:20,273 - #45 a
+INFO  14:30:20,274 - #5 =
+ERROR 14:30:20,274 - 
+Sintaksna greska na liniji 6
+INFO  14:30:20,275 - #45 a
+INFO  14:30:20,275 - #8 ;
+INFO  14:30:20,276 - #3 {
+INFO  14:30:20,276 - #45 int
+INFO  14:30:20,276 - #45 sum
+INFO  14:30:20,276 - #13 (
+INFO  14:30:20,277 - #45 int
+INFO  14:30:20,277 - #45 z
+INFO  14:30:20,277 - #6 ,
+INFO  14:30:20,277 - #45 int
+INFO  14:30:20,277 - #45 d
+INFO  14:30:20,277 - #14 )
+INFO  14:30:20,277 - #3 {
+INFO  14:30:20,277 - #21 return
+INFO  14:30:20,277 - #45 z
+INFO  14:30:20,278 - #35 +
+INFO  14:30:20,278 - #45 d
+INFO  14:30:20,278 - #8 ;
+INFO  14:30:20,278 - #4 }
+INFO  14:30:20,278 - #4 }
+ERROR 14:30:20,279 - Fatalna greska, parsiranje se ne moze nastaviti na liniji 19

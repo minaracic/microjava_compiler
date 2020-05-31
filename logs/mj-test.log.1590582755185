@@ -1,0 +1,234 @@
+INFO  14:32:14,712 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  14:32:14,782 - #2 program
+INFO  14:32:14,782 - #45 test302
+INFO  14:32:14,782 - #7 const
+INFO  14:32:14,784 - #45 int
+INFO  14:32:14,784 - #45 jedan
+INFO  14:32:14,786 - #5 =
+INFO  14:32:14,786 - #42 1
+INFO  14:32:14,786 - #8 ;
+INFO  14:32:14,788 - #7 const
+INFO  14:32:14,789 - #45 cahr
+INFO  14:32:14,790 - #45 v
+INFO  14:32:14,790 - #5 =
+INFO  14:32:14,790 - #43 2
+INFO  14:32:14,790 - #8 ;
+INFO  14:32:14,791 - #45 int
+INFO  14:32:14,791 - #45 a
+INFO  14:32:14,791 - #8 ;
+INFO  14:32:14,792 - #45 int
+INFO  14:32:14,793 - #45 as
+INFO  14:32:14,794 - #6 ,
+INFO  14:32:14,794 - #45 aba
+INFO  14:32:14,794 - #9 [
+INFO  14:32:14,794 - #10 ]
+INFO  14:32:14,794 - #6 ,
+INFO  14:32:14,794 - #45 abas
+INFO  14:32:14,794 - #9 [
+INFO  14:32:14,794 - #10 ]
+INFO  14:32:14,794 - #6 ,
+INFO  14:32:14,794 - #45 va
+INFO  14:32:14,795 - #8 ;
+INFO  14:32:14,795 - #7 const
+INFO  14:32:14,795 - #45 char
+INFO  14:32:14,795 - #45 c
+INFO  14:32:14,795 - #5 =
+INFO  14:32:14,795 - #43 2
+INFO  14:32:14,795 - #8 ;
+INFO  14:32:14,795 - #3 {
+INFO  14:32:14,795 - #45 int
+INFO  14:32:14,796 - #45 sum
+INFO  14:32:14,796 - #13 (
+INFO  14:32:14,796 - #45 int
+INFO  14:32:14,796 - #45 z
+INFO  14:32:14,797 - #6 ,
+INFO  14:32:14,799 - #45 int
+INFO  14:32:14,799 - #45 d
+INFO  14:32:14,799 - #14 )
+INFO  14:32:14,801 - #3 {
+INFO  14:32:14,802 - #21 return
+INFO  14:32:14,803 - #45 z
+INFO  14:32:14,803 - #35 +
+INFO  14:32:14,804 - #45 d
+INFO  14:32:14,805 - #8 ;
+INFO  14:32:14,806 - #4 }
+INFO  14:32:14,806 - #38 void
+INFO  14:32:14,807 - #45 main
+INFO  14:32:14,808 - #13 (
+INFO  14:32:14,809 - #14 )
+INFO  14:32:14,809 - #3 {
+INFO  14:32:14,809 - #4 }
+INFO  14:32:14,810 - #4 }
+INFO  14:32:14,827 - Program(
+  ProgName(
+   test302
+  ) [ProgName]
+  DeclListConstDecl(
+    DeclListVarDecl(
+      DeclListVarDecl(
+        DeclListConstDecl(
+          DeclListConstDecl(
+            NoDeclList(
+            ) [NoDeclList]
+            ConstDecl(
+              ConstType(
+                Type(
+                 int
+                ) [Type]
+              ) [ConstType]
+              ConstVarDecl(
+               jedan
+                NUMBER(
+                 1
+                ) [NUMBER]
+              ) [ConstVarDecl]
+              NoConstValueList(
+              ) [NoConstValueList]
+            ) [ConstDecl]
+          ) [DeclListConstDecl]
+          ConstDecl(
+            ConstType(
+              Type(
+               cahr
+              ) [Type]
+            ) [ConstType]
+            ConstVarDecl(
+             v
+              CHAR(
+               2
+              ) [CHAR]
+            ) [ConstVarDecl]
+            NoConstValueList(
+            ) [NoConstValueList]
+          ) [ConstDecl]
+        ) [DeclListConstDecl]
+        VarList(
+          ConstType(
+            Type(
+             int
+            ) [Type]
+          ) [ConstType]
+         a
+          NoVarDeclListList(
+          ) [NoVarDeclListList]
+        ) [VarList]
+      ) [DeclListVarDecl]
+      VarList(
+        ConstType(
+          Type(
+           int
+          ) [Type]
+        ) [ConstType]
+       as
+        VarDeclSingle(
+          VarArray(
+            VarArray(
+              NoVarDeclListList(
+              ) [NoVarDeclListList]
+              ArrayInit(
+               aba
+              ) [ArrayInit]
+            ) [VarArray]
+            ArrayInit(
+             abas
+            ) [ArrayInit]
+          ) [VarArray]
+         va
+        ) [VarDeclSingle]
+      ) [VarList]
+    ) [DeclListVarDecl]
+    ConstDecl(
+      ConstType(
+        Type(
+         char
+        ) [Type]
+      ) [ConstType]
+      ConstVarDecl(
+       c
+        CHAR(
+         2
+        ) [CHAR]
+      ) [ConstVarDecl]
+      NoConstValueList(
+      ) [NoConstValueList]
+    ) [ConstDecl]
+  ) [DeclListConstDecl]
+  WithMethodDeclList(
+    WithMethodDeclList(
+      NoMethodDeclList(
+      ) [NoMethodDeclList]
+      MethodDecl(
+        TypeOrVoidType(
+          Type(
+           int
+          ) [Type]
+        ) [TypeOrVoidType]
+       sum
+        WithFormPars(
+          FormPars(
+            Type(
+             int
+            ) [Type]
+           z
+            NoParent(
+            ) [NoParent]
+            WithFormParsList(
+              NoFormParsList(
+              ) [NoFormParsList]
+              Type(
+               int
+              ) [Type]
+             d
+              NoParent(
+              ) [NoParent]
+            ) [WithFormParsList]
+          ) [FormPars]
+        ) [WithFormPars]
+        NoVarDeclList(
+        ) [NoVarDeclList]
+        WithStatementList(
+          NoStatementList(
+          ) [NoStatementList]
+          Return(
+            WithExpr(
+              ExprAdd(
+                ExprTerm(
+                  TermFactor(
+                    FactorDesignator(
+                      DesignatorIdent(
+                       z
+                      ) [DesignatorIdent]
+                    ) [FactorDesignator]
+                  ) [TermFactor]
+                ) [ExprTerm]
+                AddopPls(
+                ) [AddopPls]
+                TermFactor(
+                  FactorDesignator(
+                    DesignatorIdent(
+                     d
+                    ) [DesignatorIdent]
+                  ) [FactorDesignator]
+                ) [TermFactor]
+              ) [ExprAdd]
+            ) [WithExpr]
+          ) [Return]
+        ) [WithStatementList]
+      ) [MethodDecl]
+    ) [WithMethodDeclList]
+    MethodDecl(
+      TypeOrVoidVoid(
+      ) [TypeOrVoidVoid]
+     main
+      NoFormPars(
+      ) [NoFormPars]
+      NoVarDeclList(
+      ) [NoVarDeclList]
+      NoStatementList(
+      ) [NoStatementList]
+    ) [MethodDecl]
+  ) [WithMethodDeclList]
+) [Program]
+INFO  14:32:14,827 - ==================SEMANTICKA OBRADA=================
+INFO  14:32:14,830 - Deklarisana promenljiva jedan na liniji 2
+ERROR 14:32:14,830 - Nije pronadjen tip cahr u tabeli simbola! 

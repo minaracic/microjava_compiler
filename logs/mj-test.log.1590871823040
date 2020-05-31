@@ -1,0 +1,141 @@
+INFO  22:48:14,097 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  22:48:14,184 - #2 program
+INFO  22:48:14,184 - #50 test302
+INFO  22:48:14,184 - #50 int
+INFO  22:48:14,186 - #50 x
+INFO  22:48:14,189 - #8 ;
+INFO  22:48:14,189 - #50 int
+INFO  22:48:14,190 - #50 a
+INFO  22:48:14,190 - #8 ;
+INFO  22:48:14,190 - #3 {
+INFO  22:48:14,190 - #38 void
+INFO  22:48:14,191 - #50 main
+INFO  22:48:14,191 - #13 (
+INFO  22:48:14,191 - #14 )
+INFO  22:48:14,192 - #3 {
+INFO  22:48:14,193 - #50 x
+INFO  22:48:14,194 - #5 =
+INFO  22:48:14,194 - #47 2
+INFO  22:48:14,194 - #8 ;
+INFO  22:48:14,195 - #50 x
+INFO  22:48:14,196 - #42 +=
+INFO  22:48:14,196 - #47 2
+INFO  22:48:14,197 - #8 ;
+INFO  22:48:14,197 - #22 print
+INFO  22:48:14,198 - #13 (
+INFO  22:48:14,198 - #50 x
+INFO  22:48:14,198 - #14 )
+INFO  22:48:14,198 - #8 ;
+INFO  22:48:14,198 - #4 }
+INFO  22:48:14,198 - #4 }
+INFO  22:48:14,221 - Program(
+  ProgName(
+   test302
+  ) [ProgName]
+  DeclListVarDecl(
+    DeclListVarDecl(
+      NoDeclList(
+      ) [NoDeclList]
+      VarList(
+        ConstType(
+          Type(
+           int
+          ) [Type]
+        ) [ConstType]
+       x
+        NoVarDeclListList(
+        ) [NoVarDeclListList]
+      ) [VarList]
+    ) [DeclListVarDecl]
+    VarList(
+      ConstType(
+        Type(
+         int
+        ) [Type]
+      ) [ConstType]
+     a
+      NoVarDeclListList(
+      ) [NoVarDeclListList]
+    ) [VarList]
+  ) [DeclListVarDecl]
+  WithMethodDeclList(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      FunctionVoid(
+       main
+      ) [FunctionVoid]
+      NoFormPars(
+      ) [NoFormPars]
+      NoVarDeclList(
+      ) [NoVarDeclList]
+      WithStatementList(
+        WithStatementList(
+          WithStatementList(
+            NoStatementList(
+            ) [NoStatementList]
+            StatementDesignator(
+              DesignatorAssign(
+                DesignatorIdent(
+                 x
+                ) [DesignatorIdent]
+                Assignop(
+                ) [Assignop]
+                ExprTerm(
+                  TermFactor(
+                    FactorConst(
+                      NUMBER(
+                       2
+                      ) [NUMBER]
+                    ) [FactorConst]
+                  ) [TermFactor]
+                ) [ExprTerm]
+              ) [DesignatorAssign]
+            ) [StatementDesignator]
+          ) [WithStatementList]
+          StatementDesignator(
+            DesignatorAssign(
+              DesignatorIdent(
+               x
+              ) [DesignatorIdent]
+              AssignAddopR(
+                PLUSEQ(
+                ) [PLUSEQ]
+              ) [AssignAddopR]
+              ExprTerm(
+                TermFactor(
+                  FactorConst(
+                    NUMBER(
+                     2
+                    ) [NUMBER]
+                  ) [FactorConst]
+                ) [TermFactor]
+              ) [ExprTerm]
+            ) [DesignatorAssign]
+          ) [StatementDesignator]
+        ) [WithStatementList]
+        Print(
+          ExprTerm(
+            TermFactor(
+              FactorDesignator(
+                DesignatorIdent(
+                 x
+                ) [DesignatorIdent]
+              ) [FactorDesignator]
+            ) [TermFactor]
+          ) [ExprTerm]
+        ) [Print]
+      ) [WithStatementList]
+    ) [MethodDecl]
+  ) [WithMethodDeclList]
+) [Program]
+INFO  22:48:14,222 - ==================SEMANTICKA OBRADA=================
+INFO  22:48:14,227 - Deklarisana promenljiva x na liniji 2
+INFO  22:48:14,227 - Deklarisana promenljiva a na liniji 3
+INFO  22:48:14,227 - Deklarisana metoda main na liniji 6
+INFO  22:48:14,227 - ==================SINTAKSNA ANALIZA=================
+INFO  22:48:14,228 - Ukupno deklarisanih globalnih promenljivih:		2
+INFO  22:48:14,228 - Ukupno deklarisanih globalnih nizova:			0
+INFO  22:48:14,228 - Ukupno deklarisanih globalnih konstanti:			0
+INFO  22:48:14,228 - Ukupno deklarisanih lokalnih promenljivih u main metodi:	0
+INFO  22:48:14,239 - Parsiranje uspesno zavrseno!

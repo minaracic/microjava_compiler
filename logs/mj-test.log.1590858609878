@@ -1,0 +1,111 @@
+INFO  19:09:16,054 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  19:09:16,126 - #2 program
+INFO  19:09:16,127 - #50 test302
+INFO  19:09:16,127 - #50 int
+INFO  19:09:16,129 - #50 x
+INFO  19:09:16,130 - #8 ;
+INFO  19:09:16,132 - #3 {
+INFO  19:09:16,133 - #38 void
+INFO  19:09:16,133 - #50 main
+INFO  19:09:16,134 - #13 (
+INFO  19:09:16,134 - #14 )
+INFO  19:09:16,135 - #3 {
+INFO  19:09:16,136 - #50 x
+INFO  19:09:16,137 - #5 =
+INFO  19:09:16,137 - #47 4
+INFO  19:09:16,137 - #8 ;
+INFO  19:09:16,138 - #50 x
+INFO  19:09:16,138 - #23 ++
+INFO  19:09:16,139 - #8 ;
+INFO  19:09:16,139 - #22 print
+INFO  19:09:16,139 - #13 (
+INFO  19:09:16,139 - #50 x
+INFO  19:09:16,139 - #14 )
+INFO  19:09:16,139 - #8 ;
+INFO  19:09:16,140 - #4 }
+INFO  19:09:16,140 - #4 }
+INFO  19:09:16,156 - Program(
+  ProgName(
+   test302
+  ) [ProgName]
+  DeclListVarDecl(
+    NoDeclList(
+    ) [NoDeclList]
+    VarList(
+      ConstType(
+        Type(
+         int
+        ) [Type]
+      ) [ConstType]
+     x
+      NoVarDeclListList(
+      ) [NoVarDeclListList]
+    ) [VarList]
+  ) [DeclListVarDecl]
+  WithMethodDeclList(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      FunctionVoid(
+       main
+      ) [FunctionVoid]
+      NoFormPars(
+      ) [NoFormPars]
+      NoVarDeclList(
+      ) [NoVarDeclList]
+      WithStatementList(
+        WithStatementList(
+          WithStatementList(
+            NoStatementList(
+            ) [NoStatementList]
+            StatementDesignator(
+              DesignatorAssign(
+                DesignatorIdent(
+                 x
+                ) [DesignatorIdent]
+                Assignop(
+                ) [Assignop]
+                ExprTerm(
+                  TermFactor(
+                    FactorConst(
+                      NUMBER(
+                       4
+                      ) [NUMBER]
+                    ) [FactorConst]
+                  ) [TermFactor]
+                ) [ExprTerm]
+              ) [DesignatorAssign]
+            ) [StatementDesignator]
+          ) [WithStatementList]
+          StatementDesignator(
+            Inc(
+              DesignatorIdent(
+               x
+              ) [DesignatorIdent]
+            ) [Inc]
+          ) [StatementDesignator]
+        ) [WithStatementList]
+        Print(
+          ExprTerm(
+            TermFactor(
+              FactorDesignator(
+                DesignatorIdent(
+                 x
+                ) [DesignatorIdent]
+              ) [FactorDesignator]
+            ) [TermFactor]
+          ) [ExprTerm]
+        ) [Print]
+      ) [WithStatementList]
+    ) [MethodDecl]
+  ) [WithMethodDeclList]
+) [Program]
+INFO  19:09:16,156 - ==================SEMANTICKA OBRADA=================
+INFO  19:09:16,160 - Deklarisana promenljiva x na liniji 2
+INFO  19:09:16,161 - Deklarisana metoda main na liniji 5
+INFO  19:09:16,161 - ==================SINTAKSNA ANALIZA=================
+INFO  19:09:16,161 - Ukupno deklarisanih globalnih promenljivih:		1
+INFO  19:09:16,161 - Ukupno deklarisanih globalnih nizova:			0
+INFO  19:09:16,162 - Ukupno deklarisanih globalnih konstanti:			0
+INFO  19:09:16,162 - Ukupno deklarisanih lokalnih promenljivih u main metodi:	0
+INFO  19:09:16,175 - Parsiranje uspesno zavrseno!

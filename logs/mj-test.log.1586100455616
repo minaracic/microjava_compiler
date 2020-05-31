@@ -1,0 +1,582 @@
+INFO  17:26:21,115 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  17:26:21,179 - #2 program
+INFO  17:26:21,179 - #45 P
+INFO  17:26:21,180 - #7 const
+INFO  17:26:21,181 - #45 int
+INFO  17:26:21,181 - #45 size
+INFO  17:26:21,182 - #5 =
+INFO  17:26:21,182 - #42 10
+INFO  17:26:21,182 - #8 ;
+INFO  17:26:21,183 - #11 abstract
+INFO  17:26:21,184 - #15 class
+INFO  17:26:21,184 - #45 Tab
+INFO  17:26:21,184 - #3 {
+INFO  17:26:21,185 - #45 int
+INFO  17:26:21,186 - #45 size
+INFO  17:26:21,186 - #8 ;
+INFO  17:26:21,187 - #3 {
+INFO  17:26:21,187 - #11 abstract
+INFO  17:26:21,188 - #45 int
+INFO  17:26:21,188 - #45 getp
+INFO  17:26:21,188 - #13 (
+INFO  17:26:21,188 - #45 int
+INFO  17:26:21,188 - #45 i
+INFO  17:26:21,188 - #14 )
+INFO  17:26:21,192 - #11 abstract
+INFO  17:26:21,194 - #45 int
+INFO  17:26:21,194 - #45 getn
+INFO  17:26:21,194 - #13 (
+INFO  17:26:21,194 - #45 int
+INFO  17:26:21,195 - #45 i
+INFO  17:26:21,195 - #14 )
+INFO  17:26:21,195 - #45 int
+INFO  17:26:21,196 - #45 getSize
+INFO  17:26:21,196 - #13 (
+INFO  17:26:21,196 - #14 )
+INFO  17:26:21,197 - #3 {
+INFO  17:26:21,197 - #21 return
+INFO  17:26:21,197 - #45 size
+INFO  17:26:21,198 - #8 ;
+INFO  17:26:21,198 - #4 }
+INFO  17:26:21,198 - #4 }
+INFO  17:26:21,199 - #4 }
+INFO  17:26:21,199 - #15 class
+INFO  17:26:21,200 - #45 Table
+INFO  17:26:21,200 - #12 extends
+INFO  17:26:21,200 - #45 Tab
+INFO  17:26:21,200 - #3 {
+INFO  17:26:21,200 - #45 int
+INFO  17:26:21,200 - #45 pos
+INFO  17:26:21,201 - #9 [
+INFO  17:26:21,201 - #10 ]
+INFO  17:26:21,201 - #6 ,
+INFO  17:26:21,201 - #45 neg
+INFO  17:26:21,201 - #9 [
+INFO  17:26:21,201 - #10 ]
+INFO  17:26:21,201 - #8 ;
+INFO  17:26:21,202 - #3 {
+INFO  17:26:21,202 - #38 void
+INFO  17:26:21,204 - #45 putp
+INFO  17:26:21,205 - #13 (
+INFO  17:26:21,205 - #45 int
+INFO  17:26:21,205 - #45 a
+INFO  17:26:21,211 - #6 ,
+INFO  17:26:21,211 - #45 int
+INFO  17:26:21,211 - #45 idx
+INFO  17:26:21,212 - #14 )
+INFO  17:26:21,212 - #3 {
+INFO  17:26:21,212 - #45 this
+INFO  17:26:21,212 - #37 .
+INFO  17:26:21,212 - #45 pos
+INFO  17:26:21,212 - #9 [
+INFO  17:26:21,213 - #45 idx
+INFO  17:26:21,213 - #10 ]
+INFO  17:26:21,213 - #5 =
+INFO  17:26:21,214 - #45 a
+INFO  17:26:21,215 - #8 ;
+INFO  17:26:21,216 - #4 }
+INFO  17:26:21,216 - #38 void
+INFO  17:26:21,217 - #45 putn
+INFO  17:26:21,217 - #13 (
+INFO  17:26:21,217 - #45 int
+INFO  17:26:21,217 - #45 a
+INFO  17:26:21,217 - #6 ,
+INFO  17:26:21,218 - #45 int
+INFO  17:26:21,218 - #45 idx
+INFO  17:26:21,219 - #14 )
+INFO  17:26:21,219 - #3 {
+INFO  17:26:21,219 - #45 this
+INFO  17:26:21,219 - #37 .
+INFO  17:26:21,219 - #45 neg
+INFO  17:26:21,220 - #9 [
+INFO  17:26:21,220 - #45 idx
+INFO  17:26:21,220 - #10 ]
+INFO  17:26:21,220 - #5 =
+INFO  17:26:21,220 - #45 a
+INFO  17:26:21,220 - #8 ;
+INFO  17:26:21,220 - #4 }
+INFO  17:26:21,221 - #45 int
+INFO  17:26:21,221 - #45 getp
+INFO  17:26:21,221 - #13 (
+INFO  17:26:21,221 - #45 int
+INFO  17:26:21,221 - #45 idx
+INFO  17:26:21,221 - #14 )
+INFO  17:26:21,223 - #3 {
+INFO  17:26:21,223 - #21 return
+INFO  17:26:21,223 - #45 pos
+INFO  17:26:21,223 - #9 [
+INFO  17:26:21,223 - #45 idx
+INFO  17:26:21,224 - #10 ]
+INFO  17:26:21,224 - #8 ;
+INFO  17:26:21,225 - #4 }
+INFO  17:26:21,225 - #45 int
+INFO  17:26:21,225 - #45 getn
+INFO  17:26:21,225 - #13 (
+INFO  17:26:21,226 - #45 int
+INFO  17:26:21,226 - #45 idx
+INFO  17:26:21,226 - #14 )
+INFO  17:26:21,226 - #3 {
+INFO  17:26:21,226 - #21 return
+INFO  17:26:21,226 - #45 neg
+INFO  17:26:21,226 - #9 [
+INFO  17:26:21,226 - #45 idx
+INFO  17:26:21,226 - #10 ]
+INFO  17:26:21,227 - #8 ;
+INFO  17:26:21,227 - #4 }
+INFO  17:26:21,227 - #4 }
+INFO  17:26:21,227 - #4 }
+INFO  17:26:21,227 - #45 Table
+INFO  17:26:21,229 - #45 val
+INFO  17:26:21,229 - #8 ;
+INFO  17:26:21,229 - #3 {
+INFO  17:26:21,229 - #38 void
+INFO  17:26:21,229 - #45 main
+INFO  17:26:21,230 - #13 (
+INFO  17:26:21,230 - #14 )
+INFO  17:26:21,230 - #45 int
+INFO  17:26:21,230 - #45 x
+INFO  17:26:21,230 - #6 ,
+INFO  17:26:21,230 - #45 i
+INFO  17:26:21,230 - #8 ;
+INFO  17:26:21,230 - #45 char
+INFO  17:26:21,230 - #45 c
+INFO  17:26:21,230 - #8 ;
+INFO  17:26:21,230 - #3 {
+INFO  17:26:21,231 - #4 }
+INFO  17:26:21,231 - #4 }
+INFO  17:26:21,235 - Program(
+ P
+  DeclListVarDecl(
+    DeclListClass(
+      DeclListAbstractClass(
+        DeclListConstDecl(
+          NoDeclList(
+          ) [NoDeclList]
+          ConstDecl(
+            Type(
+             int
+            ) [Type]
+           size
+            NUMBER(
+             10
+            ) [NUMBER]
+            NoConstValueList(
+            ) [NoConstValueList]
+          ) [ConstDecl]
+        ) [DeclListConstDecl]
+        AbstractClassWithMethods(
+         Tab
+          NoExtendsDecl(
+          ) [NoExtendsDecl]
+          WithVarDeclList(
+            NoVarDeclList(
+            ) [NoVarDeclList]
+            VarList(
+              Type(
+               int
+              ) [Type]
+             size
+              NoVarDeclListList(
+              ) [NoVarDeclListList]
+            ) [VarList]
+          ) [WithVarDeclList]
+          MethodList(
+            AbstractList(
+              AbstractList(
+                NoMethodOrAbstractMethodDeclList(
+                ) [NoMethodOrAbstractMethodDeclList]
+                AbstractMethodDecl(
+                  TypeOrVoidType(
+                    Type(
+                     int
+                    ) [Type]
+                  ) [TypeOrVoidType]
+                 getp
+                  WithFormPars(
+                    FormPars(
+                      Type(
+                       int
+                      ) [Type]
+                     i
+                      NoParent(
+                      ) [NoParent]
+                      NoFormParsList(
+                      ) [NoFormParsList]
+                    ) [FormPars]
+                  ) [WithFormPars]
+                ) [AbstractMethodDecl]
+              ) [AbstractList]
+              AbstractMethodDecl(
+                TypeOrVoidType(
+                  Type(
+                   int
+                  ) [Type]
+                ) [TypeOrVoidType]
+               getn
+                WithFormPars(
+                  FormPars(
+                    Type(
+                     int
+                    ) [Type]
+                   i
+                    NoParent(
+                    ) [NoParent]
+                    NoFormParsList(
+                    ) [NoFormParsList]
+                  ) [FormPars]
+                ) [WithFormPars]
+              ) [AbstractMethodDecl]
+            ) [AbstractList]
+            MethodDecl(
+              TypeOrVoidType(
+                Type(
+                 int
+                ) [Type]
+              ) [TypeOrVoidType]
+             getSize
+              NoFormPars(
+              ) [NoFormPars]
+              NoVarDeclList(
+              ) [NoVarDeclList]
+              WithStatementList(
+                NoStatementList(
+                ) [NoStatementList]
+                Return(
+                  WithExpr(
+                    ExprTerm(
+                      TermFactor(
+                        FactorDesignator(
+                          DesignatorIdent(
+                           size
+                          ) [DesignatorIdent]
+                        ) [FactorDesignator]
+                      ) [TermFactor]
+                    ) [ExprTerm]
+                  ) [WithExpr]
+                ) [Return]
+              ) [WithStatementList]
+            ) [MethodDecl]
+          ) [MethodList]
+        ) [AbstractClassWithMethods]
+      ) [DeclListAbstractClass]
+      ClassDecl(
+       Table
+        WithExtendsDecl(
+          Type(
+           Tab
+          ) [Type]
+        ) [WithExtendsDecl]
+        WithVarDeclList(
+          NoVarDeclList(
+          ) [NoVarDeclList]
+          VarDeclArray(
+            Type(
+             int
+            ) [Type]
+           pos
+            WithVarDeclListList(
+              NoVarDeclListList(
+              ) [NoVarDeclListList]
+             neg
+              WithBracket(
+              ) [WithBracket]
+            ) [WithVarDeclListList]
+          ) [VarDeclArray]
+        ) [WithVarDeclList]
+        MethodsOfClass(
+          WithMethodDeclList(
+            WithMethodDeclList(
+              WithMethodDeclList(
+                WithMethodDeclList(
+                  NoMethodDeclList(
+                  ) [NoMethodDeclList]
+                  MethodDecl(
+                    TypeOrVoidVoid(
+                    ) [TypeOrVoidVoid]
+                   putp
+                    WithFormPars(
+                      FormPars(
+                        Type(
+                         int
+                        ) [Type]
+                       a
+                        NoParent(
+                        ) [NoParent]
+                        WithFormParsList(
+                          NoFormParsList(
+                          ) [NoFormParsList]
+                          Type(
+                           int
+                          ) [Type]
+                         idx
+                          NoParent(
+                          ) [NoParent]
+                        ) [WithFormParsList]
+                      ) [FormPars]
+                    ) [WithFormPars]
+                    NoVarDeclList(
+                    ) [NoVarDeclList]
+                    WithStatementList(
+                      NoStatementList(
+                      ) [NoStatementList]
+                      StatementDesignator(
+                        DesignatorStatement(
+                          DesignatorArr(
+                            DesignatorAtrib(
+                              DesignatorIdent(
+                               this
+                              ) [DesignatorIdent]
+                             pos
+                            ) [DesignatorAtrib]
+                            ExprTerm(
+                              TermFactor(
+                                FactorDesignator(
+                                  DesignatorIdent(
+                                   idx
+                                  ) [DesignatorIdent]
+                                ) [FactorDesignator]
+                              ) [TermFactor]
+                            ) [ExprTerm]
+                          ) [DesignatorArr]
+                          DesignatorAssignop(
+                            Assignop(
+                            ) [Assignop]
+                            ExprTerm(
+                              TermFactor(
+                                FactorDesignator(
+                                  DesignatorIdent(
+                                   a
+                                  ) [DesignatorIdent]
+                                ) [FactorDesignator]
+                              ) [TermFactor]
+                            ) [ExprTerm]
+                          ) [DesignatorAssignop]
+                        ) [DesignatorStatement]
+                      ) [StatementDesignator]
+                    ) [WithStatementList]
+                  ) [MethodDecl]
+                ) [WithMethodDeclList]
+                MethodDecl(
+                  TypeOrVoidVoid(
+                  ) [TypeOrVoidVoid]
+                 putn
+                  WithFormPars(
+                    FormPars(
+                      Type(
+                       int
+                      ) [Type]
+                     a
+                      NoParent(
+                      ) [NoParent]
+                      WithFormParsList(
+                        NoFormParsList(
+                        ) [NoFormParsList]
+                        Type(
+                         int
+                        ) [Type]
+                       idx
+                        NoParent(
+                        ) [NoParent]
+                      ) [WithFormParsList]
+                    ) [FormPars]
+                  ) [WithFormPars]
+                  NoVarDeclList(
+                  ) [NoVarDeclList]
+                  WithStatementList(
+                    NoStatementList(
+                    ) [NoStatementList]
+                    StatementDesignator(
+                      DesignatorStatement(
+                        DesignatorArr(
+                          DesignatorAtrib(
+                            DesignatorIdent(
+                             this
+                            ) [DesignatorIdent]
+                           neg
+                          ) [DesignatorAtrib]
+                          ExprTerm(
+                            TermFactor(
+                              FactorDesignator(
+                                DesignatorIdent(
+                                 idx
+                                ) [DesignatorIdent]
+                              ) [FactorDesignator]
+                            ) [TermFactor]
+                          ) [ExprTerm]
+                        ) [DesignatorArr]
+                        DesignatorAssignop(
+                          Assignop(
+                          ) [Assignop]
+                          ExprTerm(
+                            TermFactor(
+                              FactorDesignator(
+                                DesignatorIdent(
+                                 a
+                                ) [DesignatorIdent]
+                              ) [FactorDesignator]
+                            ) [TermFactor]
+                          ) [ExprTerm]
+                        ) [DesignatorAssignop]
+                      ) [DesignatorStatement]
+                    ) [StatementDesignator]
+                  ) [WithStatementList]
+                ) [MethodDecl]
+              ) [WithMethodDeclList]
+              MethodDecl(
+                TypeOrVoidType(
+                  Type(
+                   int
+                  ) [Type]
+                ) [TypeOrVoidType]
+               getp
+                WithFormPars(
+                  FormPars(
+                    Type(
+                     int
+                    ) [Type]
+                   idx
+                    NoParent(
+                    ) [NoParent]
+                    NoFormParsList(
+                    ) [NoFormParsList]
+                  ) [FormPars]
+                ) [WithFormPars]
+                NoVarDeclList(
+                ) [NoVarDeclList]
+                WithStatementList(
+                  NoStatementList(
+                  ) [NoStatementList]
+                  Return(
+                    WithExpr(
+                      ExprTerm(
+                        TermFactor(
+                          FactorDesignator(
+                            DesignatorArr(
+                              DesignatorIdent(
+                               pos
+                              ) [DesignatorIdent]
+                              ExprTerm(
+                                TermFactor(
+                                  FactorDesignator(
+                                    DesignatorIdent(
+                                     idx
+                                    ) [DesignatorIdent]
+                                  ) [FactorDesignator]
+                                ) [TermFactor]
+                              ) [ExprTerm]
+                            ) [DesignatorArr]
+                          ) [FactorDesignator]
+                        ) [TermFactor]
+                      ) [ExprTerm]
+                    ) [WithExpr]
+                  ) [Return]
+                ) [WithStatementList]
+              ) [MethodDecl]
+            ) [WithMethodDeclList]
+            MethodDecl(
+              TypeOrVoidType(
+                Type(
+                 int
+                ) [Type]
+              ) [TypeOrVoidType]
+             getn
+              WithFormPars(
+                FormPars(
+                  Type(
+                   int
+                  ) [Type]
+                 idx
+                  NoParent(
+                  ) [NoParent]
+                  NoFormParsList(
+                  ) [NoFormParsList]
+                ) [FormPars]
+              ) [WithFormPars]
+              NoVarDeclList(
+              ) [NoVarDeclList]
+              WithStatementList(
+                NoStatementList(
+                ) [NoStatementList]
+                Return(
+                  WithExpr(
+                    ExprTerm(
+                      TermFactor(
+                        FactorDesignator(
+                          DesignatorArr(
+                            DesignatorIdent(
+                             neg
+                            ) [DesignatorIdent]
+                            ExprTerm(
+                              TermFactor(
+                                FactorDesignator(
+                                  DesignatorIdent(
+                                   idx
+                                  ) [DesignatorIdent]
+                                ) [FactorDesignator]
+                              ) [TermFactor]
+                            ) [ExprTerm]
+                          ) [DesignatorArr]
+                        ) [FactorDesignator]
+                      ) [TermFactor]
+                    ) [ExprTerm]
+                  ) [WithExpr]
+                ) [Return]
+              ) [WithStatementList]
+            ) [MethodDecl]
+          ) [WithMethodDeclList]
+        ) [MethodsOfClass]
+      ) [ClassDecl]
+    ) [DeclListClass]
+    VarList(
+      Type(
+       Table
+      ) [Type]
+     val
+      NoVarDeclListList(
+      ) [NoVarDeclListList]
+    ) [VarList]
+  ) [DeclListVarDecl]
+  WithMethodDeclList(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      TypeOrVoidVoid(
+      ) [TypeOrVoidVoid]
+     main
+      NoFormPars(
+      ) [NoFormPars]
+      WithVarDeclList(
+        WithVarDeclList(
+          NoVarDeclList(
+          ) [NoVarDeclList]
+          VarList(
+            Type(
+             int
+            ) [Type]
+           x
+            WithVarDeclListList(
+              NoVarDeclListList(
+              ) [NoVarDeclListList]
+             i
+              NoParent(
+              ) [NoParent]
+            ) [WithVarDeclListList]
+          ) [VarList]
+        ) [WithVarDeclList]
+        VarList(
+          Type(
+           char
+          ) [Type]
+         c
+          NoVarDeclListList(
+          ) [NoVarDeclListList]
+        ) [VarList]
+      ) [WithVarDeclList]
+      NoStatementList(
+      ) [NoStatementList]
+    ) [MethodDecl]
+  ) [WithMethodDeclList]
+) [Program]
+INFO  17:26:21,238 - ===================================
+INFO  17:26:21,243 -  Print count calls = 0
+INFO  17:26:21,243 -  Deklarisanih promenljivih ima = 1

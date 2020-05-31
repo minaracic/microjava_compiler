@@ -1,0 +1,190 @@
+INFO  09:58:43,767 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  09:58:43,904 - #2 program
+INFO  09:58:43,905 - #45 test302
+INFO  09:58:43,905 - #7 const
+INFO  09:58:43,908 - #45 int
+INFO  09:58:43,909 - #45 jedan
+INFO  09:58:43,911 - #5 =
+INFO  09:58:43,912 - #42 1
+INFO  09:58:43,912 - #8 ;
+INFO  09:58:43,915 - #7 const
+INFO  09:58:43,916 - #45 int
+INFO  09:58:43,917 - #45 v
+INFO  09:58:43,917 - #5 =
+INFO  09:58:43,917 - #42 3
+INFO  09:58:43,917 - #6 ,
+INFO  09:58:43,917 - #45 a
+INFO  09:58:43,917 - #5 =
+INFO  09:58:43,919 - #42 3
+INFO  09:58:43,919 - #8 ;
+INFO  09:58:43,920 - #45 int
+INFO  09:58:43,921 - #45 aba
+INFO  09:58:43,921 - #9 [
+INFO  09:58:43,921 - #10 ]
+INFO  09:58:43,921 - #8 ;
+INFO  09:58:43,922 - #3 {
+INFO  09:58:43,923 - #45 int
+INFO  09:58:43,924 - #45 sum
+INFO  09:58:43,924 - #13 (
+INFO  09:58:43,925 - #45 int
+INFO  09:58:43,925 - #45 z
+INFO  09:58:43,925 - #6 ,
+INFO  09:58:43,928 - #45 int
+INFO  09:58:43,928 - #45 d
+INFO  09:58:43,928 - #14 )
+INFO  09:58:43,931 - #3 {
+INFO  09:58:43,932 - #21 return
+INFO  09:58:43,933 - #45 z
+INFO  09:58:43,933 - #35 +
+INFO  09:58:43,934 - #45 d
+INFO  09:58:43,935 - #8 ;
+INFO  09:58:43,936 - #4 }
+INFO  09:58:43,937 - #38 void
+INFO  09:58:43,938 - #45 main
+INFO  09:58:43,939 - #13 (
+INFO  09:58:43,939 - #14 )
+INFO  09:58:43,942 - #3 {
+INFO  09:58:43,943 - #4 }
+INFO  09:58:43,943 - #4 }
+INFO  09:58:43,961 - Program(
+  ProgName(
+   test302
+  ) [ProgName]
+  DeclListVarDecl(
+    DeclListConstDecl(
+      DeclListConstDecl(
+        NoDeclList(
+        ) [NoDeclList]
+        ConstDecl(
+          ConstType(
+            Type(
+             int
+            ) [Type]
+          ) [ConstType]
+          ConstVarDecl(
+           jedan
+            NUMBER(
+             1
+            ) [NUMBER]
+          ) [ConstVarDecl]
+          NoConstValueList(
+          ) [NoConstValueList]
+        ) [ConstDecl]
+      ) [DeclListConstDecl]
+      ConstDecl(
+        ConstType(
+          Type(
+           int
+          ) [Type]
+        ) [ConstType]
+        ConstVarDecl(
+         v
+          NUMBER(
+           3
+          ) [NUMBER]
+        ) [ConstVarDecl]
+        WithConstValueList(
+          NoConstValueList(
+          ) [NoConstValueList]
+          ConstVarDecl(
+           a
+            NUMBER(
+             3
+            ) [NUMBER]
+          ) [ConstVarDecl]
+        ) [WithConstValueList]
+      ) [ConstDecl]
+    ) [DeclListConstDecl]
+    VarDeclArray(
+      ConstType(
+        Type(
+         int
+        ) [Type]
+      ) [ConstType]
+     aba
+      NoVarDeclListList(
+      ) [NoVarDeclListList]
+    ) [VarDeclArray]
+  ) [DeclListVarDecl]
+  WithMethodDeclList(
+    WithMethodDeclList(
+      NoMethodDeclList(
+      ) [NoMethodDeclList]
+      MethodDecl(
+        TypeOrVoidType(
+          Type(
+           int
+          ) [Type]
+        ) [TypeOrVoidType]
+       sum
+        WithFormPars(
+          FormPars(
+            Type(
+             int
+            ) [Type]
+           z
+            NoParent(
+            ) [NoParent]
+            WithFormParsList(
+              NoFormParsList(
+              ) [NoFormParsList]
+              Type(
+               int
+              ) [Type]
+             d
+              NoParent(
+              ) [NoParent]
+            ) [WithFormParsList]
+          ) [FormPars]
+        ) [WithFormPars]
+        NoVarDeclList(
+        ) [NoVarDeclList]
+        WithStatementList(
+          NoStatementList(
+          ) [NoStatementList]
+          Return(
+            WithExpr(
+              ExprAdd(
+                ExprTerm(
+                  TermFactor(
+                    FactorDesignator(
+                      DesignatorIdent(
+                       z
+                      ) [DesignatorIdent]
+                    ) [FactorDesignator]
+                  ) [TermFactor]
+                ) [ExprTerm]
+                AddopPls(
+                ) [AddopPls]
+                TermFactor(
+                  FactorDesignator(
+                    DesignatorIdent(
+                     d
+                    ) [DesignatorIdent]
+                  ) [FactorDesignator]
+                ) [TermFactor]
+              ) [ExprAdd]
+            ) [WithExpr]
+          ) [Return]
+        ) [WithStatementList]
+      ) [MethodDecl]
+    ) [WithMethodDeclList]
+    MethodDecl(
+      TypeOrVoidVoid(
+      ) [TypeOrVoidVoid]
+     main
+      NoFormPars(
+      ) [NoFormPars]
+      NoVarDeclList(
+      ) [NoVarDeclList]
+      NoStatementList(
+      ) [NoStatementList]
+    ) [MethodDecl]
+  ) [WithMethodDeclList]
+) [Program]
+INFO  09:58:43,966 - ===================================
+INFO  09:58:43,971 - Deklarisana promenljiva jedan na liniji 5
+INFO  09:58:43,971 - Deklarisana promenljiva v na liniji 6
+INFO  09:58:43,972 - Deklarisana promenljiva a na liniji 6
+INFO  09:58:43,972 -  Print count calls = 0
+INFO  09:58:43,972 -  Deklarisanih promenljivih ima = 1

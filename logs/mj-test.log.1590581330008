@@ -1,0 +1,232 @@
+INFO  14:06:56,427 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  14:06:56,509 - #2 program
+INFO  14:06:56,510 - #45 test302
+INFO  14:06:56,510 - #7 const
+INFO  14:06:56,513 - #45 int
+INFO  14:06:56,513 - #45 jedan
+INFO  14:06:56,515 - #5 =
+INFO  14:06:56,515 - #42 1
+INFO  14:06:56,515 - #8 ;
+INFO  14:06:56,517 - #7 const
+INFO  14:06:56,520 - #45 cahr
+INFO  14:06:56,520 - #45 v
+INFO  14:06:56,520 - #5 =
+INFO  14:06:56,520 - #43 2
+INFO  14:06:56,521 - #8 ;
+INFO  14:06:56,522 - #45 int
+INFO  14:06:56,522 - #45 a
+INFO  14:06:56,522 - #8 ;
+INFO  14:06:56,523 - #45 int
+INFO  14:06:56,525 - #45 as
+INFO  14:06:56,525 - #6 ,
+INFO  14:06:56,525 - #45 aba
+INFO  14:06:56,525 - #9 [
+INFO  14:06:56,525 - #10 ]
+INFO  14:06:56,526 - #6 ,
+INFO  14:06:56,526 - #45 abas
+INFO  14:06:56,526 - #9 [
+INFO  14:06:56,526 - #10 ]
+INFO  14:06:56,526 - #6 ,
+INFO  14:06:56,527 - #45 va
+INFO  14:06:56,527 - #8 ;
+INFO  14:06:56,527 - #7 const
+INFO  14:06:56,527 - #45 char
+INFO  14:06:56,528 - #45 c
+INFO  14:06:56,528 - #5 =
+INFO  14:06:56,528 - #43 2
+INFO  14:06:56,528 - #8 ;
+INFO  14:06:56,528 - #3 {
+INFO  14:06:56,528 - #45 int
+INFO  14:06:56,529 - #45 sum
+INFO  14:06:56,530 - #13 (
+INFO  14:06:56,530 - #45 int
+INFO  14:06:56,530 - #45 z
+INFO  14:06:56,530 - #6 ,
+INFO  14:06:56,533 - #45 int
+INFO  14:06:56,533 - #45 d
+INFO  14:06:56,533 - #14 )
+INFO  14:06:56,535 - #3 {
+INFO  14:06:56,536 - #21 return
+INFO  14:06:56,537 - #45 z
+INFO  14:06:56,538 - #35 +
+INFO  14:06:56,538 - #45 d
+INFO  14:06:56,540 - #8 ;
+INFO  14:06:56,541 - #4 }
+INFO  14:06:56,541 - #38 void
+INFO  14:06:56,542 - #45 main
+INFO  14:06:56,543 - #13 (
+INFO  14:06:56,544 - #14 )
+INFO  14:06:56,544 - #3 {
+INFO  14:06:56,545 - #4 }
+INFO  14:06:56,545 - #4 }
+INFO  14:06:56,566 - Program(
+  ProgName(
+   test302
+  ) [ProgName]
+  DeclListConstDecl(
+    DeclListVarDecl(
+      DeclListVarDecl(
+        DeclListConstDecl(
+          DeclListConstDecl(
+            NoDeclList(
+            ) [NoDeclList]
+            ConstDecl(
+              ConstType(
+                Type(
+                 int
+                ) [Type]
+              ) [ConstType]
+              ConstVarDecl(
+               jedan
+                NUMBER(
+                 1
+                ) [NUMBER]
+              ) [ConstVarDecl]
+              NoConstValueList(
+              ) [NoConstValueList]
+            ) [ConstDecl]
+          ) [DeclListConstDecl]
+          ConstDecl(
+            ConstType(
+              Type(
+               cahr
+              ) [Type]
+            ) [ConstType]
+            ConstVarDecl(
+             v
+              CHAR(
+               2
+              ) [CHAR]
+            ) [ConstVarDecl]
+            NoConstValueList(
+            ) [NoConstValueList]
+          ) [ConstDecl]
+        ) [DeclListConstDecl]
+        VarList(
+          ConstType(
+            Type(
+             int
+            ) [Type]
+          ) [ConstType]
+         a
+          NoVarDeclListList(
+          ) [NoVarDeclListList]
+        ) [VarList]
+      ) [DeclListVarDecl]
+      VarList(
+        ConstType(
+          Type(
+           int
+          ) [Type]
+        ) [ConstType]
+       as
+        VarDeclSingle(
+          VarArray(
+            VarArray(
+              NoVarDeclListList(
+              ) [NoVarDeclListList]
+              ArrayInit(
+               aba
+              ) [ArrayInit]
+            ) [VarArray]
+            ArrayInit(
+             abas
+            ) [ArrayInit]
+          ) [VarArray]
+         va
+        ) [VarDeclSingle]
+      ) [VarList]
+    ) [DeclListVarDecl]
+    ConstDecl(
+      ConstType(
+        Type(
+         char
+        ) [Type]
+      ) [ConstType]
+      ConstVarDecl(
+       c
+        CHAR(
+         2
+        ) [CHAR]
+      ) [ConstVarDecl]
+      NoConstValueList(
+      ) [NoConstValueList]
+    ) [ConstDecl]
+  ) [DeclListConstDecl]
+  WithMethodDeclList(
+    WithMethodDeclList(
+      NoMethodDeclList(
+      ) [NoMethodDeclList]
+      MethodDecl(
+        TypeOrVoidType(
+          Type(
+           int
+          ) [Type]
+        ) [TypeOrVoidType]
+       sum
+        WithFormPars(
+          FormPars(
+            Type(
+             int
+            ) [Type]
+           z
+            NoParent(
+            ) [NoParent]
+            WithFormParsList(
+              NoFormParsList(
+              ) [NoFormParsList]
+              Type(
+               int
+              ) [Type]
+             d
+              NoParent(
+              ) [NoParent]
+            ) [WithFormParsList]
+          ) [FormPars]
+        ) [WithFormPars]
+        NoVarDeclList(
+        ) [NoVarDeclList]
+        WithStatementList(
+          NoStatementList(
+          ) [NoStatementList]
+          Return(
+            WithExpr(
+              ExprAdd(
+                ExprTerm(
+                  TermFactor(
+                    FactorDesignator(
+                      DesignatorIdent(
+                       z
+                      ) [DesignatorIdent]
+                    ) [FactorDesignator]
+                  ) [TermFactor]
+                ) [ExprTerm]
+                AddopPls(
+                ) [AddopPls]
+                TermFactor(
+                  FactorDesignator(
+                    DesignatorIdent(
+                     d
+                    ) [DesignatorIdent]
+                  ) [FactorDesignator]
+                ) [TermFactor]
+              ) [ExprAdd]
+            ) [WithExpr]
+          ) [Return]
+        ) [WithStatementList]
+      ) [MethodDecl]
+    ) [WithMethodDeclList]
+    MethodDecl(
+      TypeOrVoidVoid(
+      ) [TypeOrVoidVoid]
+     main
+      NoFormPars(
+      ) [NoFormPars]
+      NoVarDeclList(
+      ) [NoVarDeclList]
+      NoStatementList(
+      ) [NoStatementList]
+    ) [MethodDecl]
+  ) [WithMethodDeclList]
+) [Program]
+INFO  14:06:56,586 - ==================SEMANTICKA OBRADA=================

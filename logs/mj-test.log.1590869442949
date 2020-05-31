@@ -1,0 +1,163 @@
+INFO  21:12:18,328 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  21:12:19,008 - #2 program
+INFO  21:12:19,008 - #50 test302
+INFO  21:12:19,009 - #50 int
+INFO  21:12:19,026 - #50 x
+INFO  21:12:19,031 - #8 ;
+INFO  21:12:19,034 - #50 int
+INFO  21:12:19,034 - #50 niz
+INFO  21:12:19,034 - #9 [
+INFO  21:12:19,034 - #10 ]
+INFO  21:12:19,034 - #8 ;
+INFO  21:12:19,035 - #3 {
+INFO  21:12:19,035 - #38 void
+INFO  21:12:19,043 - #50 main
+INFO  21:12:19,043 - #13 (
+INFO  21:12:19,044 - #14 )
+INFO  21:12:19,052 - #3 {
+INFO  21:12:19,055 - #50 x
+INFO  21:12:19,065 - #5 =
+INFO  21:12:19,065 - #47 4
+INFO  21:12:19,065 - #8 ;
+INFO  21:12:19,066 - #50 x
+INFO  21:12:19,067 - #23 ++
+INFO  21:12:19,067 - #8 ;
+INFO  21:12:19,067 - #22 print
+INFO  21:12:19,067 - #13 (
+INFO  21:12:19,067 - #50 niz
+INFO  21:12:19,067 - #9 [
+INFO  21:12:19,068 - #47 2
+INFO  21:12:19,068 - #10 ]
+INFO  21:12:19,068 - #35 +
+INFO  21:12:19,068 - #47 2
+INFO  21:12:19,087 - #14 )
+INFO  21:12:19,087 - #8 ;
+INFO  21:12:19,087 - #4 }
+INFO  21:12:19,087 - #4 }
+INFO  21:12:19,104 - Program(
+  ProgName(
+   test302
+  ) [ProgName]
+  DeclListVarDecl(
+    DeclListVarDecl(
+      NoDeclList(
+      ) [NoDeclList]
+      VarList(
+        ConstType(
+          Type(
+           int
+          ) [Type]
+        ) [ConstType]
+       x
+        NoVarDeclListList(
+        ) [NoVarDeclListList]
+      ) [VarList]
+    ) [DeclListVarDecl]
+    VarDeclArray(
+      ConstType(
+        Type(
+         int
+        ) [Type]
+      ) [ConstType]
+      ArrayInit(
+       niz
+      ) [ArrayInit]
+      NoVarDeclListList(
+      ) [NoVarDeclListList]
+    ) [VarDeclArray]
+  ) [DeclListVarDecl]
+  WithMethodDeclList(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      FunctionVoid(
+       main
+      ) [FunctionVoid]
+      NoFormPars(
+      ) [NoFormPars]
+      NoVarDeclList(
+      ) [NoVarDeclList]
+      WithStatementList(
+        WithStatementList(
+          WithStatementList(
+            NoStatementList(
+            ) [NoStatementList]
+            StatementDesignator(
+              DesignatorAssign(
+                DesignatorIdent(
+                 x
+                ) [DesignatorIdent]
+                Assignop(
+                ) [Assignop]
+                ExprTerm(
+                  TermFactor(
+                    FactorConst(
+                      NUMBER(
+                       4
+                      ) [NUMBER]
+                    ) [FactorConst]
+                  ) [TermFactor]
+                ) [ExprTerm]
+              ) [DesignatorAssign]
+            ) [StatementDesignator]
+          ) [WithStatementList]
+          StatementDesignator(
+            Inc(
+              DesignatorIdent(
+               x
+              ) [DesignatorIdent]
+            ) [Inc]
+          ) [StatementDesignator]
+        ) [WithStatementList]
+        Print(
+          ExprAdd(
+            ExprTerm(
+              TermFactor(
+                FactorDesignator(
+                  DesignatorArr(
+                    DesignatorIdent(
+                     niz
+                    ) [DesignatorIdent]
+                    ExprTerm(
+                      TermFactor(
+                        FactorConst(
+                          NUMBER(
+                           2
+                          ) [NUMBER]
+                        ) [FactorConst]
+                      ) [TermFactor]
+                    ) [ExprTerm]
+                  ) [DesignatorArr]
+                ) [FactorDesignator]
+              ) [TermFactor]
+            ) [ExprTerm]
+            LeftAddop(
+              AddopPls(
+              ) [AddopPls]
+            ) [LeftAddop]
+            TermFactor(
+              FactorConst(
+                NUMBER(
+                 2
+                ) [NUMBER]
+              ) [FactorConst]
+            ) [TermFactor]
+          ) [ExprAdd]
+        ) [Print]
+      ) [WithStatementList]
+    ) [MethodDecl]
+  ) [WithMethodDeclList]
+) [Program]
+INFO  21:12:19,105 - ==================SEMANTICKA OBRADA=================
+INFO  21:12:19,134 - Deklarisana promenljiva x na liniji 2
+INFO  21:12:19,135 - Deklarisana promenljiva niz na liniji 3
+INFO  21:12:19,135 - Deklarisana metoda main na liniji 6
+ERROR 21:12:19,135 - Promenljiva ne predstavlja int tip! na liniji 9
+ERROR 21:12:19,135 - Tipovi u izrazu nisu kompatibilni! na liniji 9
+ERROR 21:12:19,135 - Izraz u print naredbi nije dobrog tipa na liniji 9
+INFO  21:12:19,136 - ==================SINTAKSNA ANALIZA=================
+INFO  21:12:19,136 - Ukupno deklarisanih globalnih promenljivih:		1
+INFO  21:12:19,136 - Ukupno deklarisanih globalnih nizova:			1
+INFO  21:12:19,136 - Ukupno deklarisanih globalnih konstanti:			0
+INFO  21:12:19,136 - Ukupno deklarisanih lokalnih promenljivih u main metodi:	0
+ERROR 21:12:19,138 - Parsiranje NIJE uspesno zavrseno!

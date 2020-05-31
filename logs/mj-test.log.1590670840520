@@ -1,0 +1,129 @@
+INFO  15:00:24,497 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  15:00:24,568 - #2 program
+INFO  15:00:24,568 - #45 test302
+INFO  15:00:24,568 - #7 const
+INFO  15:00:24,570 - #45 int
+INFO  15:00:24,571 - #45 jedan
+INFO  15:00:24,573 - #8 ;
+ERROR 15:00:24,573 - 
+Sintaksna greska na liniji 2
+INFO  15:00:24,573 - #7 const
+INFO  15:00:24,573 - #45 char
+INFO  15:00:24,573 - #45 v
+ERROR 15:00:24,574 - Izvrsen oporavak do ; u liniji 2
+INFO  15:00:24,575 - #8 ;
+ERROR 15:00:24,575 - 
+Sintaksna greska na liniji 3
+INFO  15:00:24,575 - #45 int
+INFO  15:00:24,575 - #45 a
+INFO  15:00:24,575 - #8 ;
+ERROR 15:00:24,576 - Izvrsen oporavak do ; u liniji 3
+INFO  15:00:24,576 - #45 int
+INFO  15:00:24,577 - #45 as
+INFO  15:00:24,577 - #6 ,
+INFO  15:00:24,577 - #45 aba
+INFO  15:00:24,577 - #9 [
+INFO  15:00:24,577 - #10 ]
+INFO  15:00:24,577 - #6 ,
+INFO  15:00:24,578 - #45 abas
+INFO  15:00:24,578 - #9 [
+INFO  15:00:24,578 - #10 ]
+INFO  15:00:24,578 - #6 ,
+INFO  15:00:24,578 - #45 va
+INFO  15:00:24,578 - #8 ;
+INFO  15:00:24,578 - #7 const
+INFO  15:00:24,579 - #45 char
+INFO  15:00:24,579 - #45 c
+INFO  15:00:24,579 - #8 ;
+ERROR 15:00:24,579 - 
+Sintaksna greska na liniji 7
+INFO  15:00:24,579 - #3 {
+INFO  15:00:24,579 - #38 void
+INFO  15:00:24,579 - #45 main
+ERROR 15:00:24,579 - Izvrsen oporavak do ; u liniji 7
+INFO  15:00:24,580 - #13 (
+INFO  15:00:24,580 - #14 )
+INFO  15:00:24,581 - #3 {
+INFO  15:00:24,582 - #4 }
+INFO  15:00:24,583 - #4 }
+INFO  15:00:24,595 - Program(
+  ProgName(
+   test302
+  ) [ProgName]
+  DeclListVarDecl(
+    DeclListVarDecl(
+      DeclListVarDecl(
+        DeclListVarDecl(
+          DeclListVarDecl(
+            NoDeclList(
+            ) [NoDeclList]
+            VarDeclDerived2(
+            ) [VarDeclDerived2]
+          ) [DeclListVarDecl]
+          VarDeclDerived2(
+          ) [VarDeclDerived2]
+        ) [DeclListVarDecl]
+        VarList(
+          ConstType(
+            Type(
+             int
+            ) [Type]
+          ) [ConstType]
+         a
+          NoVarDeclListList(
+          ) [NoVarDeclListList]
+        ) [VarList]
+      ) [DeclListVarDecl]
+      VarList(
+        ConstType(
+          Type(
+           int
+          ) [Type]
+        ) [ConstType]
+       as
+        VarDeclSingle(
+          VarArray(
+            VarArray(
+              NoVarDeclListList(
+              ) [NoVarDeclListList]
+              ArrayInit(
+               aba
+              ) [ArrayInit]
+            ) [VarArray]
+            ArrayInit(
+             abas
+            ) [ArrayInit]
+          ) [VarArray]
+         va
+        ) [VarDeclSingle]
+      ) [VarList]
+    ) [DeclListVarDecl]
+    VarDeclDerived2(
+    ) [VarDeclDerived2]
+  ) [DeclListVarDecl]
+  WithMethodDeclList(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      FunctionVoid(
+       main
+      ) [FunctionVoid]
+      NoFormPars(
+      ) [NoFormPars]
+      NoVarDeclList(
+      ) [NoVarDeclList]
+      NoStatementList(
+      ) [NoStatementList]
+    ) [MethodDecl]
+  ) [WithMethodDeclList]
+) [Program]
+INFO  15:00:24,595 - ==================SEMANTICKA OBRADA=================
+INFO  15:00:24,598 - Deklarisana promenljiva a na liniji 4
+INFO  15:00:24,598 - Deklarisana promenljiva aba na liniji 5
+INFO  15:00:24,598 - Deklarisana promenljiva abas na liniji 5
+INFO  15:00:24,598 - Deklarisana promenljiva va na liniji 4
+INFO  15:00:24,598 - Deklarisana promenljiva as na liniji 5
+INFO  15:00:24,599 - ==================SINTAKSNA ANALIZA=================
+INFO  15:00:24,600 - Ukupno deklarisanih globalnih promenljivih:	3
+INFO  15:00:24,600 - Ukupno deklarisanih globalnih nizova:		2
+INFO  15:00:24,600 - Ukupno deklarisanih globalnih konstanti:		0

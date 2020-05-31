@@ -1,0 +1,165 @@
+INFO  20:08:24,651 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  20:08:24,850 - #2 program
+INFO  20:08:24,850 - #45 test302
+INFO  20:08:24,851 - #7 const
+INFO  20:08:24,852 - #45 int
+INFO  20:08:24,852 - #45 jedan
+INFO  20:08:24,855 - #5 =
+INFO  20:08:24,855 - #42 1
+INFO  20:08:24,855 - #8 ;
+INFO  20:08:24,857 - #7 const
+INFO  20:08:24,858 - #45 int
+INFO  20:08:24,858 - #45 b
+INFO  20:08:24,858 - #5 =
+INFO  20:08:24,859 - #42 3
+INFO  20:08:24,859 - #8 ;
+INFO  20:08:24,859 - #7 const
+INFO  20:08:24,859 - #45 char
+INFO  20:08:24,860 - #45 a
+INFO  20:08:24,860 - #5 =
+INFO  20:08:24,860 - #42 3
+INFO  20:08:24,860 - #8 ;
+INFO  20:08:24,860 - #3 {
+INFO  20:08:24,861 - #45 int
+INFO  20:08:24,862 - #45 sum
+INFO  20:08:24,862 - #13 (
+INFO  20:08:24,862 - #45 int
+INFO  20:08:24,862 - #45 z
+INFO  20:08:24,862 - #6 ,
+INFO  20:08:24,864 - #45 int
+INFO  20:08:24,865 - #45 d
+INFO  20:08:24,865 - #14 )
+INFO  20:08:24,866 - #3 {
+INFO  20:08:24,867 - #21 return
+INFO  20:08:24,868 - #45 z
+INFO  20:08:24,868 - #35 +
+INFO  20:08:24,869 - #45 d
+INFO  20:08:24,870 - #8 ;
+INFO  20:08:24,871 - #4 }
+INFO  20:08:24,871 - #4 }
+INFO  20:08:24,885 - Program(
+  ProgramName(
+   test302
+  ) [ProgramName]
+  DeclListConstDecl(
+    DeclListConstDecl(
+      DeclListConstDecl(
+        NoDeclList(
+        ) [NoDeclList]
+        ConstDecl(
+          ConstType(
+            Type(
+             int
+            ) [Type]
+          ) [ConstType]
+          ConstVarDecl(
+           jedan
+            NUMBER(
+             1
+            ) [NUMBER]
+          ) [ConstVarDecl]
+          NoConstValueList(
+          ) [NoConstValueList]
+        ) [ConstDecl]
+      ) [DeclListConstDecl]
+      ConstDecl(
+        ConstType(
+          Type(
+           int
+          ) [Type]
+        ) [ConstType]
+        ConstVarDecl(
+         b
+          NUMBER(
+           3
+          ) [NUMBER]
+        ) [ConstVarDecl]
+        NoConstValueList(
+        ) [NoConstValueList]
+      ) [ConstDecl]
+    ) [DeclListConstDecl]
+    ConstDecl(
+      ConstType(
+        Type(
+         char
+        ) [Type]
+      ) [ConstType]
+      ConstVarDecl(
+       a
+        NUMBER(
+         3
+        ) [NUMBER]
+      ) [ConstVarDecl]
+      NoConstValueList(
+      ) [NoConstValueList]
+    ) [ConstDecl]
+  ) [DeclListConstDecl]
+  WithMethodDeclList(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      TypeOrVoidType(
+        Type(
+         int
+        ) [Type]
+      ) [TypeOrVoidType]
+     sum
+      WithFormPars(
+        FormPars(
+          Type(
+           int
+          ) [Type]
+         z
+          NoParent(
+          ) [NoParent]
+          WithFormParsList(
+            NoFormParsList(
+            ) [NoFormParsList]
+            Type(
+             int
+            ) [Type]
+           d
+            NoParent(
+            ) [NoParent]
+          ) [WithFormParsList]
+        ) [FormPars]
+      ) [WithFormPars]
+      NoVarDeclList(
+      ) [NoVarDeclList]
+      WithStatementList(
+        NoStatementList(
+        ) [NoStatementList]
+        Return(
+          WithExpr(
+            ExprAdd(
+              ExprTerm(
+                TermFactor(
+                  FactorDesignator(
+                    DesignatorIdent(
+                     z
+                    ) [DesignatorIdent]
+                  ) [FactorDesignator]
+                ) [TermFactor]
+              ) [ExprTerm]
+              AddopPls(
+              ) [AddopPls]
+              TermFactor(
+                FactorDesignator(
+                  DesignatorIdent(
+                   d
+                  ) [DesignatorIdent]
+                ) [FactorDesignator]
+              ) [TermFactor]
+            ) [ExprAdd]
+          ) [WithExpr]
+        ) [Return]
+      ) [WithStatementList]
+    ) [MethodDecl]
+  ) [WithMethodDeclList]
+) [Program]
+INFO  20:08:24,920 - ===================================
+INFO  20:08:24,923 - Deklarisana promenljiva jedan na liniji 5
+INFO  20:08:24,923 - Deklarisana promenljiva b na liniji 6
+INFO  20:08:24,923 - Deklarisana promenljiva a na liniji 7
+INFO  20:08:24,923 -  Print count calls = 0
+INFO  20:08:24,923 -  Deklarisanih promenljivih ima = 0

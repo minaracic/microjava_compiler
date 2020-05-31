@@ -1,0 +1,15 @@
+INFO  16:27:13,581 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  16:27:13,644 - #2 program
+INFO  16:27:13,645 - #45 P
+INFO  16:27:13,645 - #3 {
+INFO  16:27:13,646 - #4 }
+INFO  16:27:13,649 - Program(
+ P
+  NoDeclList(
+  ) [NoDeclList]
+  NoMethodDeclList(
+  ) [NoMethodDeclList]
+) [Program]
+INFO  16:27:13,649 - ===================================
+INFO  16:27:13,668 -  Print count calls = 0
+INFO  16:27:13,668 -  Deklarisanih promenljivih ima = 0

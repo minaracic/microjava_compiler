@@ -1,0 +1,45 @@
+INFO  20:09:28,589 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  20:09:28,662 - #2 program
+INFO  20:09:28,662 - #45 test302
+INFO  20:09:28,663 - #7 const
+INFO  20:09:28,664 - #45 int
+INFO  20:09:28,664 - #45 jedan
+INFO  20:09:28,667 - #5 =
+INFO  20:09:28,667 - #42 1
+INFO  20:09:28,667 - #8 ;
+INFO  20:09:28,669 - #7 const
+INFO  20:09:28,671 - #45 int
+INFO  20:09:28,672 - #45 a
+INFO  20:09:28,673 - #5 =
+INFO  20:09:28,673 - #42 3
+INFO  20:09:28,673 - #8 ;
+INFO  20:09:28,673 - #7 const
+INFO  20:09:28,673 - #45 char
+INFO  20:09:28,675 - #45 a
+INFO  20:09:28,675 - #5 =
+INFO  20:09:28,676 - #42 3
+INFO  20:09:28,676 - #8 ;
+INFO  20:09:28,677 - #3 {
+INFO  20:09:28,678 - #45 int
+INFO  20:09:28,679 - #45 sum
+INFO  20:09:28,679 - #13 (
+INFO  20:09:28,680 - #45 int
+INFO  20:09:28,680 - #45 z
+INFO  20:09:28,682 - #6 ,
+INFO  20:09:28,685 - #45 int
+INFO  20:09:28,685 - #45 d
+INFO  20:09:28,685 - #14 )
+INFO  20:09:28,688 - #3 {
+INFO  20:09:28,689 - #45 int
+INFO  20:09:28,690 - #45 a
+ERROR 20:09:28,690 - 
+Sintaksna greska na liniji 14
+INFO  20:09:28,691 - #8 ;
+INFO  20:09:28,691 - #21 return
+INFO  20:09:28,691 - #45 z
+INFO  20:09:28,693 - #35 +
+INFO  20:09:28,693 - #45 d
+INFO  20:09:28,693 - #8 ;
+INFO  20:09:28,693 - #4 }
+INFO  20:09:28,693 - #4 }
+ERROR 20:09:28,694 - Fatalna greska, parsiranje se ne moze nastaviti na liniji 21

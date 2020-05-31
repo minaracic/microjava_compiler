@@ -1,0 +1,170 @@
+INFO  12:48:20,914 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  12:48:20,974 - #2 program
+INFO  12:48:20,974 - #45 test302
+INFO  12:48:20,974 - #7 const
+INFO  12:48:20,976 - #45 int
+INFO  12:48:20,976 - #45 jedan
+INFO  12:48:20,978 - #8 ;
+ERROR 12:48:20,978 - 
+Sintaksna greska na liniji 2
+INFO  12:48:20,978 - #7 const
+INFO  12:48:20,978 - #45 char
+INFO  12:48:20,978 - #45 v
+ERROR 12:48:20,979 - Izvrsen oporavak do ; u liniji 2
+INFO  12:48:20,981 - #8 ;
+ERROR 12:48:20,981 - 
+Sintaksna greska na liniji 3
+INFO  12:48:20,981 - #45 int
+INFO  12:48:20,981 - #45 a
+INFO  12:48:20,981 - #8 ;
+ERROR 12:48:20,981 - Izvrsen oporavak do ; u liniji 3
+INFO  12:48:20,982 - #45 int
+INFO  12:48:20,983 - #45 as
+INFO  12:48:20,983 - #6 ,
+INFO  12:48:20,983 - #45 aba
+INFO  12:48:20,983 - #9 [
+INFO  12:48:20,983 - #10 ]
+INFO  12:48:20,983 - #6 ,
+INFO  12:48:20,984 - #45 abas
+INFO  12:48:20,984 - #9 [
+INFO  12:48:20,984 - #10 ]
+INFO  12:48:20,984 - #6 ,
+INFO  12:48:20,984 - #45 va
+INFO  12:48:20,985 - #8 ;
+INFO  12:48:20,985 - #7 const
+INFO  12:48:20,985 - #45 char
+INFO  12:48:20,985 - #45 c
+INFO  12:48:20,985 - #8 ;
+ERROR 12:48:20,985 - 
+Sintaksna greska na liniji 7
+INFO  12:48:20,985 - #3 {
+INFO  12:48:20,985 - #38 void
+INFO  12:48:20,985 - #45 main
+ERROR 12:48:20,986 - Izvrsen oporavak do ; u liniji 7
+INFO  12:48:20,987 - #13 (
+INFO  12:48:20,988 - #14 )
+INFO  12:48:20,988 - #3 {
+INFO  12:48:20,990 - #45 aba
+INFO  12:48:20,991 - #9 [
+INFO  12:48:20,991 - #42 0
+INFO  12:48:20,991 - #10 ]
+INFO  12:48:20,991 - #5 =
+INFO  12:48:20,992 - #42 1
+INFO  12:48:20,992 - #8 ;
+INFO  12:48:20,993 - #4 }
+INFO  12:48:20,994 - #4 }
+INFO  12:48:21,007 - Program(
+  ProgName(
+   test302
+  ) [ProgName]
+  DeclListVarDecl(
+    DeclListVarDecl(
+      DeclListVarDecl(
+        DeclListVarDecl(
+          DeclListVarDecl(
+            NoDeclList(
+            ) [NoDeclList]
+            VarDeclDerived2(
+            ) [VarDeclDerived2]
+          ) [DeclListVarDecl]
+          VarDeclDerived2(
+          ) [VarDeclDerived2]
+        ) [DeclListVarDecl]
+        VarList(
+          ConstType(
+            Type(
+             int
+            ) [Type]
+          ) [ConstType]
+         a
+          NoVarDeclListList(
+          ) [NoVarDeclListList]
+        ) [VarList]
+      ) [DeclListVarDecl]
+      VarList(
+        ConstType(
+          Type(
+           int
+          ) [Type]
+        ) [ConstType]
+       as
+        VarDeclSingle(
+          VarArray(
+            VarArray(
+              NoVarDeclListList(
+              ) [NoVarDeclListList]
+              ArrayInit(
+               aba
+              ) [ArrayInit]
+            ) [VarArray]
+            ArrayInit(
+             abas
+            ) [ArrayInit]
+          ) [VarArray]
+         va
+        ) [VarDeclSingle]
+      ) [VarList]
+    ) [DeclListVarDecl]
+    VarDeclDerived2(
+    ) [VarDeclDerived2]
+  ) [DeclListVarDecl]
+  WithMethodDeclList(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      TypeOrVoidVoid(
+      ) [TypeOrVoidVoid]
+     main
+      NoFormPars(
+      ) [NoFormPars]
+      NoVarDeclList(
+      ) [NoVarDeclList]
+      WithStatementList(
+        NoStatementList(
+        ) [NoStatementList]
+        StatementDesignator(
+          DesignatorStatement(
+            DesignatorArr(
+              DesignatorIdent(
+               aba
+              ) [DesignatorIdent]
+              ExprTerm(
+                TermFactor(
+                  FactorConst(
+                    NUMBER(
+                     0
+                    ) [NUMBER]
+                  ) [FactorConst]
+                ) [TermFactor]
+              ) [ExprTerm]
+            ) [DesignatorArr]
+            DesignatorAssignop(
+              Assignop(
+              ) [Assignop]
+              ExprTerm(
+                TermFactor(
+                  FactorConst(
+                    NUMBER(
+                     1
+                    ) [NUMBER]
+                  ) [FactorConst]
+                ) [TermFactor]
+              ) [ExprTerm]
+            ) [DesignatorAssignop]
+          ) [DesignatorStatement]
+        ) [StatementDesignator]
+      ) [WithStatementList]
+    ) [MethodDecl]
+  ) [WithMethodDeclList]
+) [Program]
+INFO  12:48:21,009 - ==================SEMANTICKA OBRADA=================
+INFO  12:48:21,012 - Deklarisana promenljiva a na liniji 4
+INFO  12:48:21,012 - Deklarisana promenljiva aba na liniji 5
+INFO  12:48:21,013 - Deklarisana promenljiva abas na liniji 5
+INFO  12:48:21,013 - Deklarisana promenljiva va na liniji 4
+INFO  12:48:21,013 - Deklarisana promenljiva as na liniji 5
+ERROR 12:48:21,013 - Izraz u [] nije tipa int! na liniji 10
+INFO  12:48:21,017 - ==================SINTAKSNA ANALIZA=================
+INFO  12:48:21,017 - Ukupno deklarisanih globalnih promenljivih:	3
+INFO  12:48:21,017 - Ukupno deklarisanih globalnih nizova:		2
+INFO  12:48:21,018 - Ukupno deklarisanih globalnih konstanti:		0

@@ -1,0 +1,177 @@
+INFO  22:10:42,955 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  22:10:43,539 - #2 program
+INFO  22:10:43,539 - #50 test302
+INFO  22:10:43,539 - #50 int
+INFO  22:10:43,554 - #50 x
+INFO  22:10:43,558 - #8 ;
+INFO  22:10:43,560 - #50 int
+INFO  22:10:43,561 - #50 niz
+INFO  22:10:43,561 - #9 [
+INFO  22:10:43,561 - #10 ]
+INFO  22:10:43,561 - #8 ;
+INFO  22:10:43,561 - #3 {
+INFO  22:10:43,561 - #38 void
+INFO  22:10:43,570 - #50 main
+INFO  22:10:43,570 - #13 (
+INFO  22:10:43,570 - #14 )
+INFO  22:10:43,579 - #3 {
+INFO  22:10:43,581 - #50 x
+INFO  22:10:43,583 - #5 =
+INFO  22:10:43,583 - #47 4
+INFO  22:10:43,583 - #8 ;
+INFO  22:10:43,584 - #50 x
+INFO  22:10:43,584 - #42 +=
+INFO  22:10:43,584 - #47 2
+INFO  22:10:43,596 - #8 ;
+INFO  22:10:43,596 - #22 print
+INFO  22:10:43,596 - #13 (
+INFO  22:10:43,596 - #50 niz
+INFO  22:10:43,597 - #9 [
+INFO  22:10:43,597 - #47 2
+INFO  22:10:43,597 - #10 ]
+INFO  22:10:43,597 - #35 +
+INFO  22:10:43,597 - #47 2
+INFO  22:10:43,602 - #14 )
+INFO  22:10:43,602 - #8 ;
+INFO  22:10:43,602 - #4 }
+INFO  22:10:43,602 - #4 }
+INFO  22:10:43,628 - Program(
+  ProgName(
+   test302
+  ) [ProgName]
+  DeclListVarDecl(
+    DeclListVarDecl(
+      NoDeclList(
+      ) [NoDeclList]
+      VarList(
+        ConstType(
+          Type(
+           int
+          ) [Type]
+        ) [ConstType]
+       x
+        NoVarDeclListList(
+        ) [NoVarDeclListList]
+      ) [VarList]
+    ) [DeclListVarDecl]
+    VarDeclArray(
+      ConstType(
+        Type(
+         int
+        ) [Type]
+      ) [ConstType]
+      ArrayInit(
+       niz
+      ) [ArrayInit]
+      NoVarDeclListList(
+      ) [NoVarDeclListList]
+    ) [VarDeclArray]
+  ) [DeclListVarDecl]
+  WithMethodDeclList(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      FunctionVoid(
+       main
+      ) [FunctionVoid]
+      NoFormPars(
+      ) [NoFormPars]
+      NoVarDeclList(
+      ) [NoVarDeclList]
+      WithStatementList(
+        WithStatementList(
+          WithStatementList(
+            NoStatementList(
+            ) [NoStatementList]
+            StatementDesignator(
+              DesignatorAssign(
+                DesignatorIdent(
+                 x
+                ) [DesignatorIdent]
+                Assignop(
+                ) [Assignop]
+                ExprTerm(
+                  TermFactor(
+                    FactorConst(
+                      NUMBER(
+                       4
+                      ) [NUMBER]
+                    ) [FactorConst]
+                  ) [TermFactor]
+                ) [ExprTerm]
+              ) [DesignatorAssign]
+            ) [StatementDesignator]
+          ) [WithStatementList]
+          StatementDesignator(
+            DesignatorAssign(
+              DesignatorIdent(
+               x
+              ) [DesignatorIdent]
+              AssignAddopR(
+                PLUSEQ(
+                ) [PLUSEQ]
+              ) [AssignAddopR]
+              ExprTerm(
+                TermFactor(
+                  FactorConst(
+                    NUMBER(
+                     2
+                    ) [NUMBER]
+                  ) [FactorConst]
+                ) [TermFactor]
+              ) [ExprTerm]
+            ) [DesignatorAssign]
+          ) [StatementDesignator]
+        ) [WithStatementList]
+        Print(
+          ExprAdd(
+            ExprTerm(
+              TermFactor(
+                FactorDesignator(
+                  DesignatorArr(
+                    DesignatorIdent(
+                     niz
+                    ) [DesignatorIdent]
+                    ExprTerm(
+                      TermFactor(
+                        FactorConst(
+                          NUMBER(
+                           2
+                          ) [NUMBER]
+                        ) [FactorConst]
+                      ) [TermFactor]
+                    ) [ExprTerm]
+                  ) [DesignatorArr]
+                ) [FactorDesignator]
+              ) [TermFactor]
+            ) [ExprTerm]
+            LeftAddop(
+              AddopPls(
+              ) [AddopPls]
+            ) [LeftAddop]
+            TermFactor(
+              FactorConst(
+                NUMBER(
+                 2
+                ) [NUMBER]
+              ) [FactorConst]
+            ) [TermFactor]
+          ) [ExprAdd]
+        ) [Print]
+      ) [WithStatementList]
+    ) [MethodDecl]
+  ) [WithMethodDeclList]
+) [Program]
+INFO  22:10:43,629 - ==================SEMANTICKA OBRADA=================
+INFO  22:10:43,657 - Deklarisana promenljiva x na liniji 2
+INFO  22:10:43,657 - Deklarisana promenljiva niz na liniji 3
+INFO  22:10:43,658 - Deklarisana metoda main na liniji 6
+ERROR 22:10:43,658 - Promenljiva ne predstavlja int tip! na liniji 9
+ERROR 22:10:43,658 - Tipovi u izrazu nisu kompatibilni! na liniji 9
+ERROR 22:10:43,658 - Izraz u print naredbi nije dobrog tipa na liniji 9
+INFO  22:10:43,658 - ==================SINTAKSNA ANALIZA=================
+INFO  22:10:43,658 - Ukupno deklarisanih globalnih promenljivih:		1
+INFO  22:10:43,658 - Ukupno deklarisanih globalnih nizova:			1
+INFO  22:10:43,658 - Ukupno deklarisanih globalnih konstanti:			0
+INFO  22:10:43,659 - Ukupno deklarisanih lokalnih promenljivih u main metodi:	0
+ERROR 22:10:43,660 - Parsiranje NIJE uspesno zavrseno!

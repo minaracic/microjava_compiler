@@ -1,0 +1,13 @@
+program test302
+int x;
+int a;
+{		
+
+	void main(){
+		x = 2;
+		x += x += 1;
+		print(x);
+		
+	}
+	
+}

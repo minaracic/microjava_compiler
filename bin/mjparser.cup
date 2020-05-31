@@ -1,0 +1,317 @@
+package rs.ac.bg.etf.pp1;
+
+import java_cup.runtime.*;
+import org.apache.log4j.*;
+import rs.ac.bg.etf.pp1.ast.*;
+
+parser code {:
+
+	boolean errorDetected;
+	Logger log = Logger.getLogger(getClass());
+   
+   
+    // slede redefinisani metodi za prijavu gresaka radi izmene teksta poruke
+     
+    public void report_fatal_error(String message, Object info) throws java.lang.Exception {
+      done_parsing();
+      report_error(message, info);
+    }
+  
+    public void syntax_error(Symbol cur_token) {
+        report_error("\nSintaksna greska", cur_token);
+    }
+  
+    public void unrecovered_syntax_error(Symbol cur_token) throws java.lang.Exception {
+        report_fatal_error("Fatalna greska, parsiranje se ne moze nastaviti", cur_token);
+    }
+
+    public void report_error(String message, Object info) {
+    	errorDetected = true;
+    	StringBuilder msg = new StringBuilder(message); 
+    	if (info instanceof Symbol)
+            msg.append (" na liniji ").append(((Symbol)info).left);
+        log.error(msg.toString());
+    }
+
+
+:}
+
+init with {:
+	errorDetected = false;
+:}
+
+scan with {:
+	Symbol s = this.getScanner().next_token();
+	if (s != null && s.value != null) 
+		log.info(s.toString() + " " + s.value.toString());
+	return s;
+:}
+
+nonterminal DeclList, MethodDeclList, VarDecl, AbstractClassDecl, ClassDecl, ConstDecl, ExtendsDecl;
+nonterminal ConstValueList, VarDeclList, OptionalBracket, VarDeclListList;
+nonterminal MethodOrAbstractMethodDeclList, MethodDecl, AbstractMethodDecl, OptionalFormPars, StatementList, FormPars, FormParsList, Statement;
+nonterminal DesignatorStatement, Condition, OptionalDesignatorStatement, OptionalCondition;
+nonterminal OptionalExpr, CondTerm, CondFact, Relop, Addop, AddopLeft, AddopRight;
+nonterminal Assignop, ActPars, OptionalActPars, MulopRight, MulopLeft, Mulop, ClassMethods, ConstVarDecl, ArrayDecl, TypeOrVoid;
+
+terminal PROG, LBRACE, RBRACE, EQUAL, COMMA, CONST, SEMI, LBRACKET, RBRACKET, ABSTRACT;
+terminal EXTENDS, LPARENT, RPARENT, CLASS, IF, FOR, BREAK, CONTINUE, READ, RETURN, PRINT, PLUSPLUS, MINUSMINUS, ELSE, MINUS, AND;
+terminal OR, ISEQUAL, ISNOTEQUAL, GRE, GREEQUAL, SML, SMLEQUAL, PLUS, NEW, DOT, VOID, MUL, DIV, MODULE, PLUSEQ, MINUSEQ, MULEQ, MODEQ, DIVEQ;
+
+terminal Integer NUMCONST;
+terminal Character CHARCONST;
+terminal Boolean BOOLCONST; //add type of Boolean
+terminal String IDENT;
+
+nonterminal rs.etf.pp1.symboltable.concepts.Obj ProgName, Program, ConstValue, FunctionIdent, Designator;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, ConstType, Term, Expr, Factor;
+
+precedence left ELSE;
+
+Program ::= (Program) PROG ProgName DeclList LBRACE MethodDeclList RBRACE;
+
+ProgName ::= (ProgName) IDENT:progName;
+					
+DeclList ::= (DeclListConstDecl) DeclList ConstDecl 
+		|
+		(DeclListVarDecl) DeclList VarDecl
+		|
+		(DeclListAbstractClass) DeclList AbstractClassDecl
+		|
+		(DeclListClass) DeclList ClassDecl
+		| 
+		(NoDeclList);
+
+ConstDecl ::= (ConstDecl) CONST ConstType ConstVarDecl ConstValueList SEMI;
+
+ConstType ::= (ConstType) Type;
+
+ConstValueList ::= (WithConstValueList) ConstValueList COMMA ConstVarDecl
+				|
+				(NoConstValueList) /* epsilon */
+				;
+
+ConstVarDecl ::= (ConstVarDecl) IDENT:varName EQUAL ConstValue;
+
+ConstValue ::= (NUMBER)NUMCONST
+			|
+			 (CHAR)CHARCONST
+			|
+			 (BOOL)BOOLCONST;
+			
+VarDecl ::= (VarList)ConstType IDENT:varName VarDeclListList SEMI
+			|
+			(VarDeclArray)ConstType ArrayDecl VarDeclListList SEMI
+			|
+			error COMMA:l
+			{: parser.report_error("Izvrsen oporavak do , u liniji " + lleft, null);  :}
+			|
+			error SEMI:l
+			{: parser.report_error("Izvrsen oporavak do ; u liniji " + lleft, null);  :};
+
+VarDeclListList ::= (VarArray) VarDeclListList COMMA ArrayDecl
+			|
+			(VarDeclSingle) VarDeclListList COMMA IDENT:varName
+			|
+			error COMMA:l
+			{: parser.report_error("Izvrsen oporavak do , u liniji " + lleft, null);  :}
+			|
+			error SEMI:l
+			{: parser.report_error("Izvrsen oporavak do ; u liniji " + lleft, null);  :}
+			|
+			(NoVarDeclListList);
+			
+ArrayDecl ::= (ArrayInit)IDENT:arrayName LBRACKET RBRACKET;
+			
+VarDeclList ::= (WithVarDeclList) VarDeclList VarDecl
+		      | (NoVarDeclList);
+
+OptionalBracket ::= (WithBracket) LBRACKET RBRACKET 
+			|
+			(NoParent);
+			
+AbstractClassDecl ::= (AbstractClass)ABSTRACT CLASS IDENT ExtendsDecl LBRACE VarDeclList RBRACE
+					|
+					(AbstractClassWithMethods)ABSTRACT CLASS IDENT ExtendsDecl LBRACE VarDeclList LBRACE MethodOrAbstractMethodDeclList RBRACE RBRACE;
+
+MethodOrAbstractMethodDeclList ::= (MethodList) MethodOrAbstractMethodDeclList MethodDecl 
+								|  
+								(AbstractList) MethodOrAbstractMethodDeclList AbstractMethodDecl
+								| 
+								(NoMethodOrAbstractMethodDeclList);
+
+ExtendsDecl ::= (WithExtendsDecl) EXTENDS Type 
+				| (NoExtendsDecl) ;
+				 
+MethodDecl ::= (MethodDecl)FunctionIdent LPARENT OptionalFormPars RPARENT VarDeclList LBRACE StatementList RBRACE;
+
+FunctionIdent ::= (FunctionType)Type IDENT:funcName
+				|
+				(FunctionVoid)VOID IDENT:funcName;
+
+FormPars ::= (FormPars)Type IDENT OptionalBracket FormParsList;
+
+FormParsList ::= (WithFormParsList)FormParsList COMMA Type IDENT OptionalBracket
+				| 
+				(NoFormParsList);
+ 
+ClassDecl ::= (ClassDecl) CLASS IDENT ExtendsDecl LBRACE VarDeclList ClassMethods RBRACE;
+
+ClassMethods ::= (MethodsOfClass)LBRACE MethodDeclList RBRACE;
+
+MethodDeclList ::= (WithMethodDeclList) MethodDeclList MethodDecl
+				| (NoMethodDeclList); 
+						
+TypeOrVoid ::= (TypeOrVoidType) Type 
+			 | 
+			 (TypeOrVoidVoid) VOID;
+			 
+OptionalFormPars ::= (WithFormPars) FormPars
+ 					| (NoFormPars);
+ 					
+Type ::= (Type)IDENT:typeName;
+
+StatementList ::= (WithStatementList) StatementList Statement
+				| 
+				(NoStatementList);
+ 					
+Statement ::= (StatementDesignator)DesignatorStatement SEMI
+			|
+			(IF)IF LPARENT Condition RPARENT Statement
+			|
+			(Else)IF LPARENT Condition RPARENT Statement ELSE Statement
+			|
+			(For)FOR LPARENT OptionalDesignatorStatement SEMI OptionalCondition SEMI OptionalDesignatorStatement RPARENT Statement
+			|
+			(Break)BREAK SEMI
+			|
+			(Continue)CONTINUE SEMI
+			|
+			(Return)RETURN OptionalExpr SEMI
+			|
+			(Read)READ LPARENT Designator RPARENT SEMI
+			|
+			(PrintWithConst)PRINT LPARENT Expr COMMA NUMCONST RPARENT SEMI
+			|
+			(Print)PRINT LPARENT Expr RPARENT SEMI
+			|
+			(Statements)LBRACE StatementList RBRACE ;
+			
+AbstractMethodDecl ::= (AbstractMethodDecl)ABSTRACT TypeOrVoid IDENT LPARENT OptionalFormPars RPARENT;
+
+DesignatorStatement ::= (DesignatorAssign)Designator Assignop Expr 
+					|
+					(DesignatorFuncCall)Designator LPARENT OptionalActPars RPARENT
+					|
+					(Inc)Designator PLUSPLUS
+					|
+					(Dec)Designator MINUSMINUS;
+
+Condition ::= (ConditionA)CondTerm 
+			|
+			(ConditionOR)Condition OR CondTerm;
+				
+OptionalDesignatorStatement ::= (WithDesignatorStatement)DesignatorStatement 
+								|
+								(NoDesignatorStatement);
+								
+OptionalCondition ::= (WithCondition)Condition
+					|
+					(NoCondition);
+					
+OptionalExpr ::= (WithExpr)Expr
+				|
+				(NoExpr);
+
+CondTerm ::= (CondTermFact)CondFact 
+			|
+			(CondTermAnd)CondTerm AND CondFact;
+				
+CondFact ::= (CondFactExpr)Expr 
+			|
+			(CondFactRelop)Expr Relop Expr;
+
+
+Relop ::= (RelopEql)ISEQUAL | (RelopNotEql)ISNOTEQUAL | (RelopGre)GRE | (RelopGreEql)GREEQUAL | (RelopSml)SML | (RelopSmlEql)SMLEQUAL;
+
+Addop ::= (LeftAddop)AddopLeft | (RightAddop)AddopRight;
+
+AddopRight ::= (PLUSEQ) PLUSEQ | (MINUSEQ)MINUSEQ;
+
+AddopLeft ::= (AddopMin)MINUS | (AddopPls)PLUS;
+
+Assignop ::= (Equal)EQUAL
+			|
+			(AssignAddopR)AddopRight
+			|
+			(AssignMulopR)MulopRight;
+
+ActPars ::= (ActParsList)ActPars COMMA Expr
+			|
+			(ActParsExpr)Expr;
+
+Factor ::= (FactorDesignator)Designator 
+		|
+		(FuncCall)Designator LPARENT OptionalActPars RPARENT
+		|
+		(FactorConst)ConstValue
+	 	|
+	 	(FactorNewExpr)NEW Type LBRACKET Expr RBRACKET
+	 	|
+	 	(FactorNewType)NEW Type:typeName 
+	 	|
+	 	(ExprInParent)LPARENT Expr RPARENT;
+	 	
+Designator ::= (DesignatorIdent)IDENT
+  			|
+  			(DesignatorAtrib)Designator DOT IDENT
+  			|
+  			(DesignatorArr)Designator LBRACKET Expr RBRACKET;
+  			
+Expr ::= (ExprAddopRight)Expr AddopRight Term 
+	  |
+	  (ExprAddopLeft)Expr AddopLeft Term
+      |
+      (ExprTerm)Term 
+      |
+      (ExprMin)MINUS Term;
+      
+Term ::= (TermFactor)Factor
+		|
+		(TermMulop)Term Mulop Factor;
+
+OptionalActPars ::= (WithActPars)ActPars 
+				|
+				(NoActPars);
+				
+Mulop ::= (LeftMulop)MulopLeft | (RightMulop)MulopRight;
+
+MulopLeft ::= (MUL)MUL
+		|
+		(DIV)DIV
+		|
+		(MOD)MODULE;
+		
+MulopRight ::= (MULEQ)MULEQ
+			|
+			(DIVEQ)DIVEQ
+			|
+			(MODEQ)MODEQ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

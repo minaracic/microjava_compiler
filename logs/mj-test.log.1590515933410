@@ -1,0 +1,117 @@
+INFO  19:58:37,987 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  19:58:38,245 - #2 program
+INFO  19:58:38,246 - #45 test302
+INFO  19:58:38,247 - #7 const
+INFO  19:58:38,247 - #45 int
+INFO  19:58:38,247 - #45 jedan
+INFO  19:58:38,250 - #5 =
+INFO  19:58:38,250 - #42 1
+INFO  19:58:38,251 - #8 ;
+INFO  19:58:38,252 - #3 {
+INFO  19:58:38,254 - #45 int
+INFO  19:58:38,255 - #45 sum
+INFO  19:58:38,255 - #13 (
+INFO  19:58:38,255 - #45 int
+INFO  19:58:38,255 - #45 z
+INFO  19:58:38,256 - #6 ,
+INFO  19:58:38,259 - #45 int
+INFO  19:58:38,259 - #45 d
+INFO  19:58:38,259 - #14 )
+INFO  19:58:38,260 - #3 {
+INFO  19:58:38,262 - #21 return
+INFO  19:58:38,263 - #45 z
+INFO  19:58:38,263 - #35 +
+INFO  19:58:38,264 - #45 d
+INFO  19:58:38,265 - #8 ;
+INFO  19:58:38,266 - #4 }
+INFO  19:58:38,266 - #4 }
+INFO  19:58:38,281 - Program(
+  ProgramName(
+   test302
+  ) [ProgramName]
+  DeclListConstDecl(
+    NoDeclList(
+    ) [NoDeclList]
+    ConstDecl(
+      ConstType(
+        Type(
+         int
+        ) [Type]
+      ) [ConstType]
+      ConstVarDecl(
+       jedan
+        NUMBER(
+         1
+        ) [NUMBER]
+      ) [ConstVarDecl]
+      NoConstValueList(
+      ) [NoConstValueList]
+    ) [ConstDecl]
+  ) [DeclListConstDecl]
+  WithMethodDeclList(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      TypeOrVoidType(
+        Type(
+         int
+        ) [Type]
+      ) [TypeOrVoidType]
+     sum
+      WithFormPars(
+        FormPars(
+          Type(
+           int
+          ) [Type]
+         z
+          NoParent(
+          ) [NoParent]
+          WithFormParsList(
+            NoFormParsList(
+            ) [NoFormParsList]
+            Type(
+             int
+            ) [Type]
+           d
+            NoParent(
+            ) [NoParent]
+          ) [WithFormParsList]
+        ) [FormPars]
+      ) [WithFormPars]
+      NoVarDeclList(
+      ) [NoVarDeclList]
+      WithStatementList(
+        NoStatementList(
+        ) [NoStatementList]
+        Return(
+          WithExpr(
+            ExprAdd(
+              ExprTerm(
+                TermFactor(
+                  FactorDesignator(
+                    DesignatorIdent(
+                     z
+                    ) [DesignatorIdent]
+                  ) [FactorDesignator]
+                ) [TermFactor]
+              ) [ExprTerm]
+              AddopPls(
+              ) [AddopPls]
+              TermFactor(
+                FactorDesignator(
+                  DesignatorIdent(
+                   d
+                  ) [DesignatorIdent]
+                ) [FactorDesignator]
+              ) [TermFactor]
+            ) [ExprAdd]
+          ) [WithExpr]
+        ) [Return]
+      ) [WithStatementList]
+    ) [MethodDecl]
+  ) [WithMethodDeclList]
+) [Program]
+INFO  19:58:38,281 - ===================================
+INFO  19:58:38,284 - Deklarisana promenljiva jedan na liniji 5
+INFO  19:58:38,285 -  Print count calls = 0
+INFO  19:58:38,285 -  Deklarisanih promenljivih ima = 0

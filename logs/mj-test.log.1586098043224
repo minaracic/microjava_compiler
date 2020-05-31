@@ -1,0 +1,120 @@
+INFO  16:47:12,547 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  16:47:12,603 - #2 program
+INFO  16:47:12,603 - #45 P
+INFO  16:47:12,603 - #45 int
+INFO  16:47:12,604 - #45 a
+INFO  16:47:12,605 - #6 ,
+INFO  16:47:12,606 - #45 b
+INFO  16:47:12,606 - #6 ,
+INFO  16:47:12,607 - #45 c
+INFO  16:47:12,607 - #9 [
+INFO  16:47:12,607 - #10 ]
+INFO  16:47:12,608 - #8 ;
+INFO  16:47:12,608 - #45 int
+INFO  16:47:12,609 - #45 f
+INFO  16:47:12,609 - #8 ;
+INFO  16:47:12,609 - #3 {
+INFO  16:47:12,609 - #38 void
+INFO  16:47:12,610 - #45 main
+INFO  16:47:12,611 - #13 (
+INFO  16:47:12,611 - #14 )
+INFO  16:47:12,612 - #3 {
+INFO  16:47:12,613 - #45 a
+INFO  16:47:12,614 - #5 =
+INFO  16:47:12,614 - #42 3
+INFO  16:47:12,615 - #8 ;
+INFO  16:47:12,616 - #22 print
+INFO  16:47:12,617 - #13 (
+INFO  16:47:12,617 - #42 1
+INFO  16:47:12,617 - #14 )
+INFO  16:47:12,617 - #8 ;
+INFO  16:47:12,617 - #4 }
+INFO  16:47:12,617 - #4 }
+INFO  16:47:12,620 - Program(
+ P
+  DeclListVarDecl(
+    DeclListVarDecl(
+      NoDeclList(
+      ) [NoDeclList]
+      VarList(
+        Type(
+         int
+        ) [Type]
+       a
+        WithVarDeclListList(
+          WithVarDeclListList(
+            NoVarDeclListList(
+            ) [NoVarDeclListList]
+           b
+            NoParent(
+            ) [NoParent]
+          ) [WithVarDeclListList]
+         c
+          WithBracket(
+          ) [WithBracket]
+        ) [WithVarDeclListList]
+      ) [VarList]
+    ) [DeclListVarDecl]
+    VarList(
+      Type(
+       int
+      ) [Type]
+     f
+      NoVarDeclListList(
+      ) [NoVarDeclListList]
+    ) [VarList]
+  ) [DeclListVarDecl]
+  WithMethodDeclList(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      TypeOrVoidVoid(
+      ) [TypeOrVoidVoid]
+     main
+      NoFormPars(
+      ) [NoFormPars]
+      NoVarDeclList(
+      ) [NoVarDeclList]
+      WithStatementList(
+        WithStatementList(
+          NoStatementList(
+          ) [NoStatementList]
+          StatementDesignator(
+            DesignatorStatement(
+              DesignatorIdent(
+               a
+              ) [DesignatorIdent]
+              DesignatorAssignop(
+                Assignop(
+                ) [Assignop]
+                ExprTerm(
+                  TermFactor(
+                    FactorConst(
+                      NUMBER(
+                       3
+                      ) [NUMBER]
+                    ) [FactorConst]
+                  ) [TermFactor]
+                ) [ExprTerm]
+              ) [DesignatorAssignop]
+            ) [DesignatorStatement]
+          ) [StatementDesignator]
+        ) [WithStatementList]
+        Print(
+          ExprTerm(
+            TermFactor(
+              FactorConst(
+                NUMBER(
+                 1
+                ) [NUMBER]
+              ) [FactorConst]
+            ) [TermFactor]
+          ) [ExprTerm]
+        ) [Print]
+      ) [WithStatementList]
+    ) [MethodDecl]
+  ) [WithMethodDeclList]
+) [Program]
+INFO  16:47:12,620 - ===================================
+INFO  16:47:12,622 -  Print count calls = 1
+INFO  16:47:12,622 -  Deklarisanih promenljivih ima = 0
