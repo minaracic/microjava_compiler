@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 31/4/2020 17:15:43
+// 1/5/2020 22:45:31
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -10,6 +10,8 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(Mulop Mulop) { }
     public void visit(Relop Relop) { }
     public void visit(Assignop Assignop) { }
+    public void visit(ExprInParentRPARENT ExprInParentRPARENT) { }
+    public void visit(ExprInParentLPARENT ExprInParentLPARENT) { }
     public void visit(StatementList StatementList) { }
     public void visit(MethodOrAbstractMethodDeclList MethodOrAbstractMethodDeclList) { }
     public void visit(Addop Addop) { }
@@ -45,6 +47,7 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(MulopLeft MulopLeft) { }
     public void visit(CondFact CondFact) { }
     public void visit(MethodDeclList MethodDeclList) { }
+    public void visit(Neg Neg) { }
     public void visit(MulopRight MulopRight) { }
     public void visit(ClassMethods ClassMethods) { }
     public void visit(MODEQ MODEQ) { visit(); }
@@ -59,6 +62,7 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(WithActPars WithActPars) { visit(); }
     public void visit(TermMulop TermMulop) { visit(); }
     public void visit(TermFactor TermFactor) { visit(); }
+    public void visit(Negative Negative) { visit(); }
     public void visit(ExprMin ExprMin) { visit(); }
     public void visit(ExprTerm ExprTerm) { visit(); }
     public void visit(ExprAddopLeft ExprAddopLeft) { visit(); }
@@ -66,6 +70,8 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(DesignatorArr DesignatorArr) { visit(); }
     public void visit(DesignatorAtrib DesignatorAtrib) { visit(); }
     public void visit(DesignatorIdent DesignatorIdent) { visit(); }
+    public void visit(Rparent Rparent) { visit(); }
+    public void visit(Lparent Lparent) { visit(); }
     public void visit(ExprInParent ExprInParent) { visit(); }
     public void visit(FactorNewType FactorNewType) { visit(); }
     public void visit(FactorNewExpr FactorNewExpr) { visit(); }

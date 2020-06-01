@@ -70,6 +70,7 @@ nonterminal DesignatorStatement DesignatorStatement;
 nonterminal Condition Condition;
 nonterminal OptionalDesignatorStatement OptionalDesignatorStatement;
 nonterminal OptionalCondition OptionalCondition;
+nonterminal Neg Neg;
 nonterminal OptionalExpr OptionalExpr;
 nonterminal CondTerm CondTerm;
 nonterminal CondFact CondFact;
@@ -77,6 +78,8 @@ nonterminal Relop Relop;
 nonterminal Addop Addop;
 nonterminal AddopLeft AddopLeft;
 nonterminal AddopRight AddopRight;
+nonterminal ExprInParentLPARENT ExprInParentLPARENT;
+nonterminal ExprInParentRPARENT ExprInParentRPARENT;
 nonterminal Assignop Assignop;
 nonterminal ActPars ActPars;
 nonterminal OptionalActPars OptionalActPars;
@@ -265,7 +268,6 @@ CondFact ::= (CondFactExpr)Expr:E1 {: RESULT=new CondFactExpr(E1); RESULT.setLin
 			|
 			(CondFactRelop)Expr:E1 Relop:R2 Expr:E3 {: RESULT=new CondFactRelop(E1, R2, E3); RESULT.setLine(E1left); :};
 
-
 Relop ::= (RelopEql)ISEQUAL {: RESULT=new RelopEql(); :} | (RelopNotEql)ISNOTEQUAL {: RESULT=new RelopNotEql(); :} | (RelopGre)GRE {: RESULT=new RelopGre(); :} | (RelopGreEql)GREEQUAL {: RESULT=new RelopGreEql(); :} | (RelopSml)SML {: RESULT=new RelopSml(); :} | (RelopSmlEql)SMLEQUAL {: RESULT=new RelopSmlEql(); :};
 
 Addop ::= (LeftAddop)AddopLeft:A1 {: RESULT=new LeftAddop(A1); RESULT.setLine(A1left); :} | (RightAddop)AddopRight:A1 {: RESULT=new RightAddop(A1); RESULT.setLine(A1left); :};
@@ -294,7 +296,11 @@ Factor ::= (FactorDesignator)Designator:D1 {: RESULT=new FactorDesignator(D1); R
 	 	|
 	 	(FactorNewType)NEW Type:typeName {: RESULT=new FactorNewType(typeName); RESULT.setLine(typeNameleft); :} 
 	 	|
-	 	(ExprInParent)LPARENT Expr:E1 RPARENT {: RESULT=new ExprInParent(E1); RESULT.setLine(E1left); :};
+	 	(ExprInParent)ExprInParentLPARENT:E1 Expr:E2 ExprInParentRPARENT:E3 {: RESULT=new ExprInParent(E1, E2, E3); RESULT.setLine(E1left); :};
+	 	
+ExprInParentLPARENT ::= (Lparent)LPARENT {: RESULT=new Lparent(); :};
+
+ExprInParentRPARENT ::= (Rparent)RPARENT {: RESULT=new Rparent(); :};
 	 	
 Designator ::= (DesignatorIdent)IDENT:I1 {: RESULT=new DesignatorIdent(I1); RESULT.setLine(I1left); :}
   			|
@@ -308,7 +314,9 @@ Expr ::= (ExprAddopRight)Expr:E1 AddopRight:A2 Term:T3 {: RESULT=new ExprAddopRi
       |
       (ExprTerm)Term:T1 {: RESULT=new ExprTerm(T1); RESULT.setLine(T1left); :} 
       |
-      (ExprMin)MINUS Term:T1 {: RESULT=new ExprMin(T1); RESULT.setLine(T1left); :};
+      (ExprMin)Neg:N1 Term:T2 {: RESULT=new ExprMin(N1, T2); RESULT.setLine(N1left); :};
+     
+Neg ::= (Negative)MINUS {: RESULT=new Negative(); :};
       
 Term ::= (TermFactor)Factor:F1 {: RESULT=new TermFactor(F1); RESULT.setLine(F1left); :}
 		|

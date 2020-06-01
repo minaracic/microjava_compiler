@@ -50,8 +50,8 @@ scan with {:
 nonterminal DeclList, MethodDeclList, VarDecl, AbstractClassDecl, ClassDecl, ConstDecl, ExtendsDecl;
 nonterminal ConstValueList, VarDeclList, OptionalBracket, VarDeclListList;
 nonterminal MethodOrAbstractMethodDeclList, MethodDecl, AbstractMethodDecl, OptionalFormPars, StatementList, FormPars, FormParsList, Statement;
-nonterminal DesignatorStatement, Condition, OptionalDesignatorStatement, OptionalCondition;
-nonterminal OptionalExpr, CondTerm, CondFact, Relop, Addop, AddopLeft, AddopRight;
+nonterminal DesignatorStatement, Condition, OptionalDesignatorStatement, OptionalCondition, Neg;
+nonterminal OptionalExpr, CondTerm, CondFact, Relop, Addop, AddopLeft, AddopRight, ExprInParentLPARENT, ExprInParentRPARENT;
 nonterminal Assignop, ActPars, OptionalActPars, MulopRight, MulopLeft, Mulop, ClassMethods, ConstVarDecl, ArrayDecl, TypeOrVoid;
 
 terminal PROG, LBRACE, RBRACE, EQUAL, COMMA, CONST, SEMI, LBRACKET, RBRACKET, ABSTRACT;
@@ -259,7 +259,11 @@ Factor ::= (FactorDesignator)Designator
 	 	|
 	 	(FactorNewType)NEW Type:typeName 
 	 	|
-	 	(ExprInParent)LPARENT Expr RPARENT;
+	 	(ExprInParent)ExprInParentLPARENT Expr ExprInParentRPARENT;
+	 	
+ExprInParentLPARENT ::= (Lparent)LPARENT;
+
+ExprInParentRPARENT ::= (Rparent)RPARENT;
 	 	
 Designator ::= (DesignatorIdent)IDENT
   			|
@@ -273,7 +277,9 @@ Expr ::= (ExprAddopRight)Expr AddopRight Term
       |
       (ExprTerm)Term 
       |
-      (ExprMin)MINUS Term;
+      (ExprMin)Neg Term;
+     
+Neg ::= (Negative)MINUS;
       
 Term ::= (TermFactor)Factor
 		|

@@ -1,25 +1,28 @@
 package rs.ac.bg.etf.pp1;
 
-import java.util.Stack;
+import java.util.*;
 
 import rs.ac.bg.etf.pp1.ast.*;
 import rs.etf.pp1.mj.runtime.Code;
 import rs.etf.pp1.symboltable.Tab;
 import rs.etf.pp1.symboltable.concepts.Obj;
+import rs.etf.pp1.symboltable.concepts.Struct;
 
 public class CodeGenerator extends VisitorAdaptor {
 	private int mainPC;
-	private Stack<Obj> variables = new Stack<Obj>(); 
-	private Stack<String> operands = new Stack<String>();
+	private Stack<String> operators = new Stack<String>();
+	private LinkedList<String> output = new LinkedList<String>();
+	private LinkedList<Obj> objects = new LinkedList<Obj>();
+	
+	private List<String> operatorTokens = Arrays.asList(new String[]{"+", "-", "*", "/", "%", "(", ")", "-u", "+=", "-=", "=", "*=", "/=", "%="});
+	private List<String> rightAssociativeOperators = Arrays.asList(new String[]{"-u" ,"+=", "-=", "=", "*=", "/=", "%="});
 	
 	public int getMainPC() {
 		return mainPC;
 	}
 	
 	public void visit(NUMBER num) {
-		num.obj.setLevel(0);
-//		Code.load(num.obj);
-		variables.push(num.obj);
+		output.add(num.getN1().toString());
 	}
 	
 	public void visit(CHAR ch) {
@@ -55,46 +58,28 @@ public class CodeGenerator extends VisitorAdaptor {
 		Code.put(0);
 		Code.put(SemanticAnalyzer.mainMethodLocals);
 	}
-	
-	public void visit(ExprMin var) {
-		Code.put(Code.neg);
-	}
-	
-//	public void visit(ExprAdd var) {
-//		Addop op = var.getAddop();
-//		if(op instanceof LeftAddop) {
-//			if(((LeftAddop) op).getAddopLeft() instanceof AddopPls){
-//				Code.put(Code.add);
-//			}
-//			if(((LeftAddop) op).getAddopLeft() instanceof AddopMin){
-//				Code.put(Code.sub);
-//			}
-//		}
-//		else {
-//			if(((RightAddop) op).getAddopRight() instanceof PLUSEQ){
-//				Code.put(Code.add);
-//				Code.put(Code.dup);
-//				Code.store(variables.pop());
-//			}
-//			if(((RightAddop) op).getAddopRight() instanceof MINUSEQ){
-//				Code.put(Code.sub);
-//				Code.put(Code.dup);
-//				Code.store(variables.pop());
-//			}
-//		}
-//	}
-	
-	public void visit(TermMulop var) {
-		Code.put(Code.mul);
-	}
-	
-	public void visit(FactorDesignator var) {
-	//	variables.push(var.getDesignator().obj);
-//		Code.load(var.getDesignator().obj);
-	}
+
 	
 	public void visit(Print printStmt) {
-		generateCode();
+//		System.out.println("print statement: " + printStmt);
+//		List<String> output;
+//		printStmt.getExpr().traverseBottomUp(new VisitorAdaptor() {
+//			@Override
+//			public void visit(NUMBER NUMBER) {
+//				System.out.println("Visit: " + NUMBER);
+//				output.add(NUMBER);
+//			}
+//			
+//			@Override
+//			public void visit(AddopPls Addop) {
+//				System.out.println("Visit: " + Addop);
+//			}
+//			
+//			@Override
+//			public void visit(MUL Addop) {
+//				System.out.println("Visit: " + Addop);
+//			}
+//		});
 		if (printStmt.getExpr().struct.getKind() == Tab.charType.getKind()) {
 			Code.loadConst(1);
 			Code.put(Code.bprint);
@@ -104,58 +89,113 @@ public class CodeGenerator extends VisitorAdaptor {
 		}
 	}
 	
+	public void visit(Negative op) {
+		addOperatorToOutput("-u");
+	}
+	
+	private boolean isLeftAssociative(String op) {
+		if(rightAssociativeOperators.indexOf(op) != -1)
+			return false;
+		return true;
+	}
+	
+	//todo: add other operators
+	private int getPrecendence(String op) {
+		if(op.equals("++") || op.equals("--"))
+			return 1;
+		if(op.equals("(") || op.equals(")"))
+			return 1;
+		if(op.equals("-u"))
+			return 2;
+		if(op.equals("*") || op.equals("/") || op.equals("%"))
+			return 3;
+		if(op.equals("+") || op.equals("-"))
+			return 4;
+		if(op.equals("*=") || op.equals("/=") || op.equals("%=") || op.equals("+=") || op.equals("-="))
+			return 14;
+		return -1;
+		
+	}
+	
+	private void addOperatorToOutput(String op) {
+		
+		if(op.equals("(")) {
+			operators.push(op);
+			return;
+		}
+		
+		if(op.equals(")")) {
+			while(!operators.lastElement().equals("(")) {
+				String currentOp = operators.pop();
+				output.add(currentOp);
+			}
+			
+			if(operators.lastElement().equals("(")) {
+				operators.pop();
+			}
+			
+			return;
+		}
+		
+		while(!operators.isEmpty() 
+				&& !operators.lastElement().equals("(")
+				&& (getPrecendence(operators.lastElement()) < getPrecendence(op)
+						|| (getPrecendence(operators.lastElement()) == getPrecendence(op)) && isLeftAssociative(op))) {
+			output.add(operators.pop());
+		}
+		
+		operators.push(op);
+		
+	}
+	
+	public void visit(AddopPls plus) {
+		addOperatorToOutput("+");
+	}
+	
 	public void visit(Equal var) {
-		operands.push("=");
+		addOperatorToOutput("=");
+	}
+	
+	public void visit(AddopMin min) {
+		addOperatorToOutput("-");
+	}
+	
+	public void visit(MUL mul) {
+		addOperatorToOutput("*");
+	}
+	
+	public void visit(DIV div) {
+		addOperatorToOutput("/");
+	}
+	
+	public void visit(MOD mod) {
+		addOperatorToOutput("%");
 	}
 	
 	public void visit(PLUSEQ var) {
-		operands.push("+=");
+		addOperatorToOutput("+=");
 	}
 	
 	public void visit(MINUSEQ var) {
-		operands.push("-=");
+		addOperatorToOutput("-=");
 	}
-
 	
-	public void visit(DesignatorAssign var) {
-		Obj desig = var.getDesignator().obj;
-		Assignop op = var.getAssignop();
-		
-//		if(op instanceof Equal) {
-//			operands.push("=");
-//			//generateCode();
-//		}
-//		if(op instanceof AssignAddopR) {
-//			AddopRight right = ((AssignAddopR) op).getAddopRight();
-//			if(right instanceof PLUSEQ) {
-//				operands.push("+=");
-//			}
-//			if(right instanceof MINUSEQ) {
-//				operands.push("-=");
-//			}
-//		}
-//		if(op instanceof AssignMulopR) {
-//			MulopRight mul = ((AssignMulopR) op).getMulopRight();
-//			if(mul instanceof MULEQ) {
-//				operands.push("*=");
-//			}
-//			if(mul instanceof DIVEQ) {
-//				operands.push("/=");
-//			}
-//			if(mul instanceof MODEQ) {
-//				operands.push("/=");
-//			}
-//		}
+	public void visit(DIVEQ var) {
+		addOperatorToOutput("/=");
+	}
 	
+	public void visit(MODEQ var) {
+		addOperatorToOutput("%=");
 	}
 	
 	public void visit(StatementDesignator var) {
+		System.out.println(var.getDesignatorStatement().toString());
 		generateCode();
 	}
 	
 	public void visit(DesignatorIdent var) {
-		variables.push(var.obj);
-		
+		//objects.add(var.obj);
+		output.add(var.obj.getName());
 	}
 	
 	public void visit(MethodDecl var) {
@@ -163,84 +203,169 @@ public class CodeGenerator extends VisitorAdaptor {
 		Code.put(Code.return_);
 	}
 	
-	public void visit(ExprAddopLeft var) {
-//		if(var.getAddopLeft() instanceof AddopPls) {
-//			operands.push("+");
-//		}
-//		if(var.getAddopLeft() instanceof AddopMin) {
-//			operands.push("-");
-//		}
+	private Obj getObject(String in) {
+		try {
+			int val = Integer.parseInt(in);
+			Obj obj = new Obj(Obj.Con, "", Tab.intType, val, Obj.NO_VALUE);
+			return obj;
+		}catch(NumberFormatException er) {
+			return Tab.find(in);
+		}
 	}
 	
-	public void visit(ExprAddopRight var) {
-//		if(var.getAddopRight() instanceof PLUSEQ) {
-//			operands.push("+=");
-//		}
-//		if(var.getAddopRight() instanceof MINUSEQ) {
-//			operands.push("-=");
-//		}
+	private boolean isOperator(String in) {
+		if(operatorTokens.indexOf(in) != -1) {
+			return true;
+		}
+		return false;
 	}
 	
-	private void codeForEqual() {
-		Obj val = variables.pop();
-		Obj var = variables.pop();
-		Code.load(val);
-		Code.store(var);
+	public void visit(Lparent var) {
+		addOperatorToOutput("(");
 	}
 	
-	private void codeForPlusEq() {
-		Obj val = variables.pop();
-		Obj var = variables.pop();
-		Code.load(val);
-		Code.load(var);
-		Code.put(Code.add);
-		Code.store(var);
-		variables.push(var);
-//		Code.load(var);
-	}
-	
-	private void codeForMinEq() {
-		Obj val = variables.pop();
-		Obj var = variables.pop();
-		Code.load(val);
-		Code.load(var);
-	}
-	
-	private void codeForPlus() {
-		
-	}
-	
-	private boolean isAssignement(String op) {
-		if(op.equals("+") || op.equals("-") || op.equals("*") || op.equals("/") || op.equals("%"))
-			return false;
-		return true;
+	public void visit(Rparent var) {
+		addOperatorToOutput(")");
 	}
 	
 	public void generateCode() {
-		if(operands.empty() && !variables.empty()) {
-			Obj obj = variables.pop();
-			Code.load(obj);
+		Stack<Obj> vars = new Stack<Obj>();
+		while(!operators.isEmpty()) {
+			output.add(operators.pop());
 		}
-		while(!operands.isEmpty()) {
-			String op = operands.pop();
+		
+		while(!output.isEmpty()) {
+			String in = output.poll();
+			System.out.println("In je: " + in);
 			
-			switch(op) {
-				case "=":
-					codeForEqual();
-				case "+=":
-					codeForPlusEq();
-				case "-=":
-					codeForMinEq();
-				case "+":
-					codeForPlus();
+			if(!isOperator(in)) {
+				Obj obj = getObject(in);
+				vars.push(obj);
+			}
+			else {
+				if(in.equals("+")) {
+					Obj var1 = vars.pop();
+					Obj var2 = vars.pop();
+					Code.load(var1);
+					Code.load(var2);
+					Code.put(Code.add);
+					int result = var1.getAdr() + var2.getAdr();
+					Obj res = new Obj(Obj.Var, "", Tab.intType, result, 1);
+					Code.store(res);
+					vars.push(res);
+				}
+				if(in.equals("-u")) {
+					Obj var1 = vars.pop();
+					Code.load(var1);
+					Code.put(Code.neg);
+					int result = -var1.getAdr();
+					Obj res = new Obj(Obj.Var, "", Tab.intType, result, 1);
+					Code.store(res);
+					vars.push(res);
+				}
+				if(in.equals("*")) {
+					Obj var1 = vars.pop();
+					Obj var2 = vars.pop();
+					Code.load(var1);
+					Code.load(var2);
+					Code.put(Code.mul);
+					int res = var1.getAdr() * var2.getAdr();
+					Obj ress = new Obj(Obj.Var, "", Tab.intType, res, 1);
+					Code.store(ress);
+					vars.push(ress);
+				}
+				if(in.equals("/")) {
+					Obj var1 = vars.pop();
+					Obj var2 = vars.pop();
+					Code.load(var1);
+					Code.load(var2);
+					Code.put(Code.div);
+					int result = var1.getAdr() / var2.getAdr();
+					Obj res = new Obj(Obj.Var, "", Tab.intType, result, 1);
+					Code.store(res);
+					vars.push(res);
+				}
+				if(in.equals("%")) {
+					Obj var1 = vars.pop();
+					Obj var2 = vars.pop();
+					Code.load(var1);
+					Code.load(var2);
+					Code.put(Code.rem);
+					int result = var1.getAdr() % var2.getAdr();
+					Obj res = new Obj(Obj.Var, "", Tab.intType, result, 1);
+					Code.store(res);
+					vars.push(res);
+				}
+				if(in.equals("-")) {
+					Obj var1 = vars.pop();
+					Obj var2 = vars.pop();
+					Code.load(var1);
+					Code.load(var2);
+					Code.put(Code.rem);
+					int result = var1.getAdr() % var2.getAdr();
+					Obj res = new Obj(Obj.Var, "", Tab.intType, result, 1);
+					Code.store(res);
+					vars.push(res);
+				}
+				if(in.equals("=")) {
+					Obj var1 = vars.pop();
+					Obj var2 = vars.pop();
+					Code.load(var1);
+					Code.store(var2);
+					vars.push(var2);
+				}
+				if(in.equals("+=")) {
+					Obj var1 = vars.pop();
+					Obj var2 = vars.pop();
+					Code.load(var1);
+					Code.load(var2);
+					Code.put(Code.add);
+					Code.store(var2);
+					vars.push(var2);
+				}
+				if(in.equals("-=")) {
+					Obj var1 = vars.pop();
+					Obj var2 = vars.pop();
+					Code.load(var1);
+					Code.load(var2);
+					Code.put(Code.sub);
+					Code.store(var2);
+					vars.push(var2);
+				}
+				if(in.equals("*=")) {
+					Obj var1 = vars.pop();
+					Obj var2 = vars.pop();
+					Code.load(var1);
+					Code.load(var2);
+					Code.put(Code.mul);
+					Code.store(var2);
+					vars.push(var2);
+				}
+				if(in.equals("/=")) {
+					Obj var1 = vars.pop();
+					Obj var2 = vars.pop();
+					Code.load(var1);
+					Code.load(var2);
+					Code.put(Code.div);
+					Code.store(var2);
+					vars.push(var2);
+				}
+				if(in.equals("%=")) {
+					Obj var1 = vars.pop();
+					Obj var2 = vars.pop();
+					Code.load(var1);
+					Code.load(var2);
+					Code.put(Code.rem);
+					Code.store(var2);
+					vars.push(var2);
+				}
 					
 			}
 			
-			if(operands.empty() && !isAssignement(op)) {
-				Obj val = variables.pop();
-				Code.load(val);
-			}
 		}
+		
+		Code.load(vars.pop());
+		
 	}
 
 }

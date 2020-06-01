@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 31/4/2020 17:15:43
+// 1/5/2020 22:45:31
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -10,6 +10,8 @@ public interface Visitor {
     public void visit(Mulop Mulop);
     public void visit(Relop Relop);
     public void visit(Assignop Assignop);
+    public void visit(ExprInParentRPARENT ExprInParentRPARENT);
+    public void visit(ExprInParentLPARENT ExprInParentLPARENT);
     public void visit(StatementList StatementList);
     public void visit(MethodOrAbstractMethodDeclList MethodOrAbstractMethodDeclList);
     public void visit(Addop Addop);
@@ -45,6 +47,7 @@ public interface Visitor {
     public void visit(MulopLeft MulopLeft);
     public void visit(CondFact CondFact);
     public void visit(MethodDeclList MethodDeclList);
+    public void visit(Neg Neg);
     public void visit(MulopRight MulopRight);
     public void visit(ClassMethods ClassMethods);
     public void visit(MODEQ MODEQ);
@@ -59,6 +62,7 @@ public interface Visitor {
     public void visit(WithActPars WithActPars);
     public void visit(TermMulop TermMulop);
     public void visit(TermFactor TermFactor);
+    public void visit(Negative Negative);
     public void visit(ExprMin ExprMin);
     public void visit(ExprTerm ExprTerm);
     public void visit(ExprAddopLeft ExprAddopLeft);
@@ -66,6 +70,8 @@ public interface Visitor {
     public void visit(DesignatorArr DesignatorArr);
     public void visit(DesignatorAtrib DesignatorAtrib);
     public void visit(DesignatorIdent DesignatorIdent);
+    public void visit(Rparent Rparent);
+    public void visit(Lparent Lparent);
     public void visit(ExprInParent ExprInParent);
     public void visit(FactorNewType FactorNewType);
     public void visit(FactorNewExpr FactorNewExpr);

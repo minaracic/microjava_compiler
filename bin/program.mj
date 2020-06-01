@@ -4,8 +4,8 @@ int a;
 {		
 
 	void main(){
-		print(2);
 		
+		print(2 + 4*3/2 - 1);
 	}
 	
 }
