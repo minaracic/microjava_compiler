@@ -2,8 +2,6 @@ package rs.ac.bg.etf.pp1;
 
 import java.util.Stack;
 
-import com.sun.org.apache.xpath.internal.operations.Equals;
-
 import rs.ac.bg.etf.pp1.ast.*;
 import rs.etf.pp1.mj.runtime.Code;
 import rs.etf.pp1.symboltable.Tab;
@@ -20,7 +18,8 @@ public class CodeGenerator extends VisitorAdaptor {
 	
 	public void visit(NUMBER num) {
 		num.obj.setLevel(0);
-		Code.load(num.obj);
+//		Code.load(num.obj);
+		variables.push(num.obj);
 	}
 	
 	public void visit(CHAR ch) {
@@ -90,11 +89,12 @@ public class CodeGenerator extends VisitorAdaptor {
 	}
 	
 	public void visit(FactorDesignator var) {
-		variables.push(var.getDesignator().obj);
-		Code.load(var.getDesignator().obj);
+	//	variables.push(var.getDesignator().obj);
+//		Code.load(var.getDesignator().obj);
 	}
 	
 	public void visit(Print printStmt) {
+		generateCode();
 		if (printStmt.getExpr().struct.getKind() == Tab.charType.getKind()) {
 			Code.loadConst(1);
 			Code.put(Code.bprint);
@@ -104,63 +104,57 @@ public class CodeGenerator extends VisitorAdaptor {
 		}
 	}
 	
+	public void visit(Equal var) {
+		operands.push("=");
+	}
+	
+	public void visit(PLUSEQ var) {
+		operands.push("+=");
+	}
+	
+	public void visit(MINUSEQ var) {
+		operands.push("-=");
+	}
+
+	
 	public void visit(DesignatorAssign var) {
 		Obj desig = var.getDesignator().obj;
-		
 		Assignop op = var.getAssignop();
-		if(op instanceof AssignAddopR) {
-			AddopRight right = ((AssignAddopR) op).getAddopRight();
-			if(right instanceof PLUSEQ) {
-//				Code.load(desig);
-				variables.push(desig);
-				Code.put(Code.add);
-			}
-			else {
-//				Code.load(desig);
-				variables.push(desig);
-				Code.put(Code.sub);
-			}
-		}
-		else {
-			if(op instanceof AssignMulopR) {
-				MulopRight mul = ((AssignMulopR) op).getMulopRight();
-				if(mul instanceof MULEQ) {
-//					Code.load(desig);
-					variables.push(desig);
-					Code.put(Code.mul);
-				}
-				if(mul instanceof DIVEQ) {
-//					Code.load(desig);
-					variables.push(desig);
-					Code.put(Code.div);
-				}
-				if(mul instanceof MODEQ) {
-//					Code.load(desig);
-					variables.push(desig);
-					Code.put(Code.rem);
-				}
-				
-			}
-		}
-
-		Code.store(var.getDesignator().obj);
+		
+//		if(op instanceof Equal) {
+//			operands.push("=");
+//			//generateCode();
+//		}
+//		if(op instanceof AssignAddopR) {
+//			AddopRight right = ((AssignAddopR) op).getAddopRight();
+//			if(right instanceof PLUSEQ) {
+//				operands.push("+=");
+//			}
+//			if(right instanceof MINUSEQ) {
+//				operands.push("-=");
+//			}
+//		}
+//		if(op instanceof AssignMulopR) {
+//			MulopRight mul = ((AssignMulopR) op).getMulopRight();
+//			if(mul instanceof MULEQ) {
+//				operands.push("*=");
+//			}
+//			if(mul instanceof DIVEQ) {
+//				operands.push("/=");
+//			}
+//			if(mul instanceof MODEQ) {
+//				operands.push("/=");
+//			}
+//		}
 	
 	}
 	
+	public void visit(StatementDesignator var) {
+		generateCode();
+	}
+	
 	public void visit(DesignatorIdent var) {
-		if(var.getParent().getClass() == DesignatorAssign.class) {
-			
-			DesignatorAssign d = (DesignatorAssign) var.getParent();
-			Assignop op = d.getAssignop();
-			
-			if(op instanceof Assignop) {
-				if(!(op instanceof Equal)) {
-					Code.load(var.obj);
-					variables.push(var.obj);
-				}
-			}
-			
-		}
+		variables.push(var.obj);
 		
 	}
 	
@@ -170,26 +164,83 @@ public class CodeGenerator extends VisitorAdaptor {
 	}
 	
 	public void visit(ExprAddopLeft var) {
-		if(var.getAddopLeft() instanceof AddopPls) {
-			Code.put(Code.add);
-		}
-		if(var.getAddopLeft() instanceof AddopMin) {
-			Code.put(Code.sub);
-		}
+//		if(var.getAddopLeft() instanceof AddopPls) {
+//			operands.push("+");
+//		}
+//		if(var.getAddopLeft() instanceof AddopMin) {
+//			operands.push("-");
+//		}
 	}
 	
 	public void visit(ExprAddopRight var) {
-		Obj d = variables.pop();
-		if(var.getAddopRight() instanceof PLUSEQ) {
-			Code.load(d);
-			Code.put(Code.add);
-			Code.put(Code.dup);
-//			Code.store()
-		}
-		if(var.getAddopLeft() instanceof AddopMin) {
-			Code.put(Code.sub);
-		}
+//		if(var.getAddopRight() instanceof PLUSEQ) {
+//			operands.push("+=");
+//		}
+//		if(var.getAddopRight() instanceof MINUSEQ) {
+//			operands.push("-=");
+//		}
 	}
 	
+	private void codeForEqual() {
+		Obj val = variables.pop();
+		Obj var = variables.pop();
+		Code.load(val);
+		Code.store(var);
+	}
+	
+	private void codeForPlusEq() {
+		Obj val = variables.pop();
+		Obj var = variables.pop();
+		Code.load(val);
+		Code.load(var);
+		Code.put(Code.add);
+		Code.store(var);
+		variables.push(var);
+//		Code.load(var);
+	}
+	
+	private void codeForMinEq() {
+		Obj val = variables.pop();
+		Obj var = variables.pop();
+		Code.load(val);
+		Code.load(var);
+	}
+	
+	private void codeForPlus() {
+		
+	}
+	
+	private boolean isAssignement(String op) {
+		if(op.equals("+") || op.equals("-") || op.equals("*") || op.equals("/") || op.equals("%"))
+			return false;
+		return true;
+	}
+	
+	public void generateCode() {
+		if(operands.empty() && !variables.empty()) {
+			Obj obj = variables.pop();
+			Code.load(obj);
+		}
+		while(!operands.isEmpty()) {
+			String op = operands.pop();
+			
+			switch(op) {
+				case "=":
+					codeForEqual();
+				case "+=":
+					codeForPlusEq();
+				case "-=":
+					codeForMinEq();
+				case "+":
+					codeForPlus();
+					
+			}
+			
+			if(operands.empty() && !isAssignement(op)) {
+				Obj val = variables.pop();
+				Code.load(val);
+			}
+		}
+	}
 
 }

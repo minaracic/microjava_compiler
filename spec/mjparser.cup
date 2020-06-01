@@ -231,7 +231,6 @@ CondFact ::= (CondFactExpr)Expr
 			|
 			(CondFactRelop)Expr Relop Expr;
 
-
 Relop ::= (RelopEql)ISEQUAL | (RelopNotEql)ISNOTEQUAL | (RelopGre)GRE | (RelopGreEql)GREEQUAL | (RelopSml)SML | (RelopSmlEql)SMLEQUAL;
 
 Addop ::= (LeftAddop)AddopLeft | (RightAddop)AddopRight;

@@ -1,0 +1,151 @@
+INFO  10:08:59,408 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  10:08:59,590 - #2 program
+INFO  10:08:59,591 - #50 test302
+INFO  10:08:59,591 - #50 int
+INFO  10:08:59,593 - #50 x
+INFO  10:08:59,596 - #8 ;
+INFO  10:08:59,598 - #50 int
+INFO  10:08:59,599 - #50 a
+INFO  10:08:59,599 - #8 ;
+INFO  10:08:59,599 - #3 {
+INFO  10:08:59,599 - #38 void
+INFO  10:08:59,600 - #50 main
+INFO  10:08:59,600 - #13 (
+INFO  10:08:59,600 - #14 )
+INFO  10:08:59,601 - #3 {
+INFO  10:08:59,602 - #50 x
+INFO  10:08:59,603 - #5 =
+INFO  10:08:59,603 - #47 2
+INFO  10:08:59,604 - #8 ;
+INFO  10:08:59,605 - #50 x
+INFO  10:08:59,605 - #5 =
+INFO  10:08:59,606 - #50 x
+INFO  10:08:59,606 - #42 +=
+INFO  10:08:59,606 - #47 2
+INFO  10:08:59,608 - #8 ;
+INFO  10:08:59,608 - #22 print
+INFO  10:08:59,608 - #13 (
+INFO  10:08:59,608 - #50 x
+INFO  10:08:59,608 - #14 )
+INFO  10:08:59,608 - #8 ;
+INFO  10:08:59,608 - #4 }
+INFO  10:08:59,609 - #4 }
+INFO  10:08:59,629 - Program(
+  ProgName(
+   test302
+  ) [ProgName]
+  DeclListVarDecl(
+    DeclListVarDecl(
+      NoDeclList(
+      ) [NoDeclList]
+      VarList(
+        ConstType(
+          Type(
+           int
+          ) [Type]
+        ) [ConstType]
+       x
+        NoVarDeclListList(
+        ) [NoVarDeclListList]
+      ) [VarList]
+    ) [DeclListVarDecl]
+    VarList(
+      ConstType(
+        Type(
+         int
+        ) [Type]
+      ) [ConstType]
+     a
+      NoVarDeclListList(
+      ) [NoVarDeclListList]
+    ) [VarList]
+  ) [DeclListVarDecl]
+  WithMethodDeclList(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      FunctionVoid(
+       main
+      ) [FunctionVoid]
+      NoFormPars(
+      ) [NoFormPars]
+      NoVarDeclList(
+      ) [NoVarDeclList]
+      WithStatementList(
+        WithStatementList(
+          WithStatementList(
+            NoStatementList(
+            ) [NoStatementList]
+            StatementDesignator(
+              DesignatorAssign(
+                DesignatorIdent(
+                 x
+                ) [DesignatorIdent]
+                Equal(
+                ) [Equal]
+                ExprTerm(
+                  TermFactor(
+                    FactorConst(
+                      NUMBER(
+                       2
+                      ) [NUMBER]
+                    ) [FactorConst]
+                  ) [TermFactor]
+                ) [ExprTerm]
+              ) [DesignatorAssign]
+            ) [StatementDesignator]
+          ) [WithStatementList]
+          StatementDesignator(
+            DesignatorAssign(
+              DesignatorIdent(
+               x
+              ) [DesignatorIdent]
+              Equal(
+              ) [Equal]
+              ExprAddopRight(
+                ExprTerm(
+                  TermFactor(
+                    FactorDesignator(
+                      DesignatorIdent(
+                       x
+                      ) [DesignatorIdent]
+                    ) [FactorDesignator]
+                  ) [TermFactor]
+                ) [ExprTerm]
+                PLUSEQ(
+                ) [PLUSEQ]
+                TermFactor(
+                  FactorConst(
+                    NUMBER(
+                     2
+                    ) [NUMBER]
+                  ) [FactorConst]
+                ) [TermFactor]
+              ) [ExprAddopRight]
+            ) [DesignatorAssign]
+          ) [StatementDesignator]
+        ) [WithStatementList]
+        Print(
+          ExprTerm(
+            TermFactor(
+              FactorDesignator(
+                DesignatorIdent(
+                 x
+                ) [DesignatorIdent]
+              ) [FactorDesignator]
+            ) [TermFactor]
+          ) [ExprTerm]
+        ) [Print]
+      ) [WithStatementList]
+    ) [MethodDecl]
+  ) [WithMethodDeclList]
+) [Program]
+INFO  10:08:59,629 - ==================SEMANTICKA OBRADA=================
+INFO  10:08:59,676 - Deklarisana promenljiva x na liniji 2
+INFO  10:08:59,676 - Deklarisana promenljiva a na liniji 3
+INFO  10:08:59,677 - Deklarisana metoda main na liniji 6
+INFO  10:08:59,678 - ==================SINTAKSNA ANALIZA=================
+INFO  10:08:59,679 - Ukupno deklarisanih globalnih promenljivih:		2
+INFO  10:08:59,679 - Ukupno deklarisanih globalnih nizova:			0
+INFO  10:08:59,679 - Ukupno deklarisanih globalnih konstanti:			0
+INFO  10:08:59,680 - Ukupno deklarisanih lokalnih promenljivih u main metodi:	0
