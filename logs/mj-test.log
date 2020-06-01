@@ -1,59 +1,47 @@
-INFO  22:22:22,410 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
-INFO  22:22:22,493 - #2 program
-INFO  22:22:22,493 - #50 test302
-INFO  22:22:22,493 - #50 int
-INFO  22:22:22,495 - #50 x
-INFO  22:22:22,497 - #8 ;
-INFO  22:22:22,497 - #50 int
-INFO  22:22:22,498 - #50 a
-INFO  22:22:22,498 - #8 ;
-INFO  22:22:22,498 - #3 {
-INFO  22:22:22,498 - #38 void
-INFO  22:22:22,499 - #50 main
-INFO  22:22:22,499 - #13 (
-INFO  22:22:22,499 - #14 )
-INFO  22:22:22,500 - #3 {
-INFO  22:22:22,501 - #22 print
-INFO  22:22:22,501 - #13 (
-INFO  22:22:22,502 - #47 2
-INFO  22:22:22,502 - #35 +
-INFO  22:22:22,502 - #47 4
-INFO  22:22:22,504 - #39 *
-INFO  22:22:22,504 - #47 3
-INFO  22:22:22,505 - #40 /
-INFO  22:22:22,505 - #47 2
-INFO  22:22:22,506 - #26 -
-INFO  22:22:22,506 - #47 1
-INFO  22:22:22,507 - #14 )
-INFO  22:22:22,507 - #8 ;
-INFO  22:22:22,507 - #4 }
-INFO  22:22:22,507 - #4 }
-INFO  22:22:22,521 - Program(
+INFO  23:17:11,347 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  23:17:11,425 - #2 program
+INFO  23:17:11,425 - #50 test302
+INFO  23:17:11,426 - #50 int
+INFO  23:17:11,427 - #50 x
+INFO  23:17:11,430 - #8 ;
+INFO  23:17:11,431 - #3 {
+INFO  23:17:11,431 - #38 void
+INFO  23:17:11,432 - #50 main
+INFO  23:17:11,432 - #13 (
+INFO  23:17:11,433 - #14 )
+INFO  23:17:11,433 - #3 {
+INFO  23:17:11,434 - #50 x
+INFO  23:17:11,435 - #5 =
+INFO  23:17:11,435 - #26 -
+INFO  23:17:11,436 - #47 1
+INFO  23:17:11,437 - #35 +
+INFO  23:17:11,438 - #47 3
+INFO  23:17:11,439 - #26 -
+INFO  23:17:11,439 - #47 3
+INFO  23:17:11,440 - #26 -
+INFO  23:17:11,440 - #47 1
+INFO  23:17:11,440 - #8 ;
+INFO  23:17:11,441 - #22 print
+INFO  23:17:11,442 - #13 (
+INFO  23:17:11,443 - #50 x
+INFO  23:17:11,443 - #14 )
+INFO  23:17:11,443 - #8 ;
+INFO  23:17:11,443 - #4 }
+INFO  23:17:11,443 - #4 }
+INFO  23:17:11,459 - Program(
   ProgName(
    test302
   ) [ProgName]
   DeclListVarDecl(
-    DeclListVarDecl(
-      NoDeclList(
-      ) [NoDeclList]
-      VarList(
-        ConstType(
-          Type(
-           int
-          ) [Type]
-        ) [ConstType]
-       x
-        NoVarDeclListList(
-        ) [NoVarDeclListList]
-      ) [VarList]
-    ) [DeclListVarDecl]
+    NoDeclList(
+    ) [NoDeclList]
     VarList(
       ConstType(
         Type(
          int
         ) [Type]
       ) [ConstType]
-     a
+     x
       NoVarDeclListList(
       ) [NoVarDeclListList]
     ) [VarList]
@@ -70,74 +58,84 @@ INFO  22:22:22,521 - Program(
       NoVarDeclList(
       ) [NoVarDeclList]
       WithStatementList(
-        NoStatementList(
-        ) [NoStatementList]
-        Print(
-          ExprAddopLeft(
-            ExprAddopLeft(
-              ExprTerm(
-                TermFactor(
-                  FactorConst(
-                    NUMBER(
-                     2
-                    ) [NUMBER]
-                  ) [FactorConst]
-                ) [TermFactor]
-              ) [ExprTerm]
-              AddopPls(
-              ) [AddopPls]
-              TermMulop(
-                TermMulop(
+        WithStatementList(
+          NoStatementList(
+          ) [NoStatementList]
+          StatementDesignator(
+            DesignatorAssign(
+              DesignatorIdent(
+               x
+              ) [DesignatorIdent]
+              Equal(
+              ) [Equal]
+              ExprAddopLeft(
+                ExprAddopLeft(
+                  ExprAddopLeft(
+                    ExprMin(
+                      Negative(
+                      ) [Negative]
+                      TermFactor(
+                        FactorConst(
+                          NUMBER(
+                           1
+                          ) [NUMBER]
+                        ) [FactorConst]
+                      ) [TermFactor]
+                    ) [ExprMin]
+                    AddopPls(
+                    ) [AddopPls]
+                    TermFactor(
+                      FactorConst(
+                        NUMBER(
+                         3
+                        ) [NUMBER]
+                      ) [FactorConst]
+                    ) [TermFactor]
+                  ) [ExprAddopLeft]
+                  AddopMin(
+                  ) [AddopMin]
                   TermFactor(
                     FactorConst(
                       NUMBER(
-                       4
+                       3
                       ) [NUMBER]
                     ) [FactorConst]
                   ) [TermFactor]
-                  LeftMulop(
-                    MUL(
-                    ) [MUL]
-                  ) [LeftMulop]
+                ) [ExprAddopLeft]
+                AddopMin(
+                ) [AddopMin]
+                TermFactor(
                   FactorConst(
                     NUMBER(
-                     3
+                     1
                     ) [NUMBER]
                   ) [FactorConst]
-                ) [TermMulop]
-                LeftMulop(
-                  DIV(
-                  ) [DIV]
-                ) [LeftMulop]
-                FactorConst(
-                  NUMBER(
-                   2
-                  ) [NUMBER]
-                ) [FactorConst]
-              ) [TermMulop]
-            ) [ExprAddopLeft]
-            AddopMin(
-            ) [AddopMin]
+                ) [TermFactor]
+              ) [ExprAddopLeft]
+            ) [DesignatorAssign]
+          ) [StatementDesignator]
+        ) [WithStatementList]
+        Print(
+          ExprTerm(
             TermFactor(
-              FactorConst(
-                NUMBER(
-                 1
-                ) [NUMBER]
-              ) [FactorConst]
+              FactorDesignator(
+                DesignatorIdent(
+                 x
+                ) [DesignatorIdent]
+              ) [FactorDesignator]
             ) [TermFactor]
-          ) [ExprAddopLeft]
+          ) [ExprTerm]
         ) [Print]
       ) [WithStatementList]
     ) [MethodDecl]
   ) [WithMethodDeclList]
 ) [Program]
-INFO  22:22:22,522 - ==================SEMANTICKA OBRADA=================
-INFO  22:22:22,525 - Deklarisana promenljiva x na liniji 2
-INFO  22:22:22,526 - Deklarisana promenljiva a na liniji 3
-INFO  22:22:22,526 - Deklarisana metoda main na liniji 6
-INFO  22:22:22,526 - ==================SINTAKSNA ANALIZA=================
-INFO  22:22:22,526 - Ukupno deklarisanih globalnih promenljivih:		2
-INFO  22:22:22,527 - Ukupno deklarisanih globalnih nizova:			0
-INFO  22:22:22,527 - Ukupno deklarisanih globalnih konstanti:			0
-INFO  22:22:22,527 - Ukupno deklarisanih lokalnih promenljivih u main metodi:	0
-INFO  22:22:22,537 - Parsiranje uspesno zavrseno!
+INFO  23:17:11,460 - ==================SEMANTICKA OBRADA=================
+INFO  23:17:11,466 - Deklarisana promenljiva x na liniji 2
+INFO  23:17:11,466 - Deklarisana metoda main na liniji 5
+INFO  23:17:11,499 - ==================SINTAKSNA ANALIZA=================
+INFO  23:17:11,499 - Ukupno deklarisanih globalnih promenljivih:		1
+INFO  23:17:11,500 - Ukupno deklarisanih globalnih nizova:			0
+INFO  23:17:11,500 - Ukupno deklarisanih globalnih konstanti:			0
+INFO  23:17:11,500 - Ukupno deklarisanih lokalnih promenljivih u main metodi:	0
+INFO  23:17:11,515 - Parsiranje uspesno zavrseno!

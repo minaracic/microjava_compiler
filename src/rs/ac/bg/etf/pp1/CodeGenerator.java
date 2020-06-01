@@ -61,25 +61,6 @@ public class CodeGenerator extends VisitorAdaptor {
 
 	
 	public void visit(Print printStmt) {
-//		System.out.println("print statement: " + printStmt);
-//		List<String> output;
-//		printStmt.getExpr().traverseBottomUp(new VisitorAdaptor() {
-//			@Override
-//			public void visit(NUMBER NUMBER) {
-//				System.out.println("Visit: " + NUMBER);
-//				output.add(NUMBER);
-//			}
-//			
-//			@Override
-//			public void visit(AddopPls Addop) {
-//				System.out.println("Visit: " + Addop);
-//			}
-//			
-//			@Override
-//			public void visit(MUL Addop) {
-//				System.out.println("Visit: " + Addop);
-//			}
-//		});
 		if (printStmt.getExpr().struct.getKind() == Tab.charType.getKind()) {
 			Code.loadConst(1);
 			Code.put(Code.bprint);
@@ -111,7 +92,7 @@ public class CodeGenerator extends VisitorAdaptor {
 			return 3;
 		if(op.equals("+") || op.equals("-"))
 			return 4;
-		if(op.equals("*=") || op.equals("/=") || op.equals("%=") || op.equals("+=") || op.equals("-="))
+		if(op.equals("*=") || op.equals("/=") || op.equals("%=") || op.equals("+=") || op.equals("-=") || op.equals("="))
 			return 14;
 		return -1;
 		
@@ -258,8 +239,7 @@ public class CodeGenerator extends VisitorAdaptor {
 					Obj var1 = vars.pop();
 					Code.load(var1);
 					Code.put(Code.neg);
-					int result = -var1.getAdr();
-					Obj res = new Obj(Obj.Var, "", Tab.intType, result, 1);
+					Obj res = new Obj(Obj.Var, "", Tab.intType);
 					Code.store(res);
 					vars.push(res);
 				}
@@ -299,10 +279,10 @@ public class CodeGenerator extends VisitorAdaptor {
 				if(in.equals("-")) {
 					Obj var1 = vars.pop();
 					Obj var2 = vars.pop();
-					Code.load(var1);
 					Code.load(var2);
-					Code.put(Code.rem);
-					int result = var1.getAdr() % var2.getAdr();
+					Code.load(var1);
+					Code.put(Code.sub);
+					int result = var2.getAdr() - var1.getAdr();
 					Obj res = new Obj(Obj.Var, "", Tab.intType, result, 1);
 					Code.store(res);
 					vars.push(res);
