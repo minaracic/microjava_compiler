@@ -12,7 +12,7 @@ public class CodeGenerator extends VisitorAdaptor {
 	private int mainPC;
 	private Stack<String> operators = new Stack<String>();
 	private LinkedList<String> output = new LinkedList<String>();
-	private LinkedList<Obj> objects = new LinkedList<Obj>();
+	private Stack<Obj> objects = new Stack<Obj>();
 	
 	private List<String> operatorTokens = Arrays.asList(new String[]{"+", "-", "*", "/", "%", "(", ")", "-u", "+=", "-=", "=", "*=", "/=", "%="});
 	private List<String> rightAssociativeOperators = Arrays.asList(new String[]{"-u" ,"+=", "-=", "=", "*=", "/=", "%="});
@@ -58,9 +58,19 @@ public class CodeGenerator extends VisitorAdaptor {
 		Code.put(0);
 		Code.put(SemanticAnalyzer.mainMethodLocals);
 	}
+	
+	public void visit(ExprAddopRight var) {
+//		var.getExpr().childrenAccept(new VisitorAdaptor() {
+//			@Override
+//			public void visit(DesignatorIdent DesignatorIdent) {
+//				objects.push(DesignatorIdent.obj);
+//			}
+//		});
+	}
 
 	
 	public void visit(Print printStmt) {
+		generateCode();
 		if (printStmt.getExpr().struct.getKind() == Tab.charType.getKind()) {
 			Code.loadConst(1);
 			Code.put(Code.bprint);
@@ -170,7 +180,13 @@ public class CodeGenerator extends VisitorAdaptor {
 	}
 	
 	public void visit(StatementDesignator var) {
-		System.out.println(var.getDesignatorStatement().toString());
+		System.out.println(var);
+		var.getDesignatorStatement().childrenAccept(new VisitorAdaptor() {
+			@Override
+			public void visit(DesignatorIdent DesignatorIdent) {
+				objects.push(DesignatorIdent.obj);
+			}
+		});
 		generateCode();
 	}
 	
@@ -221,7 +237,12 @@ public class CodeGenerator extends VisitorAdaptor {
 			
 			if(!isOperator(in)) {
 				Obj obj = getObject(in);
+//				Code.load(obj);
 				vars.push(obj);
+//				if(operators.isEmpty()) {
+//					Code.load(obj);
+//					return;
+//				}
 			}
 			else {
 				if(in.equals("+")) {
@@ -290,9 +311,12 @@ public class CodeGenerator extends VisitorAdaptor {
 				if(in.equals("=")) {
 					Obj var1 = vars.pop();
 					Obj var2 = vars.pop();
-					Code.load(var1);
-					Code.store(var2);
-					vars.push(var2);
+//					Obj obj = Code.
+//					Obj obj = objects.pop();
+//					Code.put(Code.astore);
+				//	Code.put(Code.pop);
+					Code.load(var2);
+					Code.store(var1);
 				}
 				if(in.equals("+=")) {
 					Obj var1 = vars.pop();
@@ -344,7 +368,7 @@ public class CodeGenerator extends VisitorAdaptor {
 			
 		}
 		
-		Code.load(vars.pop());
+//		Code.load(vars.pop());
 		
 	}
 
