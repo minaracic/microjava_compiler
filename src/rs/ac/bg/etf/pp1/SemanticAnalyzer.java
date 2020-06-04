@@ -212,7 +212,6 @@ public class SemanticAnalyzer extends VisitorAdaptor{
     	}
     	
     	var.obj = obj;
-    	
     }
     
     public void visit(DesignatorArr var) {

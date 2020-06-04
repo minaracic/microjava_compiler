@@ -2,8 +2,11 @@ program test302
 int x;
 {		
 
+//ne pamti mi vrednost u x, posle dodele
 	void main(){
-		x = 3;
+	 	x = 5;
+		x += x + x*3;
+		print(x);
 	}
 	
 }
