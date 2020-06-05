@@ -12,19 +12,26 @@ import rs.etf.pp1.symboltable.visitors.SymbolTableVisitor;
 
 public class CodeGenerator extends VisitorAdaptor {
 	private int mainPC;
-	private Stack<String> operators = new Stack<String>();
-	private LinkedList<String> output = new LinkedList<String>();
+	private Stack<SyntaxNode> operators = new Stack<SyntaxNode>();
+	private LinkedList<SyntaxNode> output = new LinkedList<SyntaxNode>();
 //	private Set<Obj> objects = new HashSet<Obj>();
 	
-	private List<String> operatorTokens = Arrays.asList(new String[]{"+", "-", "*", "/", "%", "(", ")", "-u", "+=", "-=", "=", "*=", "/=", "%="});
-	private List<String> rightAssociativeOperators = Arrays.asList(new String[]{"-u" ,"+=", "-=", "=", "*=", "/=", "%="});
+	private List<Class> operatorTokens = Arrays.asList(new Class[]{AddopPls.class, AddopMin.class, Equal.class, 
+			MUL.class, DIV.class, MOD.class, 
+			Lparent.class, Rparent.class,
+			PLUSEQ.class, MINUSEQ.class, MULEQ.class, DIVEQ.class, MODEQ.class});
+			//- kao unarni operator, kako da razlikujem
+	
+	//dodaj - kao unarni operator
+	private List<Class> rightAssociativeOperators = Arrays.asList(new Class[]{PLUSEQ.class, MINUSEQ.class, MULEQ.class, 
+			DIVEQ.class, MODEQ.class, Equal.class});
 	
 	public int getMainPC() {
 		return mainPC;
 	}
 	
 	public void visit(NUMBER num) {
-		output.add(num.getN1().toString());
+		output.add(num);
 	}
 	
 	public void visit(CHAR ch) {
@@ -63,180 +70,9 @@ public class CodeGenerator extends VisitorAdaptor {
 
 	
 	public void visit(Print printStmt) {
-		
-		Stack<Obj> vars = new Stack<Obj>();
-		while(!operators.isEmpty()) {
-			output.add(operators.pop());
-		}
-		if(output.size() == 1) {
-			Obj obj;
-			String in = output.remove();
-			try {
-				int val = Integer.parseInt(in);
-				obj = new Obj(Obj.Con, "", Tab.intType, val, Obj.NO_VALUE);
-				
-			}catch(NumberFormatException er) {
-				obj = Tab.find(in);
-			}
-
-			Code.load(obj);
-//				System.out.println(obj.getAdr());
-		}
-		else {
-		while(!output.isEmpty()) {
-			String in = output.poll();
-			System.out.println("In je: " + in);
-			
-			Obj obj;
-			if(!isOperator(in)) {
-				try {
-					int val = Integer.parseInt(in);
-					obj = new Obj(Obj.Con, "", Tab.intType, val, Obj.NO_VALUE);
-					
-				}catch(NumberFormatException er) {
-					obj = Tab.find(in);
-				}
-				
-//				Code.load(obj);
-				vars.push(obj);
-//				if(operators.isEmpty()) {
-//					Code.load(obj);
-//					return;
-//				}
-			}
-			else {
-				if(in.equals("+")) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-//					Code.load(var1);
-//					Code.load(var2);
-//					Code.put(Code.add);
-					int result = var1.getAdr() + var2.getAdr();
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-					vars.push(res);
-				}
-				if(in.equals("-u")) {
-					Obj var1 = vars.pop();
-					int x = var1.getAdr();
-//					Code.load(var1);
-//					Code.put(Code.neg);
-					Obj res = new Obj(Obj.Con, "", Tab.intType, -x, 1);
-//					Code.store(res);
-					vars.push(res);
-				}
-				if(in.equals("*")) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-//					Code.load(var1);
-//					Code.load(var2);
-//					Code.put(Code.mul);
-					int res = var1.getAdr() * var2.getAdr();
-					Obj ress = new Obj(Obj.Con, "", Tab.intType, res, 1);
-//					Code.store(ress);
-					vars.push(ress);
-				}
-				if(in.equals("/")) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-//					Code.load(var1);
-//					Code.load(var2);
-//					Code.put(Code.div);
-					int result = var1.getAdr() / var2.getAdr();
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-//					Code.store(res);
-					vars.push(res);
-				}
-				if(in.equals("%")) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-//					Code.load(var1);
-//					Code.load(var2);
-//					Code.put(Code.rem);
-					int result = var1.getAdr() % var2.getAdr();
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-//					Code.store(res);
-					vars.push(res);
-				}
-				if(in.equals("-")) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-//					Code.load(var2);
-//					Code.load(var1);
-//					Code.put(Code.sub);
-					int result = var2.getAdr() - var1.getAdr();
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-//					Code.store(res);
-					vars.push(res);
-				}
-				//ne dohvata mi promenljivu x
-				if(in.equals("=")) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-					Code.load(var1);
-					Code.store(var2);
-					var2.setAdr(var1.getAdr());
-					updateObject(var2, var1.getAdr());
-				}
-				if(in.equals("+=")) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-					Code.load(var1);
-					Code.load(var2);
-					Code.put(Code.add);
-					Code.store(var2);
-					
-					int result = var2.getAdr() + var1.getAdr();
-//					var2.setAdr(result);
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-//					Code.load(res);
-//					Code.store(var2);
-//					updateObject(var2, result);
-					vars.push(res);
-				}
-				if(in.equals("-=")) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-					int result = var2.getAdr() - var1.getAdr();
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-					Code.load(res);
-					Code.store(var2);
-					vars.push(res);
-				}
-				if(in.equals("*=")) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-					int result = var2.getAdr() * var1.getAdr();
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-					Code.load(res);
-					Code.store(var2);
-					vars.push(res);
-				}
-				if(in.equals("/=")) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-					int result = var2.getAdr() / var1.getAdr();
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-					Code.load(res);
-					Code.store(var2);
-					vars.push(res);
-				}
-				if(in.equals("%=")) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-					int result = var2.getAdr() % var1.getAdr();
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-					Code.load(res);
-					Code.store(var2);
-					vars.push(res);
-				}
-					
-			}
-			
-		}
-		}
-		
-		
-			
+//		Obj o = getObject(generateCode());
+		Obj o =generateCode();
+		Code.load(o);
 		if (printStmt.getExpr().struct.getKind() == Tab.charType.getKind()) {
 			Code.loadConst(1);
 			Code.put(Code.bprint);
@@ -246,48 +82,47 @@ public class CodeGenerator extends VisitorAdaptor {
 		}
 	}
 	
-	public void visit(Negative op) {
-		addOperatorToOutput("-u");
-	}
-	
-	private boolean isLeftAssociative(String op) {
-		if(rightAssociativeOperators.indexOf(op) != -1)
+//	public void visit(Negative op) {
+//		addOperatorToOutput("-u");
+//	}
+//	
+	private boolean isLeftAssociative(SyntaxNode op) {
+		if(rightAssociativeOperators.indexOf(op.getClass()) != -1)
 			return false;
 		return true;
 	}
 	
-	//todo: add other operators
-	private int getPrecendence(String op) {
-		if(op.equals("++") || op.equals("--"))
+	//todo: add other operators ++, --, []
+	private int getPrecendence(SyntaxNode op) {
+		if(op instanceof Inc || op instanceof Dec)
 			return 1;
-		if(op.equals("(") || op.equals(")"))
+		if(op instanceof Lparent  || op instanceof Rparent)
 			return 1;
-		if(op.equals("-u"))
-			return 2;
-		if(op.equals("*") || op.equals("/") || op.equals("%"))
+//		if(op.equals("-u"))
+//			return 2;
+		if(op instanceof MUL || op instanceof DIV || op instanceof MOD)
 			return 3;
-		if(op.equals("+") || op.equals("-"))
+		if(op instanceof AddopPls || op instanceof AddopMin)
 			return 4;
-		if(op.equals("*=") || op.equals("/=") || op.equals("%=") || op.equals("+=") || op.equals("-=") || op.equals("="))
+		if(op instanceof MULEQ || op instanceof DIVEQ || op instanceof MODEQ || op instanceof PLUSEQ || op instanceof MINUSEQ || op instanceof Equal)
 			return 14;
 		return -1;
 		
 	}
 	
-	private void addOperatorToOutput(String op) {
-		
-		if(op.equals("(")) {
+	private void addOperatorToOutput(SyntaxNode op) {
+		if(op instanceof Lparent) {
 			operators.push(op);
 			return;
 		}
 		
-		if(op.equals(")")) {
-			while(!operators.lastElement().equals("(")) {
-				String currentOp = operators.pop();
+		if(op instanceof Rparent) {
+			while(!(operators.lastElement() instanceof Lparent)) {
+				SyntaxNode currentOp = operators.pop();
 				output.add(currentOp);
 			}
 			
-			if(operators.lastElement().equals("(")) {
+			if(operators.lastElement() instanceof Lparent) {
 				operators.pop();
 			}
 			
@@ -295,9 +130,9 @@ public class CodeGenerator extends VisitorAdaptor {
 		}
 		
 		while(!operators.isEmpty() 
-				&& !operators.lastElement().equals("(")
+				&& !(operators.lastElement() instanceof Lparent)
 				&& (getPrecendence(operators.lastElement()) < getPrecendence(op)
-						|| (getPrecendence(operators.lastElement()) == getPrecendence(op)) && isLeftAssociative(op))) {
+						|| ((getPrecendence(operators.lastElement()) == getPrecendence(op)) && isLeftAssociative(op)))) {
 			output.add(operators.pop());
 		}
 		
@@ -308,214 +143,55 @@ public class CodeGenerator extends VisitorAdaptor {
 	//todo: dodaj ++ i --
 	
 	public void visit(AddopPls plus) {
-		addOperatorToOutput("+");
+		addOperatorToOutput(plus);
 	}
 	
 	public void visit(Equal var) {
-		addOperatorToOutput("=");
+		addOperatorToOutput(var);
 	}
 	
 	public void visit(AddopMin min) {
-		addOperatorToOutput("-");
+		addOperatorToOutput(min);
+	}
+	
+	public void visit(MULEQ min) {
+		addOperatorToOutput(min);
 	}
 	
 	public void visit(MUL mul) {
-		addOperatorToOutput("*");
+		addOperatorToOutput(mul);
 	}
 	
 	public void visit(DIV div) {
-		addOperatorToOutput("/");
+		addOperatorToOutput(div);
 	}
 	
 	public void visit(MOD mod) {
-		addOperatorToOutput("%");
+		addOperatorToOutput(mod);
 	}
 	
 	public void visit(PLUSEQ var) {
-		addOperatorToOutput("+=");
+		addOperatorToOutput(var);
 	}
 	
 	public void visit(MINUSEQ var) {
-		addOperatorToOutput("-=");
+		addOperatorToOutput(var);
 	}
 	
 	public void visit(DIVEQ var) {
-		addOperatorToOutput("/=");
+		addOperatorToOutput(var);
 	}
 	
 	public void visit(MODEQ var) {
-		addOperatorToOutput("%=");
+		addOperatorToOutput(var);
 	}
 	
 	public void visit(StatementDesignator var) {
-		Stack<Obj> vars = new Stack<Obj>();
-		while(!operators.isEmpty()) {
-			output.add(operators.pop());
-		}
-		
-		while(!output.isEmpty()) {
-			String in = output.poll();
-			System.out.println("In je: " + in);
-			
-			Obj obj;
-			if(!isOperator(in)) {
-				try {
-					int val = Integer.parseInt(in);
-					obj = new Obj(Obj.Con, "", Tab.intType, val, Obj.NO_VALUE);
-					
-				}catch(NumberFormatException er) {
-					obj = Tab.find(in);
-				}
-				
-//				Code.load(obj);
-				vars.push(obj);
-//				if(operators.isEmpty()) {
-//					Code.load(obj);
-//					return;
-//				}
-			}
-			else {
-				if(in.equals("+")) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-					Code.load(var1);
-					Code.load(var2);
-					Code.put(Code.add);
-					int result = var1.getAdr() + var2.getAdr();
-					Obj res = new Obj(Obj.Var, "", Tab.intType, result, 1);
-					Code.store(res);
-					vars.push(res);
-				}
-				if(in.equals("-u")) {
-					Obj var1 = vars.pop();
-					int x = var1.getAdr();
-//					Code.load(var1);
-//					Code.put(Code.neg);
-					Obj res = new Obj(Obj.Con, "", Tab.intType, -x, 1);
-//					Code.store(res);
-					vars.push(res);
-				}
-				if(in.equals("*")) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-//					Code.load(var1);
-//					Code.load(var2);
-//					Code.put(Code.mul);
-					int res = var1.getAdr() * var2.getAdr();
-					Obj ress = new Obj(Obj.Con, "", Tab.intType, res, 1);
-//					Code.store(ress);
-					vars.push(ress);
-				}
-				if(in.equals("/")) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-//					Code.load(var1);
-//					Code.load(var2);
-//					Code.put(Code.div);
-					int result = var1.getAdr() / var2.getAdr();
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-//					Code.store(res);
-					vars.push(res);
-				}
-				if(in.equals("%")) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-//					Code.load(var1);
-//					Code.load(var2);
-//					Code.put(Code.rem);
-					int result = var1.getAdr() % var2.getAdr();
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-//					Code.store(res);
-					vars.push(res);
-				}
-				if(in.equals("-")) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-//					Code.load(var2);
-//					Code.load(var1);
-//					Code.put(Code.sub);
-					int result = var2.getAdr() - var1.getAdr();
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-//					Code.store(res);
-					vars.push(res);
-				}
-				//ne dohvata mi promenljivu x
-				if(in.equals("=")) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-					Code.load(var1);
-					Code.store(var2);
-					var2.setAdr(var1.getAdr());
-					updateObject(var2, var1.getAdr());
-				}
-				if(in.equals("+=")) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-//					Code.load(var1);
-//					Code.load(var2);
-				//	Code.put(Code.add);
-					
-					int result = var2.getAdr() + var1.getAdr();
-					var2.setAdr(result);
-//					var2.setAdr(result);
-//					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-//					Code.load(res);
-//					Code.store(var2);
-//					updateObject(var2, result);
-					vars.push(var2);
-				}
-				if(in.equals("-=")) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-					int result = var2.getAdr() - var1.getAdr();
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-					Code.load(res);
-					Code.store(var2);
-					vars.push(res);
-				}
-				if(in.equals("*=")) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-					int result = var2.getAdr() * var1.getAdr();
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-					Code.load(res);
-					Code.store(var2);
-					vars.push(res);
-				}
-				if(in.equals("/=")) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-					int result = var2.getAdr() / var1.getAdr();
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-					Code.load(res);
-					Code.store(var2);
-					vars.push(res);
-				}
-				if(in.equals("%=")) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-					int result = var2.getAdr() % var1.getAdr();
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-					Code.load(res);
-					Code.store(var2);
-					vars.push(res);
-				}
-					
-			}
-			
-		}
-		
-//			Obj obj = vars.pop();
-//			Code.load(obj);
-//			System.out.println(obj.getAdr());
+		generateCode();
 	}
 	
 	public void visit(DesignatorIdent var) {
-//		Obj obj = Tab.find(var.getI1());
-//		var.obj = obj;
-//		Tab.insert(Obj.Var, var.obj.getName(), var.obj.getType());
-//		objects.add(var.obj);
-		output.add(var.obj.getName());
+		output.add(var);
 	}
 	
 	public void visit(MethodDecl var) {
@@ -523,18 +199,13 @@ public class CodeGenerator extends VisitorAdaptor {
 		Code.put(Code.return_);
 	}
 	
-	private Obj getObject(String in) {
-		try {
-			int val = Integer.parseInt(in);
-			Obj obj = new Obj(Obj.Con, "", Tab.intType, val, Obj.NO_VALUE);
-			return obj;
-		}catch(NumberFormatException er) {
-			return Tab.find(in);
-		}
-		
+	private Obj getObject(SyntaxNode in) {
+		if(in instanceof DesignatorIdent)return ((DesignatorIdent) in).obj;
+		if(in instanceof NUMBER)return ((NUMBER) in).obj;
+		return null;
 	}
 	
-	private boolean isOperator(String in) {
+	private boolean isOperator(Class in) {
 		if(operatorTokens.indexOf(in) != -1) {
 			return true;
 		}
@@ -542,180 +213,152 @@ public class CodeGenerator extends VisitorAdaptor {
 	}
 	
 	public void visit(Lparent var) {
-		addOperatorToOutput("(");
+		addOperatorToOutput(var);
 	}
 	
 	public void visit(Rparent var) {
-		addOperatorToOutput(")");
+		addOperatorToOutput(var);
 	}
 	
-	private void updateObject(Obj obj, int value) {
-//		Iterator<Obj> it = objects.iterator();
-//		while(it.hasNext()) {
-//			Obj obj1 = (Obj)it.next();
-//			if(obj1.getName().equals(obj.getName())) {
-//				obj.setAdr(value);
-//				return;
-//			}
-//		}
-	}
-	
-	public void generateCode(boolean calledBy) {
+	public Obj generateCode() {
 		Stack<Obj> vars = new Stack<Obj>();
+	
+		//add rest of operators
 		while(!operators.isEmpty()) {
 			output.add(operators.pop());
 		}
 		
+		System.out.println(output);
+		
 		while(!output.isEmpty()) {
-			String in = output.poll();
-			System.out.println("In je: " + in);
+			SyntaxNode in = output.poll();
+//			System.out.println("In je: " + in.toString());
 			
 			
-			if(!isOperator(in)) {
-				Obj obj = getObject(in);
-//				Code.load(obj);
-				vars.push(obj);
-//				if(operators.isEmpty()) {
-//					Code.load(obj);
-//					return;
-//				}
+			if(isOperator(in.getClass()) == false) {
+				Obj o = getObject(in);
+				vars.push(o);
 			}
 			else {
-				if(in.equals("+")) {
+				
+				if(in instanceof AddopPls) {
 					Obj var1 = vars.pop();
 					Obj var2 = vars.pop();
-//					Code.load(var1);
-//					Code.load(var2);
-//					Code.put(Code.add);
-					int result = var1.getAdr() + var2.getAdr();
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-					vars.push(res);
+					
+					Code.load(var1);
+					Code.load(var2);
+					Code.put(Code.add);
+					Obj tmp = new Obj(Obj.Var, "$", Tab.intType);
+					tmp.setAdr(var1.getAdr()+var2.getAdr());
+					Code.store(tmp);
+					vars.push(tmp);
 				}
 				if(in.equals("-u")) {
-					Obj var1 = vars.pop();
-					int x = var1.getAdr();
-//					Code.load(var1);
-//					Code.put(Code.neg);
-					Obj res = new Obj(Obj.Con, "", Tab.intType, -x, 1);
-//					Code.store(res);
-					vars.push(res);
+					
 				}
-				if(in.equals("*")) {
+				if(in instanceof MUL) {
 					Obj var1 = vars.pop();
 					Obj var2 = vars.pop();
-//					Code.load(var1);
-//					Code.load(var2);
-//					Code.put(Code.mul);
-					int res = var1.getAdr() * var2.getAdr();
-					Obj ress = new Obj(Obj.Con, "", Tab.intType, res, 1);
-//					Code.store(ress);
-					vars.push(ress);
+					Code.load(var1);
+					Code.load(var2);
+					Code.put(Code.mul);
+					Obj tmp = new Obj(Obj.Var, "$", Tab.intType);
+					tmp.setAdr(var1.getAdr()*var2.getAdr());
+					Code.store(tmp);
+					vars.push(tmp);
 				}
-				if(in.equals("/")) {
+				if(in instanceof DIV) {
 					Obj var1 = vars.pop();
 					Obj var2 = vars.pop();
-//					Code.load(var1);
-//					Code.load(var2);
-//					Code.put(Code.div);
-					int result = var1.getAdr() / var2.getAdr();
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-//					Code.store(res);
-					vars.push(res);
+					Code.load(var2);
+					Code.load(var1);
+					Code.put(Code.div);
+					Obj tmp = new Obj(Obj.Var, "$", Tab.intType);
+					tmp.setAdr(var2.getAdr()/var1.getAdr());
+					Code.store(tmp);
+					vars.push(tmp);
 				}
-				if(in.equals("%")) {
+				if(in instanceof MOD) {
 					Obj var1 = vars.pop();
 					Obj var2 = vars.pop();
-//					Code.load(var1);
-//					Code.load(var2);
-//					Code.put(Code.rem);
-					int result = var1.getAdr() % var2.getAdr();
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-//					Code.store(res);
-					vars.push(res);
+					Code.load(var2);
+					Code.load(var1);
+					Code.put(Code.rem);
+					Obj tmp = new Obj(Obj.Var, "$", Tab.intType);
+					tmp.setAdr(var2.getAdr()%var1.getAdr());
+					Code.store(tmp);
+					vars.push(tmp);
 				}
-				if(in.equals("-")) {
+				if(in instanceof AddopMin) {
 					Obj var1 = vars.pop();
 					Obj var2 = vars.pop();
-//					Code.load(var2);
-//					Code.load(var1);
-//					Code.put(Code.sub);
-					int result = var2.getAdr() - var1.getAdr();
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-//					Code.store(res);
-					vars.push(res);
+					
+					Code.load(var1);
+					Code.load(var2);
+					Code.put(Code.sub);
+					Obj tmp = new Obj(Obj.Var, "$", Tab.intType);
+					tmp.setAdr(var1.getAdr()-var2.getAdr());
+					Code.store(tmp);
+					vars.push(tmp);
 				}
-				//ne dohvata mi promenljivu x
-				if(in.equals("=")) {
+				if(in instanceof Equal) {
 					Obj var1 = vars.pop();
 					Obj var2 = vars.pop();
 					Code.load(var1);
 					Code.store(var2);
-//					var2.setAdr(var1.getAdr());
-//					updateObject(var2, var1.getAdr());
 				}
-				if(in.equals("+=")) {
+				if(in instanceof PLUSEQ) {
 					Obj var1 = vars.pop();
 					Obj var2 = vars.pop();
 					Code.load(var1);
 					Code.load(var2);
 					Code.put(Code.add);
 					Code.store(var2);
-					
-					int result = var2.getAdr() + var1.getAdr();
-//					var2.setAdr(result);
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-//					Code.load(res);
-//					Code.store(var2);
-//					updateObject(var2, result);
-					vars.push(res);
+					vars.push(var2);				
 				}
-				if(in.equals("-=")) {
+				if(in instanceof MINUSEQ) {
 					Obj var1 = vars.pop();
 					Obj var2 = vars.pop();
-					int result = var2.getAdr() - var1.getAdr();
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-					Code.load(res);
+					Code.load(var2);
+					Code.load(var1);
+					Code.put(Code.sub);
 					Code.store(var2);
-					vars.push(res);
+					vars.push(var2);				
 				}
-				if(in.equals("*=")) {
+				if(in instanceof MULEQ) {
 					Obj var1 = vars.pop();
 					Obj var2 = vars.pop();
-					int result = var2.getAdr() * var1.getAdr();
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-					Code.load(res);
+					Code.load(var2);
+					Code.load(var1);
+					Code.put(Code.mul);
 					Code.store(var2);
-					vars.push(res);
+					vars.push(var2);	
 				}
-				if(in.equals("/=")) {
+				if(in instanceof DIVEQ) {
 					Obj var1 = vars.pop();
 					Obj var2 = vars.pop();
-					int result = var2.getAdr() / var1.getAdr();
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-					Code.load(res);
+					Code.load(var2);
+					Code.load(var1);
+					Code.put(Code.div);
 					Code.store(var2);
-					vars.push(res);
+					vars.push(var2);	
 				}
-				if(in.equals("%=")) {
+				if(in instanceof MODEQ) {
 					Obj var1 = vars.pop();
 					Obj var2 = vars.pop();
-					int result = var2.getAdr() % var1.getAdr();
-					Obj res = new Obj(Obj.Con, "", Tab.intType, result, 1);
-					Code.load(res);
+					Code.load(var2);
+					Code.load(var1);
+					Code.put(Code.rem);
 					Code.store(var2);
-					vars.push(res);
-				}
-					
+					vars.push(var2);	
+				}	
 			}
 			
 		}
 		
-			Obj obj = vars.pop();
-			Code.load(obj);
-//			System.out.println(obj.getAdr());
-		
-		
-		
+		if(vars.size() != 0)
+			return vars.pop();
+		return null;
 	}
 
 }

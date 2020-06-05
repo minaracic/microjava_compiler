@@ -1,12 +1,14 @@
 program test302
 int x;
+int temp, prom;
 {		
 
-//ne pamti mi vrednost u x, posle dodele
-	void main(){
-	 	x = 5;
-		x += x + x*3;
-		print(x);
+	void main()int y, poeni;{
+		prom = 5;
+		poeni = 10;
+		temp=30%2+poeni*10*(prom*=3*4/(3+3))/10;
+		print(prom);					//10
+		print(temp);					//100
 	}
 	
 }
