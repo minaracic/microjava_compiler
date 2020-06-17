@@ -51,7 +51,7 @@ nonterminal DeclList, MethodDeclList, VarDecl, AbstractClassDecl, ClassDecl, Con
 nonterminal ConstValueList, VarDeclList, OptionalBracket, VarDeclListList;
 nonterminal MethodOrAbstractMethodDeclList, MethodDecl, AbstractMethodDecl, OptionalFormPars, StatementList, FormPars, FormParsList, Statement;
 nonterminal DesignatorStatement, Condition, OptionalDesignatorStatement, OptionalCondition, Neg;
-nonterminal OptionalExpr, CondTerm, CondFact, Relop, Addop, AddopLeft, AddopRight, ExprInParentLPARENT, ExprInParentRPARENT;
+nonterminal OptionalExpr, CondTerm, CondFact, Relop, Addop, AddopLeft, AddopRight, ExprInParentLPARENT, ExprInParentRPARENT, DesignatorLBRACKET, DesignatorRBRACKET;
 nonterminal Assignop, ActPars, OptionalActPars, MulopRight, MulopLeft, Mulop, ClassMethods, ConstVarDecl, ArrayDecl, TypeOrVoid;
 
 terminal PROG, LBRACE, RBRACE, EQUAL, COMMA, CONST, SEMI, LBRACKET, RBRACKET, ABSTRACT;
@@ -124,7 +124,8 @@ VarDeclListList ::= (VarArray) VarDeclListList COMMA ArrayDecl
 ArrayDecl ::= (ArrayInit)IDENT:arrayName LBRACKET RBRACKET;
 			
 VarDeclList ::= (WithVarDeclList) VarDeclList VarDecl
-		      | (NoVarDeclList);
+			|
+		    (NoVarDeclList);
 
 OptionalBracket ::= (WithBracket) LBRACKET RBRACKET 
 			|
@@ -255,7 +256,7 @@ Factor ::= (FactorDesignator)Designator
 		|
 		(FactorConst)ConstValue
 	 	|
-	 	(FactorNewExpr)NEW Type LBRACKET Expr RBRACKET
+	 	(FactorNewExpr)NEW Type:t LBRACKET Expr:e RBRACKET
 	 	|
 	 	(FactorNewType)NEW Type:typeName 
 	 	|
@@ -269,8 +270,12 @@ Designator ::= (DesignatorIdent)IDENT
   			|
   			(DesignatorAtrib)Designator DOT IDENT
   			|
-  			(DesignatorArr)Designator LBRACKET Expr RBRACKET;
-  			
+  			(DesignatorArr)Designator DesignatorLBRACKET Expr DesignatorRBRACKET;
+ 
+DesignatorLBRACKET ::= (LBRACKET)LBRACKET;
+
+DesignatorRBRACKET ::= (RBRACKET)RBRACKET;
+
 Expr ::= (ExprAddopRight)Expr AddopRight Term 
 	  |
 	  (ExprAddopLeft)Expr AddopLeft Term
@@ -281,7 +286,7 @@ Expr ::= (ExprAddopRight)Expr AddopRight Term
      
 Neg ::= (Negative)MINUS;
       
-Term ::= (TermFactor)Factor
+Term ::= (TermFactor)Factor:f
 		|
 		(TermMulop)Term Mulop Factor;
 

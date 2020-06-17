@@ -1,14 +1,11 @@
 program test302
-int x;
-int temp, prom;
+int a[];
 {		
 
-	void main()int y, poeni;{
-		prom = 5;
-		poeni = 10;
-		temp=30%2+poeni*10*(prom*=3*4/(3+3))/10;
-		print(prom);					//10
-		print(temp);					//100
+	void main(){
+		a = new int[4];
+		a[a[2]] = 3;
+		//print(a[2]);
 	}
 	
 }

@@ -1,5 +1,7 @@
 package rs.ac.bg.etf.pp1;
 
+import javax.smartcardio.TerminalFactorySpi;
+
 import org.apache.log4j.Logger;
 
 import rs.ac.bg.etf.pp1.ast.*;
@@ -104,6 +106,16 @@ public class SemanticAnalyzer extends VisitorAdaptor{
     	}
     }
     
+    public void visit(FactorNewExpr var) {
+//    	System.out.println(var.getType().struct);
+    	var.struct = new Struct(Struct.Array, var.getType().struct);
+//    	var.struct = var.getType().struct;
+    	if(var.getExpr().struct.getKind() != Struct.Int) {
+    		report_info("Izraz u [] nije int tipa ", var);
+    	}
+    	
+    }
+    
     public void visit(ArrayInit arr) {
     	int line = arr.getLine();
     	String name = arr.getArrayName();
@@ -116,6 +128,7 @@ public class SemanticAnalyzer extends VisitorAdaptor{
     		Obj constVal = Tab.insert(Obj.Var, name, new Struct(Struct.Array, currentType));
     		totalGlobalArray++;
     		report_info("Deklarisana promenljiva "+ name, arr);
+    		//arr.obj = constVal
 
     	}
     	else {
@@ -216,22 +229,38 @@ public class SemanticAnalyzer extends VisitorAdaptor{
     
     public void visit(DesignatorArr var) {
     	Obj obj = var.getDesignator().obj;
+    	var.obj = Tab.noObj;
     	
-    	if(obj != Tab.noObj) {
-    		if(obj.getType().getKind() != Struct.Array) {
-    			report_error("Identifikator nije niz", var);
-    		}
+    	if(obj.getType().getKind() != Struct.Array) {
+    		report_error("Promenljiva nije tipa niz!", var);
+    	}
+    	else {
+    		if(var.getExpr().struct.getKind() != Struct.Int) {
+        		report_error("Izraz u [] nije tipa int!", var);
+        	}
+    		var.obj = new Obj(Obj.Elem, obj.getName(), obj.getType().getElemType());
+    	}
+    
+    	if(var.obj.equals(Tab.noObj)) {
+    		var.obj = new Obj(Tab.noObj.getKind(), var.getDesignator().obj.getName(), Tab.noType);
     	}
     	
-    	if(var.getExpr().struct.getKind() != Struct.Int) {
-    		report_error("Izraz u [] nije tipa int!", var);
-    	}
-    	
-    	var.obj = obj;
     }
     
     public void visit(DesignatorAssign var) {
-    	if(!var.getExpr().struct.assignableTo(var.getDesignator().obj.getType()))
+    	if(var.getDesignator().obj.getType().getKind() == 3) {
+    		if(var.getExpr().struct.getKind() == Struct.Array) {
+    			if(var.getExpr().struct.getElemType().getKind() != var.getDesignator().obj.getType().getElemType().getKind()) {
+    				report_error("Nekompatibilni tipovi u inicijalizaciji niza", var);
+    			}
+    		}
+    		else {
+    			if(var.getExpr().struct.getKind() != var.getDesignator().obj.getType().getElemType().getKind()) {
+    				report_error("Nekompatibilni tipovi u inicijalizaciji niza", var);
+    			}
+    		}
+    	}
+    	else if(!var.getExpr().struct.assignableTo(var.getDesignator().obj.getType()))
     		report_error("Nekompatibilni tipovi u dodeli vrednosti", var);
     }
     
@@ -243,11 +272,26 @@ public class SemanticAnalyzer extends VisitorAdaptor{
     	var.struct = var.getTerm().struct;
     }
     
+    //if Array then if elemnts of int type
+    //if not array, check if int type of var
     public void visit(ExprTerm var) {
-    	if(!var.getTerm().struct.equals(Tab.intType)) {
-    		report_error("Promenljiva ne predstavlja int tip!", var);
-    	}
+    	//is Array
+//    	if(var.getParent() instanceof DesignatorAssign && ((DesignatorAssign)var.getParent()).getAssignop() instanceof Equal) {
+//    		System.out.println("Inicijalizacija niza");
+//    		
+//    		int designatorType = ((DesignatorAssign)var.getParent()).getDesignator().obj.getType().getElemType().getKind();
+//    		int typeInNEW = ((FactorNewExpr)((TermFactor)var.getTerm()).getFactor()).struct.getElemType().getKind();
+//    		if(designatorType != typeInNEW) {
+//    			report_error("Nekompatibilni tipovi dodele!", var);
+//    		}
+//    	}
+//    	else {
+//    		
+//    	}
     	
+//    		else if(var.getTerm().struct.getKind() != Struct.Int) 
+//    			report_error("Promenljiva ne predstavlja int tip!", var);
+//    	}
     	var.struct = var.getTerm().struct;
     }
     
@@ -304,28 +348,32 @@ public class SemanticAnalyzer extends VisitorAdaptor{
 //    }
     
     public void visit(ExprAddopLeft var) {	
-    	if(var.getExpr().struct.getKind() == var.getTerm().struct.getKind()) {
-    		if(var.getExpr().struct.getKind() != Struct.Int) {
-    			report_error("Izraz nije tipa int!", var);
-    		}
-    	}
-    	else {
-    		report_error("Tipovi u izrazu nisu kompatibilni!", var);
-    	}
-
-		var.struct = var.getExpr().struct;
+		if(var.getExpr().struct.getKind() == var.getTerm().struct.getKind()) {
+			if(var.getExpr().struct.getKind() != Struct.Int) {
+				report_error("Izraz nije tipa int!", var);
+			}
+		}
+		else {
+			report_error("Tipovi u izrazu nisu kompatibilni!", var);
+		}
+    	var.struct = var.getExpr().struct;
     }
     
     public void visit(ExprAddopRight var) {	
-    	if(var.getExpr().struct.getKind() == var.getTerm().struct.getKind()) {
-    		if(var.getExpr().struct.getKind() != Struct.Int) {
-    			report_error("Izraz nije tipa int!", var);
-    		}
-    	}
-    	else {
+    	if(!var.getExpr().struct.compatibleWith(var.getTerm().struct)) {
+//    		if(var.getExpr().struct.getKind() != Struct.Int) {
+//    			report_error("Izraz nije tipa int!", var);
+//    		}
     		report_error("Tipovi u izrazu nisu kompatibilni!", var);
     	}
-
+		if(var.getExpr() instanceof ExprTerm) {
+			if((((ExprTerm)var.getExpr()).getTerm() instanceof TermFactor)) {
+				TermFactor t = (TermFactor) ((ExprTerm)var.getExpr()).getTerm();
+				if(t.getFactor() instanceof FactorDesignator == false)
+					report_error("Nepravilan izraz na levoj strani dodele", var);
+			}
+			
+		}
 		var.struct = var.getExpr().struct;
     }
     
@@ -355,17 +403,36 @@ public class SemanticAnalyzer extends VisitorAdaptor{
     }
     
     public void visit(TermFactor var) {
+    //	System.out.println("TermFactor " + var.getFactor().struct.getKind());
+//    	if(var.getFactor().struct.getKind() == 3) {
+//    		
+//    	}
+//    	if(var.getParent() instanceof FactorNewExpr) {
+//    		var.struct = ((FactorNewExpr)var.getParent()).struct.getElemType();
+//    	}
+//    	else{
+//    		var.struct = var.getFactor().struct;
+//    	}
+//    	System.out.println("TermFactor " + var.struct.getKind());
     	var.struct = var.getFactor().struct;
     }
 
     public void visit(TermMulop var) {
-    	if(var.getTerm().struct.getKind() == var.getFactor().struct.getKind()) {
-    		if(var.getTerm().struct.getKind() != Struct.Int) {
-    			report_error("Izraz nije tipa int!", var);
-    		}
-    	}
-    	else {
+    	if(!var.getTerm().struct.compatibleWith(var.getFactor().struct)) {
+//    		if(var.getTerm().struct.getKind() != Struct.Int) {
+//    			report_error("Izraz nije tipa int!", var);
+//    		}
     		report_error("Tipovi u izrazu nisu kompatibilni! ", var);
+    	}
+    	
+    	
+    	if(var.getMulop() instanceof RightMulop) {
+    		if(var.getTerm() instanceof TermFactor) {
+    			if((((TermFactor)var.getTerm()).getFactor() instanceof FactorDesignator) == false) {
+    				report_error("Nepravilan izraz na levoj strani dodele", var);
+    			}
+    			
+    		}
     	}
     
 		var.struct = var.getTerm().struct;

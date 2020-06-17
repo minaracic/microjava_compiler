@@ -80,6 +80,8 @@ nonterminal AddopLeft AddopLeft;
 nonterminal AddopRight AddopRight;
 nonterminal ExprInParentLPARENT ExprInParentLPARENT;
 nonterminal ExprInParentRPARENT ExprInParentRPARENT;
+nonterminal DesignatorLBRACKET DesignatorLBRACKET;
+nonterminal DesignatorRBRACKET DesignatorRBRACKET;
 nonterminal Assignop Assignop;
 nonterminal ActPars ActPars;
 nonterminal OptionalActPars OptionalActPars;
@@ -161,7 +163,8 @@ VarDeclListList ::= (VarArray) VarDeclListList:V1 COMMA ArrayDecl:A2 {: RESULT=n
 ArrayDecl ::= (ArrayInit)IDENT:arrayName LBRACKET RBRACKET {: RESULT=new ArrayInit(arrayName); RESULT.setLine(arrayNameleft); :};
 			
 VarDeclList ::= (WithVarDeclList) VarDeclList:V1 VarDecl:V2 {: RESULT=new WithVarDeclList(V1, V2); RESULT.setLine(V1left); :}
-		      | (NoVarDeclList) {: RESULT=new NoVarDeclList(); :};
+			|
+		    (NoVarDeclList) {: RESULT=new NoVarDeclList(); :};
 
 OptionalBracket ::= (WithBracket) LBRACKET RBRACKET {: RESULT=new WithBracket(); :} 
 			|
@@ -292,7 +295,7 @@ Factor ::= (FactorDesignator)Designator:D1 {: RESULT=new FactorDesignator(D1); R
 		|
 		(FactorConst)ConstValue:C1 {: RESULT=new FactorConst(C1); RESULT.setLine(C1left); :}
 	 	|
-	 	(FactorNewExpr)NEW Type:T1 LBRACKET Expr:E2 RBRACKET {: RESULT=new FactorNewExpr(T1, E2); RESULT.setLine(T1left); :}
+	 	(FactorNewExpr)NEW Type:t LBRACKET Expr:e RBRACKET {: RESULT=new FactorNewExpr(t, e); RESULT.setLine(tleft); :}
 	 	|
 	 	(FactorNewType)NEW Type:typeName {: RESULT=new FactorNewType(typeName); RESULT.setLine(typeNameleft); :} 
 	 	|
@@ -306,8 +309,12 @@ Designator ::= (DesignatorIdent)IDENT:I1 {: RESULT=new DesignatorIdent(I1); RESU
   			|
   			(DesignatorAtrib)Designator:D1 DOT IDENT:I2 {: RESULT=new DesignatorAtrib(D1, I2); RESULT.setLine(D1left); :}
   			|
-  			(DesignatorArr)Designator:D1 LBRACKET Expr:E2 RBRACKET {: RESULT=new DesignatorArr(D1, E2); RESULT.setLine(D1left); :};
-  			
+  			(DesignatorArr)Designator:D1 DesignatorLBRACKET:D2 Expr:E3 DesignatorRBRACKET:D4 {: RESULT=new DesignatorArr(D1, D2, E3, D4); RESULT.setLine(D1left); :};
+ 
+DesignatorLBRACKET ::= (LBRACKET)LBRACKET {: RESULT=new LBRACKET(); :};
+
+DesignatorRBRACKET ::= (RBRACKET)RBRACKET {: RESULT=new RBRACKET(); :};
+
 Expr ::= (ExprAddopRight)Expr:E1 AddopRight:A2 Term:T3 {: RESULT=new ExprAddopRight(E1, A2, T3); RESULT.setLine(E1left); :} 
 	  |
 	  (ExprAddopLeft)Expr:E1 AddopLeft:A2 Term:T3 {: RESULT=new ExprAddopLeft(E1, A2, T3); RESULT.setLine(E1left); :}
@@ -318,7 +325,7 @@ Expr ::= (ExprAddopRight)Expr:E1 AddopRight:A2 Term:T3 {: RESULT=new ExprAddopRi
      
 Neg ::= (Negative)MINUS {: RESULT=new Negative(); :};
       
-Term ::= (TermFactor)Factor:F1 {: RESULT=new TermFactor(F1); RESULT.setLine(F1left); :}
+Term ::= (TermFactor)Factor:f {: RESULT=new TermFactor(f); RESULT.setLine(fleft); :}
 		|
 		(TermMulop)Term:T1 Mulop:M2 Factor:F3 {: RESULT=new TermMulop(T1, M2, F3); RESULT.setLine(T1left); :};
 

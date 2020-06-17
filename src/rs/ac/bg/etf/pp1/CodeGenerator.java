@@ -19,7 +19,8 @@ public class CodeGenerator extends VisitorAdaptor {
 	private List<Class> operatorTokens = Arrays.asList(new Class[]{AddopPls.class, AddopMin.class, Equal.class, 
 			MUL.class, DIV.class, MOD.class, 
 			Lparent.class, Rparent.class,
-			PLUSEQ.class, MINUSEQ.class, MULEQ.class, DIVEQ.class, MODEQ.class});
+			PLUSEQ.class, MINUSEQ.class, MULEQ.class, DIVEQ.class, MODEQ.class,
+			LBRACKET.class, RBRACKET.class});
 			//- kao unarni operator, kako da razlikujem
 	
 	//dodaj - kao unarni operator
@@ -98,6 +99,8 @@ public class CodeGenerator extends VisitorAdaptor {
 			return 1;
 		if(op instanceof Lparent  || op instanceof Rparent)
 			return 1;
+		if(op instanceof LBRACKET || op instanceof RBRACKET)
+			return 1;
 //		if(op.equals("-u"))
 //			return 2;
 		if(op instanceof MUL || op instanceof DIV || op instanceof MOD)
@@ -141,6 +144,14 @@ public class CodeGenerator extends VisitorAdaptor {
 	}
 	
 	//todo: dodaj ++ i --
+	
+	public void visit(LBRACKET var) {
+		addOperatorToOutput(var);
+	}
+	
+	public void visit(RBRACKET var) {
+		addOperatorToOutput(var);
+	}
 	
 	public void visit(AddopPls plus) {
 		addOperatorToOutput(plus);
@@ -187,11 +198,34 @@ public class CodeGenerator extends VisitorAdaptor {
 	}
 	
 	public void visit(StatementDesignator var) {
+		if(output.size() == 0)return;
+		System.out.println(output.size());
 		generateCode();
 	}
 	
 	public void visit(DesignatorIdent var) {
 		output.add(var);
+	}
+	
+	public void visit(FactorNewExpr var) {
+		SyntaxNode arr = output.pop();
+		SyntaxNode cnt = output.pop();
+		Obj arrObj = getObject(arr);
+		Obj cntObj = getObject(cnt);
+		
+		Code.load(cntObj);
+		if(arrObj.getType().getElemType().getKind() == Struct.Char) {
+			//Code.put(Code.baload);
+			Code.put(Code.newarray);
+			Code.put(0);
+		}
+		else {
+			//Code.put(Code.aload);
+			Code.put(Code.newarray);
+			Code.put(1);
+		}
+		Code.store(arrObj);
+		
 	}
 	
 	public void visit(MethodDecl var) {
