@@ -71,9 +71,9 @@ public class CodeGenerator extends VisitorAdaptor {
 
 	
 	public void visit(Print printStmt) {
-//		Obj o = getObject(generateCode());
-		Obj o =generateCode();
-		Code.load(o);
+		Stack<Obj> o = generateCode();
+		loadObject(o.pop(), o);
+		
 		if (printStmt.getExpr().struct.getKind() == Tab.charType.getKind()) {
 			Code.loadConst(1);
 			Code.put(Code.bprint);
@@ -114,6 +114,27 @@ public class CodeGenerator extends VisitorAdaptor {
 	}
 	
 	private void addOperatorToOutput(SyntaxNode op) {
+		if(op instanceof LBRACKET) {
+			operators.push(op);
+			output.add(op);
+			return;
+		}
+		
+		if(op instanceof RBRACKET) {
+			while(!(operators.lastElement() instanceof LBRACKET)) {
+				SyntaxNode currentOp = operators.pop();
+				output.add(currentOp);
+			}
+			output.add(op);
+			
+			if(operators.lastElement() instanceof LBRACKET) {
+				
+				operators.pop();
+			}
+			
+			return;
+		}
+		
 		if(op instanceof Lparent) {
 			operators.push(op);
 			return;
@@ -134,6 +155,7 @@ public class CodeGenerator extends VisitorAdaptor {
 		
 		while(!operators.isEmpty() 
 				&& !(operators.lastElement() instanceof Lparent)
+				&& !(operators.lastElement() instanceof LBRACKET)
 				&& (getPrecendence(operators.lastElement()) < getPrecendence(op)
 						|| ((getPrecendence(operators.lastElement()) == getPrecendence(op)) && isLeftAssociative(op)))) {
 			output.add(operators.pop());
@@ -199,12 +221,19 @@ public class CodeGenerator extends VisitorAdaptor {
 	
 	public void visit(StatementDesignator var) {
 		if(output.size() == 0)return;
-		System.out.println(output.size());
 		generateCode();
 	}
 	
 	public void visit(DesignatorIdent var) {
 		output.add(var);
+	}
+	
+	public void visit(Lparent var) {
+		addOperatorToOutput(var);
+	}
+	
+	public void visit(Rparent var) {
+		addOperatorToOutput(var);
 	}
 	
 	public void visit(FactorNewExpr var) {
@@ -226,6 +255,8 @@ public class CodeGenerator extends VisitorAdaptor {
 		}
 		Code.store(arrObj);
 		
+		output.clear();
+		operators.clear();
 	}
 	
 	public void visit(MethodDecl var) {
@@ -246,15 +277,236 @@ public class CodeGenerator extends VisitorAdaptor {
 		return false;
 	}
 	
-	public void visit(Lparent var) {
-		addOperatorToOutput(var);
+	public boolean isArrayElement(Obj obj) {
+		if(obj.getKind() == Obj.Elem) 
+			return true;
+		return false;
 	}
 	
-	public void visit(Rparent var) {
-		addOperatorToOutput(var);
+	public void loadElementOfArray(Obj obj) {
+		
 	}
 	
-	public Obj generateCode() {
+	public void storeInElementOfArray(Obj obj) {
+		
+	}
+	
+	//load object on stack
+	public void loadObject(Obj obj, Stack<Obj> vars) {
+		if(obj.getType().getKind() == Tab.noType.getKind())return;
+		if(isArrayElement(obj)) {
+			Obj index = vars.pop();
+			Obj arr = vars.pop();
+			loadObject(index, vars);
+			Code.load(arr);
+			Code.put(Code.dup_x1);
+			Code.put(Code.pop);
+			
+			if(obj.getType().getKind() == Struct.Char) 
+				Code.put(Code.baload);
+			else 
+				Code.put(Code.aload);
+		}
+		else {
+			Code.load(obj);
+		}
+	}
+	
+	public void putObjectOnStack(Obj obj, Stack<Obj> vars) {
+		if(obj.getType().getKind() == Tab.noType.getKind())return;
+		if(isArrayElement(obj)) {
+			Obj index = vars.pop();
+			if(isNoType(index)) {
+				Code.store(index);
+			}
+			Obj arr = vars.pop();
+			Code.load(arr);
+			Code.load(index);
+		}
+		else {
+			Code.load(obj);
+		}
+	}
+	
+	public void storeInObject(Obj obj, Stack<Obj> vars) {
+		
+		if(isArrayElement(obj)) {
+			if(obj.getType().getKind() == Struct.Char) {
+				Code.put(Code.bastore);
+			}
+			else {
+				Code.put(Code.astore);
+			}
+			
+		}
+		else {
+			Code.store(obj);
+		}
+	}
+	
+	private boolean isNoType(Obj obj) {
+		if(obj.getType().getKind() == Tab.noType.getKind())return true;
+		return false;
+	}
+	
+	public void generateCodeForOp(SyntaxNode in, Stack<Obj> vars) {
+		if(in instanceof AddopPls) {
+			Obj var1 = vars.pop();
+			loadObject(var1, vars);
+			
+			Obj var2 = vars.pop();
+			loadObject(var2, vars);
+			
+			Code.put(Code.add);
+			Obj tmp = new Obj(Obj.Var, "$", Tab.noType);
+			vars.push(tmp);
+			
+		}
+		if(in.equals("-u")) {
+			
+		}
+		if(in instanceof MUL) {
+			Obj var1 = vars.pop();
+			loadObject(var1, vars);
+			Obj var2 = vars.pop();
+			loadObject(var2, vars);
+			
+			Code.put(Code.mul);
+			Obj tmp = new Obj(Obj.Var, "$", Tab.noType);
+			vars.push(tmp);
+		}
+		if(in instanceof DIV) {
+			Obj var1 = vars.pop();
+			loadObject(var1, vars);
+			
+			Obj tmp = new Obj(Obj.Var, "$", Tab.noType);
+			Code.store(tmp);
+			
+			Obj var2 = vars.pop();
+			loadObject(var2, vars);
+			Code.load(tmp);
+			Code.put(Code.div);
+	
+			tmp = new Obj(Obj.Var, "$", Tab.noType);
+			vars.push(tmp);
+			
+		}
+		if(in instanceof MOD) {
+			Obj var1 = vars.pop();
+			loadObject(var1, vars);
+			Obj var2 = vars.pop();
+			loadObject(var2, vars);
+			
+			Code.put(Code.rem);
+			Obj tmp = new Obj(Obj.Var, "$", Tab.noType);
+			vars.push(tmp);
+		}
+		if(in instanceof AddopMin) {
+			Obj var1 = vars.pop();
+			loadObject(var1, vars);
+			Obj tmp = new Obj(Obj.Var, "$", Tab.noType);
+			Code.store(tmp);
+			
+			Obj var2 = vars.pop();
+			loadObject(var2, vars);
+			Code.load(tmp);
+			
+			Code.put(Code.sub);
+			tmp = new Obj(Obj.Var, "$", Tab.noType);
+			vars.push(tmp);
+		}
+		if(in instanceof Equal) {
+//			Obj val = new Obj(Obj.Var, "val", Tab.noType);
+			
+			Obj var1 = vars.pop(); 
+			loadObject(var1, vars);
+			
+			Obj var2 = vars.pop();
+			if(isArrayElement(var2)) {
+				
+				Obj ind = vars.pop();
+				loadObject(ind, vars);
+				if(!isNoType(ind)) {		
+					Code.put(Code.dup_x1);
+					Code.put(Code.pop);
+				}
+			
+				Obj arr = vars.pop();
+				Code.load(arr);
+				Code.put(Code.dup_x2);
+				Code.put(Code.pop);
+
+				if(arr.getType().getKind() == Struct.Char)Code.put(Code.bastore);
+				else Code.put(Code.astore);
+			}
+			else {
+//				Code.load(val);
+				Code.store(var2);
+			}
+
+		}
+		if(in instanceof PLUSEQ) {
+			Obj var1 = vars.pop();
+			loadObject(var1, vars);
+			
+			Obj var2 = vars.pop();
+			if(isArrayElement(var2)) {	
+				putObjectOnStack(var2, vars);
+				Code.put(Code.dup2);
+				Code.put(Code.aload);
+				Code.put(Code.add);
+			}
+			else {
+				loadObject(var2, vars);
+//				Code.load(tmp);
+				Code.put(Code.add);
+				Code.put(Code.dup);
+			}
+			
+			storeInObject(var2, vars);
+			Obj tmp1 = new Obj(Obj.Var, "$", Tab.noType);
+			vars.push(tmp1);
+							
+		}
+		if(in instanceof MINUSEQ) {
+			Obj var1 = vars.pop();
+			Obj var2 = vars.pop();
+			Code.load(var2);
+			Code.load(var1);
+			Code.put(Code.sub);
+			Code.store(var2);
+			vars.push(var2);				
+		}
+		if(in instanceof MULEQ) {
+			Obj var1 = vars.pop();
+			Obj var2 = vars.pop();
+			Code.load(var2);
+			Code.load(var1);
+			Code.put(Code.mul);
+			Code.store(var2);
+			vars.push(var2);	
+		}
+		if(in instanceof DIVEQ) {
+			Obj var1 = vars.pop();
+			Obj var2 = vars.pop();
+			Code.load(var2);
+			Code.load(var1);
+			Code.put(Code.div);
+			Code.store(var2);
+			vars.push(var2);	
+		}
+		if(in instanceof MODEQ) {
+			Obj var1 = vars.pop();
+			Obj var2 = vars.pop();
+			Code.load(var2);
+			Code.load(var1);
+			Code.put(Code.rem);
+			Code.store(var2);
+			vars.push(var2);	
+		}	
+	}
+	
+	public Stack<Obj> generateCode() {
 		Stack<Obj> vars = new Stack<Obj>();
 	
 		//add rest of operators
@@ -262,136 +514,34 @@ public class CodeGenerator extends VisitorAdaptor {
 			output.add(operators.pop());
 		}
 		
-		System.out.println(output);
+	//	System.out.println(output);
 		
 		while(!output.isEmpty()) {
 			SyntaxNode in = output.poll();
-//			System.out.println("In je: " + in.toString());
+			System.out.println("In je: " + in.toString());
 			
-			
-			if(isOperator(in.getClass()) == false) {
-				Obj o = getObject(in);
-				vars.push(o);
-			}
-			else {
+			if(in instanceof LBRACKET)continue;
+			if(in instanceof RBRACKET) {
+				//moze da bude i char
+				Obj tmp = new Obj(Obj.Elem, "$", Tab.intType);
+				vars.push(tmp);
 				
-				if(in instanceof AddopPls) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-					
-					Code.load(var1);
-					Code.load(var2);
-					Code.put(Code.add);
-					Obj tmp = new Obj(Obj.Var, "$", Tab.intType);
-					tmp.setAdr(var1.getAdr()+var2.getAdr());
-					Code.store(tmp);
-					vars.push(tmp);
+			}
+			
+			else {
+				if(isOperator(in.getClass()) == false) {
+					Obj o = getObject(in);
+					vars.push(o);
 				}
-				if(in.equals("-u")) {
-					
+				else {
+					generateCodeForOp(in, vars);
 				}
-				if(in instanceof MUL) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-					Code.load(var1);
-					Code.load(var2);
-					Code.put(Code.mul);
-					Obj tmp = new Obj(Obj.Var, "$", Tab.intType);
-					tmp.setAdr(var1.getAdr()*var2.getAdr());
-					Code.store(tmp);
-					vars.push(tmp);
-				}
-				if(in instanceof DIV) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-					Code.load(var2);
-					Code.load(var1);
-					Code.put(Code.div);
-					Obj tmp = new Obj(Obj.Var, "$", Tab.intType);
-					tmp.setAdr(var2.getAdr()/var1.getAdr());
-					Code.store(tmp);
-					vars.push(tmp);
-				}
-				if(in instanceof MOD) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-					Code.load(var2);
-					Code.load(var1);
-					Code.put(Code.rem);
-					Obj tmp = new Obj(Obj.Var, "$", Tab.intType);
-					tmp.setAdr(var2.getAdr()%var1.getAdr());
-					Code.store(tmp);
-					vars.push(tmp);
-				}
-				if(in instanceof AddopMin) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-					
-					Code.load(var1);
-					Code.load(var2);
-					Code.put(Code.sub);
-					Obj tmp = new Obj(Obj.Var, "$", Tab.intType);
-					tmp.setAdr(var1.getAdr()-var2.getAdr());
-					Code.store(tmp);
-					vars.push(tmp);
-				}
-				if(in instanceof Equal) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-					Code.load(var1);
-					Code.store(var2);
-				}
-				if(in instanceof PLUSEQ) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-					Code.load(var1);
-					Code.load(var2);
-					Code.put(Code.add);
-					Code.store(var2);
-					vars.push(var2);				
-				}
-				if(in instanceof MINUSEQ) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-					Code.load(var2);
-					Code.load(var1);
-					Code.put(Code.sub);
-					Code.store(var2);
-					vars.push(var2);				
-				}
-				if(in instanceof MULEQ) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-					Code.load(var2);
-					Code.load(var1);
-					Code.put(Code.mul);
-					Code.store(var2);
-					vars.push(var2);	
-				}
-				if(in instanceof DIVEQ) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-					Code.load(var2);
-					Code.load(var1);
-					Code.put(Code.div);
-					Code.store(var2);
-					vars.push(var2);	
-				}
-				if(in instanceof MODEQ) {
-					Obj var1 = vars.pop();
-					Obj var2 = vars.pop();
-					Code.load(var2);
-					Code.load(var1);
-					Code.put(Code.rem);
-					Code.store(var2);
-					vars.push(var2);	
-				}	
 			}
 			
 		}
 		
 		if(vars.size() != 0)
-			return vars.pop();
+			return vars;
 		return null;
 	}
 

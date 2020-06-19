@@ -1,56 +1,86 @@
-INFO  17:57:15,977 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
-INFO  17:57:16,048 - #2 program
-INFO  17:57:16,049 - #50 test302
-INFO  17:57:16,049 - #50 int
-INFO  17:57:16,050 - #50 a
-INFO  17:57:16,052 - #9 [
-INFO  17:57:16,052 - #10 ]
-INFO  17:57:16,052 - #8 ;
-INFO  17:57:16,053 - #3 {
-INFO  17:57:16,054 - #38 void
-INFO  17:57:16,055 - #50 main
-INFO  17:57:16,055 - #13 (
-INFO  17:57:16,055 - #14 )
-INFO  17:57:16,056 - #3 {
-INFO  17:57:16,057 - #50 a
-INFO  17:57:16,058 - #5 =
-INFO  17:57:16,058 - #36 new
-INFO  17:57:16,059 - #50 int
-INFO  17:57:16,060 - #9 [
-INFO  17:57:16,060 - #47 4
-INFO  17:57:16,060 - #10 ]
-INFO  17:57:16,060 - #8 ;
-INFO  17:57:16,061 - #50 a
-INFO  17:57:16,061 - #9 [
-INFO  17:57:16,061 - #50 a
-INFO  17:57:16,065 - #9 [
-INFO  17:57:16,065 - #47 2
-INFO  17:57:16,065 - #10 ]
-INFO  17:57:16,065 - #10 ]
-INFO  17:57:16,067 - #5 =
-INFO  17:57:16,067 - #47 3
-INFO  17:57:16,068 - #8 ;
-INFO  17:57:16,068 - #4 }
-INFO  17:57:16,068 - #4 }
-INFO  17:57:16,080 - Program(
+INFO  17:07:57,347 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  17:07:57,417 - #2 program
+INFO  17:07:57,417 - #50 test302
+INFO  17:07:57,417 - #50 int
+INFO  17:07:57,419 - #50 a
+INFO  17:07:57,421 - #9 [
+INFO  17:07:57,421 - #10 ]
+INFO  17:07:57,421 - #8 ;
+INFO  17:07:57,422 - #50 int
+INFO  17:07:57,423 - #50 x
+INFO  17:07:57,423 - #8 ;
+INFO  17:07:57,423 - #3 {
+INFO  17:07:57,423 - #38 void
+INFO  17:07:57,424 - #50 main
+INFO  17:07:57,424 - #13 (
+INFO  17:07:57,425 - #14 )
+INFO  17:07:57,425 - #3 {
+INFO  17:07:57,426 - #50 a
+INFO  17:07:57,427 - #5 =
+INFO  17:07:57,427 - #36 new
+INFO  17:07:57,428 - #50 int
+INFO  17:07:57,428 - #9 [
+INFO  17:07:57,428 - #47 10
+INFO  17:07:57,429 - #10 ]
+INFO  17:07:57,429 - #8 ;
+INFO  17:07:57,429 - #50 a
+INFO  17:07:57,430 - #9 [
+INFO  17:07:57,430 - #47 1
+INFO  17:07:57,431 - #10 ]
+INFO  17:07:57,431 - #5 =
+INFO  17:07:57,432 - #47 10
+INFO  17:07:57,433 - #8 ;
+INFO  17:07:57,433 - #50 a
+INFO  17:07:57,433 - #9 [
+INFO  17:07:57,433 - #47 1
+INFO  17:07:57,433 - #10 ]
+INFO  17:07:57,433 - #42 +=
+INFO  17:07:57,433 - #50 a
+INFO  17:07:57,434 - #9 [
+INFO  17:07:57,434 - #47 1
+INFO  17:07:57,434 - #10 ]
+INFO  17:07:57,435 - #8 ;
+INFO  17:07:57,435 - #22 print
+INFO  17:07:57,435 - #13 (
+INFO  17:07:57,435 - #50 a
+INFO  17:07:57,435 - #9 [
+INFO  17:07:57,435 - #47 1
+INFO  17:07:57,435 - #10 ]
+INFO  17:07:57,435 - #14 )
+INFO  17:07:57,436 - #8 ;
+INFO  17:07:57,436 - #4 }
+INFO  17:07:57,436 - #4 }
+INFO  17:07:57,451 - Program(
   ProgName(
    test302
   ) [ProgName]
   DeclListVarDecl(
-    NoDeclList(
-    ) [NoDeclList]
-    VarDeclArray(
+    DeclListVarDecl(
+      NoDeclList(
+      ) [NoDeclList]
+      VarDeclArray(
+        ConstType(
+          Type(
+           int
+          ) [Type]
+        ) [ConstType]
+        ArrayInit(
+         a
+        ) [ArrayInit]
+        NoVarDeclListList(
+        ) [NoVarDeclListList]
+      ) [VarDeclArray]
+    ) [DeclListVarDecl]
+    VarList(
       ConstType(
         Type(
          int
         ) [Type]
       ) [ConstType]
-      ArrayInit(
-       a
-      ) [ArrayInit]
+     x
       NoVarDeclListList(
       ) [NoVarDeclListList]
-    ) [VarDeclArray]
+    ) [VarList]
   ) [DeclListVarDecl]
   WithMethodDeclList(
     NoMethodDeclList(
@@ -65,44 +95,96 @@ INFO  17:57:16,080 - Program(
       ) [NoVarDeclList]
       WithStatementList(
         WithStatementList(
-          NoStatementList(
-          ) [NoStatementList]
+          WithStatementList(
+            WithStatementList(
+              NoStatementList(
+              ) [NoStatementList]
+              StatementDesignator(
+                DesignatorAssign(
+                  DesignatorIdent(
+                   a
+                  ) [DesignatorIdent]
+                  Equal(
+                  ) [Equal]
+                  ExprTerm(
+                    TermFactor(
+                      FactorNewExpr(
+                        Type(
+                         int
+                        ) [Type]
+                        ExprTerm(
+                          TermFactor(
+                            FactorConst(
+                              NUMBER(
+                               10
+                              ) [NUMBER]
+                            ) [FactorConst]
+                          ) [TermFactor]
+                        ) [ExprTerm]
+                      ) [FactorNewExpr]
+                    ) [TermFactor]
+                  ) [ExprTerm]
+                ) [DesignatorAssign]
+              ) [StatementDesignator]
+            ) [WithStatementList]
+            StatementDesignator(
+              DesignatorAssign(
+                DesignatorArr(
+                  DesignatorIdent(
+                   a
+                  ) [DesignatorIdent]
+                  LBRACKET(
+                  ) [LBRACKET]
+                  ExprTerm(
+                    TermFactor(
+                      FactorConst(
+                        NUMBER(
+                         1
+                        ) [NUMBER]
+                      ) [FactorConst]
+                    ) [TermFactor]
+                  ) [ExprTerm]
+                  RBRACKET(
+                  ) [RBRACKET]
+                ) [DesignatorArr]
+                Equal(
+                ) [Equal]
+                ExprTerm(
+                  TermFactor(
+                    FactorConst(
+                      NUMBER(
+                       10
+                      ) [NUMBER]
+                    ) [FactorConst]
+                  ) [TermFactor]
+                ) [ExprTerm]
+              ) [DesignatorAssign]
+            ) [StatementDesignator]
+          ) [WithStatementList]
           StatementDesignator(
             DesignatorAssign(
-              DesignatorIdent(
-               a
-              ) [DesignatorIdent]
-              Equal(
-              ) [Equal]
-              ExprTerm(
-                TermFactor(
-                  FactorNewExpr(
-                    Type(
-                     int
-                    ) [Type]
-                    ExprTerm(
-                      TermFactor(
-                        FactorConst(
-                          NUMBER(
-                           4
-                          ) [NUMBER]
-                        ) [FactorConst]
-                      ) [TermFactor]
-                    ) [ExprTerm]
-                  ) [FactorNewExpr]
-                ) [TermFactor]
-              ) [ExprTerm]
-            ) [DesignatorAssign]
-          ) [StatementDesignator]
-        ) [WithStatementList]
-        StatementDesignator(
-          DesignatorAssign(
-            DesignatorArr(
-              DesignatorIdent(
-               a
-              ) [DesignatorIdent]
-              LBRACKET(
-              ) [LBRACKET]
+              DesignatorArr(
+                DesignatorIdent(
+                 a
+                ) [DesignatorIdent]
+                LBRACKET(
+                ) [LBRACKET]
+                ExprTerm(
+                  TermFactor(
+                    FactorConst(
+                      NUMBER(
+                       1
+                      ) [NUMBER]
+                    ) [FactorConst]
+                  ) [TermFactor]
+                ) [ExprTerm]
+                RBRACKET(
+                ) [RBRACKET]
+              ) [DesignatorArr]
+              AssignAddopR(
+                PLUSEQ(
+                ) [PLUSEQ]
+              ) [AssignAddopR]
               ExprTerm(
                 TermFactor(
                   FactorDesignator(
@@ -116,7 +198,7 @@ INFO  17:57:16,080 - Program(
                         TermFactor(
                           FactorConst(
                             NUMBER(
-                             2
+                             1
                             ) [NUMBER]
                           ) [FactorConst]
                         ) [TermFactor]
@@ -127,32 +209,46 @@ INFO  17:57:16,080 - Program(
                   ) [FactorDesignator]
                 ) [TermFactor]
               ) [ExprTerm]
-              RBRACKET(
-              ) [RBRACKET]
-            ) [DesignatorArr]
-            Equal(
-            ) [Equal]
-            ExprTerm(
-              TermFactor(
-                FactorConst(
-                  NUMBER(
-                   3
-                  ) [NUMBER]
-                ) [FactorConst]
-              ) [TermFactor]
-            ) [ExprTerm]
-          ) [DesignatorAssign]
-        ) [StatementDesignator]
+            ) [DesignatorAssign]
+          ) [StatementDesignator]
+        ) [WithStatementList]
+        Print(
+          ExprTerm(
+            TermFactor(
+              FactorDesignator(
+                DesignatorArr(
+                  DesignatorIdent(
+                   a
+                  ) [DesignatorIdent]
+                  LBRACKET(
+                  ) [LBRACKET]
+                  ExprTerm(
+                    TermFactor(
+                      FactorConst(
+                        NUMBER(
+                         1
+                        ) [NUMBER]
+                      ) [FactorConst]
+                    ) [TermFactor]
+                  ) [ExprTerm]
+                  RBRACKET(
+                  ) [RBRACKET]
+                ) [DesignatorArr]
+              ) [FactorDesignator]
+            ) [TermFactor]
+          ) [ExprTerm]
+        ) [Print]
       ) [WithStatementList]
     ) [MethodDecl]
   ) [WithMethodDeclList]
 ) [Program]
-INFO  17:57:16,085 - ==================SEMANTICKA OBRADA=================
-INFO  17:57:16,089 - Deklarisana promenljiva a na liniji 2
-INFO  17:57:16,089 - Deklarisana metoda main na liniji 5
-INFO  17:57:16,090 - ==================SINTAKSNA ANALIZA=================
-INFO  17:57:16,090 - Ukupno deklarisanih globalnih promenljivih:		0
-INFO  17:57:16,090 - Ukupno deklarisanih globalnih nizova:			1
-INFO  17:57:16,090 - Ukupno deklarisanih globalnih konstanti:			0
-INFO  17:57:16,090 - Ukupno deklarisanih lokalnih promenljivih u main metodi:	0
-INFO  17:57:16,114 - Parsiranje uspesno zavrseno!
+INFO  17:07:57,453 - ==================SEMANTICKA OBRADA=================
+INFO  17:07:57,456 - Deklarisana promenljiva a na liniji 2
+INFO  17:07:57,456 - Deklarisana promenljiva x na liniji 3
+INFO  17:07:57,457 - Deklarisana metoda main na liniji 6
+INFO  17:07:57,457 - ==================SINTAKSNA ANALIZA=================
+INFO  17:07:57,457 - Ukupno deklarisanih globalnih promenljivih:		1
+INFO  17:07:57,463 - Ukupno deklarisanih globalnih nizova:			1
+INFO  17:07:57,463 - Ukupno deklarisanih globalnih konstanti:			0
+INFO  17:07:57,463 - Ukupno deklarisanih lokalnih promenljivih u main metodi:	0
+INFO  17:07:57,481 - Parsiranje uspesno zavrseno!

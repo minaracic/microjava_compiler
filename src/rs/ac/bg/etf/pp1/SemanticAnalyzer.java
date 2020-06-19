@@ -260,7 +260,7 @@ public class SemanticAnalyzer extends VisitorAdaptor{
     			}
     		}
     	}
-    	else if(!var.getExpr().struct.assignableTo(var.getDesignator().obj.getType()))
+    	else if(var.getExpr().struct.getKind() != var.getDesignator().obj.getType().getKind())
     		report_error("Nekompatibilni tipovi u dodeli vrednosti", var);
     }
     
