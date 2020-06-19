@@ -50,7 +50,7 @@ scan with {:
 nonterminal DeclList, MethodDeclList, VarDecl, AbstractClassDecl, ClassDecl, ConstDecl, ExtendsDecl;
 nonterminal ConstValueList, VarDeclList, OptionalBracket, VarDeclListList;
 nonterminal MethodOrAbstractMethodDeclList, MethodDecl, AbstractMethodDecl, OptionalFormPars, StatementList, FormPars, FormParsList, Statement;
-nonterminal DesignatorStatement, Condition, OptionalDesignatorStatement, OptionalCondition, Neg;
+nonterminal DesignatorStatement, Condition, OptionalDesignatorStatement, OptionalCondition, Neg, PlusPlus, MinusMinus;
 nonterminal OptionalExpr, CondTerm, CondFact, Relop, Addop, AddopLeft, AddopRight, ExprInParentLPARENT, ExprInParentRPARENT, DesignatorLBRACKET, DesignatorRBRACKET;
 nonterminal Assignop, ActPars, OptionalActPars, MulopRight, MulopLeft, Mulop, ClassMethods, ConstVarDecl, ArrayDecl, TypeOrVoid;
 
@@ -204,9 +204,13 @@ DesignatorStatement ::= (DesignatorAssign)Designator Assignop Expr
 					|
 					(DesignatorFuncCall)Designator LPARENT OptionalActPars RPARENT
 					|
-					(Inc)Designator PLUSPLUS
+					(Inc)Designator PlusPlus
 					|
-					(Dec)Designator MINUSMINUS;
+					(Dec)Designator MinusMinus;
+					
+PlusPlus ::= (PlsPls) PLUSPLUS;
+
+MinusMinus ::= (MinMin) MINUSMINUS;
 
 Condition ::= (ConditionA)CondTerm 
 			|

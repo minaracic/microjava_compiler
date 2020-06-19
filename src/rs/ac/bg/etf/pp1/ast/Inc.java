@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 17/5/2020 13:34:48
+// 19/5/2020 23:21:54
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -8,10 +8,13 @@ package rs.ac.bg.etf.pp1.ast;
 public class Inc extends DesignatorStatement {
 
     private Designator Designator;
+    private PlusPlus PlusPlus;
 
-    public Inc (Designator Designator) {
+    public Inc (Designator Designator, PlusPlus PlusPlus) {
         this.Designator=Designator;
         if(Designator!=null) Designator.setParent(this);
+        this.PlusPlus=PlusPlus;
+        if(PlusPlus!=null) PlusPlus.setParent(this);
     }
 
     public Designator getDesignator() {
@@ -22,21 +25,32 @@ public class Inc extends DesignatorStatement {
         this.Designator=Designator;
     }
 
+    public PlusPlus getPlusPlus() {
+        return PlusPlus;
+    }
+
+    public void setPlusPlus(PlusPlus PlusPlus) {
+        this.PlusPlus=PlusPlus;
+    }
+
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
 
     public void childrenAccept(Visitor visitor) {
         if(Designator!=null) Designator.accept(visitor);
+        if(PlusPlus!=null) PlusPlus.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
         if(Designator!=null) Designator.traverseTopDown(visitor);
+        if(PlusPlus!=null) PlusPlus.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
         if(Designator!=null) Designator.traverseBottomUp(visitor);
+        if(PlusPlus!=null) PlusPlus.traverseBottomUp(visitor);
         accept(visitor);
     }
 
@@ -47,6 +61,12 @@ public class Inc extends DesignatorStatement {
 
         if(Designator!=null)
             buffer.append(Designator.toString("  "+tab));
+        else
+            buffer.append(tab+"  null");
+        buffer.append("\n");
+
+        if(PlusPlus!=null)
+            buffer.append(PlusPlus.toString("  "+tab));
         else
             buffer.append(tab+"  null");
         buffer.append("\n");

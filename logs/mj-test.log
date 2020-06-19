@@ -1,86 +1,75 @@
-INFO  17:07:57,347 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
-INFO  17:07:57,417 - #2 program
-INFO  17:07:57,417 - #50 test302
-INFO  17:07:57,417 - #50 int
-INFO  17:07:57,419 - #50 a
-INFO  17:07:57,421 - #9 [
-INFO  17:07:57,421 - #10 ]
-INFO  17:07:57,421 - #8 ;
-INFO  17:07:57,422 - #50 int
-INFO  17:07:57,423 - #50 x
-INFO  17:07:57,423 - #8 ;
-INFO  17:07:57,423 - #3 {
-INFO  17:07:57,423 - #38 void
-INFO  17:07:57,424 - #50 main
-INFO  17:07:57,424 - #13 (
-INFO  17:07:57,425 - #14 )
-INFO  17:07:57,425 - #3 {
-INFO  17:07:57,426 - #50 a
-INFO  17:07:57,427 - #5 =
-INFO  17:07:57,427 - #36 new
-INFO  17:07:57,428 - #50 int
-INFO  17:07:57,428 - #9 [
-INFO  17:07:57,428 - #47 10
-INFO  17:07:57,429 - #10 ]
-INFO  17:07:57,429 - #8 ;
-INFO  17:07:57,429 - #50 a
-INFO  17:07:57,430 - #9 [
-INFO  17:07:57,430 - #47 1
-INFO  17:07:57,431 - #10 ]
-INFO  17:07:57,431 - #5 =
-INFO  17:07:57,432 - #47 10
-INFO  17:07:57,433 - #8 ;
-INFO  17:07:57,433 - #50 a
-INFO  17:07:57,433 - #9 [
-INFO  17:07:57,433 - #47 1
-INFO  17:07:57,433 - #10 ]
-INFO  17:07:57,433 - #42 +=
-INFO  17:07:57,433 - #50 a
-INFO  17:07:57,434 - #9 [
-INFO  17:07:57,434 - #47 1
-INFO  17:07:57,434 - #10 ]
-INFO  17:07:57,435 - #8 ;
-INFO  17:07:57,435 - #22 print
-INFO  17:07:57,435 - #13 (
-INFO  17:07:57,435 - #50 a
-INFO  17:07:57,435 - #9 [
-INFO  17:07:57,435 - #47 1
-INFO  17:07:57,435 - #10 ]
-INFO  17:07:57,435 - #14 )
-INFO  17:07:57,436 - #8 ;
-INFO  17:07:57,436 - #4 }
-INFO  17:07:57,436 - #4 }
-INFO  17:07:57,451 - Program(
+INFO  00:03:54,141 - Compiling source file: C:\Users\Mina\Desktop\Temp\PP\pp1domaci\MJCompiler\test\program.mj
+INFO  00:03:54,211 - #2 program
+INFO  00:03:54,211 - #50 test302
+INFO  00:03:54,211 - #50 int
+INFO  00:03:54,212 - #50 a
+INFO  00:03:54,216 - #9 [
+INFO  00:03:54,216 - #10 ]
+INFO  00:03:54,216 - #8 ;
+INFO  00:03:54,217 - #3 {
+INFO  00:03:54,218 - #38 void
+INFO  00:03:54,218 - #50 main
+INFO  00:03:54,218 - #13 (
+INFO  00:03:54,219 - #14 )
+INFO  00:03:54,219 - #50 int
+INFO  00:03:54,220 - #50 x
+INFO  00:03:54,220 - #8 ;
+INFO  00:03:54,220 - #50 char
+INFO  00:03:54,221 - #50 ch
+INFO  00:03:54,221 - #9 [
+INFO  00:03:54,221 - #10 ]
+INFO  00:03:54,221 - #8 ;
+INFO  00:03:54,221 - #3 {
+INFO  00:03:54,221 - #50 a
+INFO  00:03:54,222 - #5 =
+INFO  00:03:54,222 - #36 new
+INFO  00:03:54,223 - #50 int
+INFO  00:03:54,223 - #9 [
+INFO  00:03:54,223 - #47 10
+INFO  00:03:54,223 - #10 ]
+INFO  00:03:54,224 - #8 ;
+INFO  00:03:54,224 - #50 a
+INFO  00:03:54,224 - #9 [
+INFO  00:03:54,224 - #47 1
+INFO  00:03:54,225 - #10 ]
+INFO  00:03:54,225 - #5 =
+INFO  00:03:54,227 - #47 3
+INFO  00:03:54,227 - #8 ;
+INFO  00:03:54,227 - #50 a
+INFO  00:03:54,227 - #9 [
+INFO  00:03:54,227 - #47 1
+INFO  00:03:54,228 - #10 ]
+INFO  00:03:54,228 - #23 ++
+INFO  00:03:54,228 - #8 ;
+INFO  00:03:54,229 - #22 print
+INFO  00:03:54,229 - #13 (
+INFO  00:03:54,230 - #50 a
+INFO  00:03:54,230 - #9 [
+INFO  00:03:54,230 - #47 1
+INFO  00:03:54,230 - #10 ]
+INFO  00:03:54,230 - #14 )
+INFO  00:03:54,230 - #8 ;
+INFO  00:03:54,230 - #4 }
+INFO  00:03:54,231 - #4 }
+INFO  00:03:54,246 - Program(
   ProgName(
    test302
   ) [ProgName]
   DeclListVarDecl(
-    DeclListVarDecl(
-      NoDeclList(
-      ) [NoDeclList]
-      VarDeclArray(
-        ConstType(
-          Type(
-           int
-          ) [Type]
-        ) [ConstType]
-        ArrayInit(
-         a
-        ) [ArrayInit]
-        NoVarDeclListList(
-        ) [NoVarDeclListList]
-      ) [VarDeclArray]
-    ) [DeclListVarDecl]
-    VarList(
+    NoDeclList(
+    ) [NoDeclList]
+    VarDeclArray(
       ConstType(
         Type(
          int
         ) [Type]
       ) [ConstType]
-     x
+      ArrayInit(
+       a
+      ) [ArrayInit]
       NoVarDeclListList(
       ) [NoVarDeclListList]
-    ) [VarList]
+    ) [VarDeclArray]
   ) [DeclListVarDecl]
   WithMethodDeclList(
     NoMethodDeclList(
@@ -91,8 +80,34 @@ INFO  17:07:57,451 - Program(
       ) [FunctionVoid]
       NoFormPars(
       ) [NoFormPars]
-      NoVarDeclList(
-      ) [NoVarDeclList]
+      WithVarDeclList(
+        WithVarDeclList(
+          NoVarDeclList(
+          ) [NoVarDeclList]
+          VarList(
+            ConstType(
+              Type(
+               int
+              ) [Type]
+            ) [ConstType]
+           x
+            NoVarDeclListList(
+            ) [NoVarDeclListList]
+          ) [VarList]
+        ) [WithVarDeclList]
+        VarDeclArray(
+          ConstType(
+            Type(
+             char
+            ) [Type]
+          ) [ConstType]
+          ArrayInit(
+           ch
+          ) [ArrayInit]
+          NoVarDeclListList(
+          ) [NoVarDeclListList]
+        ) [VarDeclArray]
+      ) [WithVarDeclList]
       WithStatementList(
         WithStatementList(
           WithStatementList(
@@ -153,7 +168,7 @@ INFO  17:07:57,451 - Program(
                   TermFactor(
                     FactorConst(
                       NUMBER(
-                       10
+                       3
                       ) [NUMBER]
                     ) [FactorConst]
                   ) [TermFactor]
@@ -162,7 +177,7 @@ INFO  17:07:57,451 - Program(
             ) [StatementDesignator]
           ) [WithStatementList]
           StatementDesignator(
-            DesignatorAssign(
+            Inc(
               DesignatorArr(
                 DesignatorIdent(
                  a
@@ -181,35 +196,9 @@ INFO  17:07:57,451 - Program(
                 RBRACKET(
                 ) [RBRACKET]
               ) [DesignatorArr]
-              AssignAddopR(
-                PLUSEQ(
-                ) [PLUSEQ]
-              ) [AssignAddopR]
-              ExprTerm(
-                TermFactor(
-                  FactorDesignator(
-                    DesignatorArr(
-                      DesignatorIdent(
-                       a
-                      ) [DesignatorIdent]
-                      LBRACKET(
-                      ) [LBRACKET]
-                      ExprTerm(
-                        TermFactor(
-                          FactorConst(
-                            NUMBER(
-                             1
-                            ) [NUMBER]
-                          ) [FactorConst]
-                        ) [TermFactor]
-                      ) [ExprTerm]
-                      RBRACKET(
-                      ) [RBRACKET]
-                    ) [DesignatorArr]
-                  ) [FactorDesignator]
-                ) [TermFactor]
-              ) [ExprTerm]
-            ) [DesignatorAssign]
+              PlsPls(
+              ) [PlsPls]
+            ) [Inc]
           ) [StatementDesignator]
         ) [WithStatementList]
         Print(
@@ -242,13 +231,14 @@ INFO  17:07:57,451 - Program(
     ) [MethodDecl]
   ) [WithMethodDeclList]
 ) [Program]
-INFO  17:07:57,453 - ==================SEMANTICKA OBRADA=================
-INFO  17:07:57,456 - Deklarisana promenljiva a na liniji 2
-INFO  17:07:57,456 - Deklarisana promenljiva x na liniji 3
-INFO  17:07:57,457 - Deklarisana metoda main na liniji 6
-INFO  17:07:57,457 - ==================SINTAKSNA ANALIZA=================
-INFO  17:07:57,457 - Ukupno deklarisanih globalnih promenljivih:		1
-INFO  17:07:57,463 - Ukupno deklarisanih globalnih nizova:			1
-INFO  17:07:57,463 - Ukupno deklarisanih globalnih konstanti:			0
-INFO  17:07:57,463 - Ukupno deklarisanih lokalnih promenljivih u main metodi:	0
-INFO  17:07:57,481 - Parsiranje uspesno zavrseno!
+INFO  00:03:54,247 - ==================SEMANTICKA OBRADA=================
+INFO  00:03:54,251 - Deklarisana promenljiva a na liniji 2
+INFO  00:03:54,251 - Deklarisana metoda main na liniji 6
+INFO  00:03:54,251 - Deklarisana promenljiva x na liniji 6
+INFO  00:03:54,251 - Deklarisana promenljiva ch na liniji 6
+INFO  00:03:54,255 - ==================SINTAKSNA ANALIZA=================
+INFO  00:03:54,255 - Ukupno deklarisanih globalnih promenljivih:		1
+INFO  00:03:54,255 - Ukupno deklarisanih globalnih nizova:			2
+INFO  00:03:54,255 - Ukupno deklarisanih globalnih konstanti:			0
+INFO  00:03:54,255 - Ukupno deklarisanih lokalnih promenljivih u main metodi:	2
+INFO  00:03:54,275 - Parsiranje uspesno zavrseno!

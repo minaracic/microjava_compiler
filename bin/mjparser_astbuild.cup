@@ -71,6 +71,8 @@ nonterminal Condition Condition;
 nonterminal OptionalDesignatorStatement OptionalDesignatorStatement;
 nonterminal OptionalCondition OptionalCondition;
 nonterminal Neg Neg;
+nonterminal PlusPlus PlusPlus;
+nonterminal MinusMinus MinusMinus;
 nonterminal OptionalExpr OptionalExpr;
 nonterminal CondTerm CondTerm;
 nonterminal CondFact CondFact;
@@ -243,9 +245,13 @@ DesignatorStatement ::= (DesignatorAssign)Designator:D1 Assignop:A2 Expr:E3 {: R
 					|
 					(DesignatorFuncCall)Designator:D1 LPARENT OptionalActPars:O2 RPARENT {: RESULT=new DesignatorFuncCall(D1, O2); RESULT.setLine(D1left); :}
 					|
-					(Inc)Designator:D1 PLUSPLUS {: RESULT=new Inc(D1); RESULT.setLine(D1left); :}
+					(Inc)Designator:D1 PlusPlus:P2 {: RESULT=new Inc(D1, P2); RESULT.setLine(D1left); :}
 					|
-					(Dec)Designator:D1 MINUSMINUS {: RESULT=new Dec(D1); RESULT.setLine(D1left); :};
+					(Dec)Designator:D1 MinusMinus:M2 {: RESULT=new Dec(D1, M2); RESULT.setLine(D1left); :};
+					
+PlusPlus ::= (PlsPls) PLUSPLUS {: RESULT=new PlsPls(); :};
+
+MinusMinus ::= (MinMin) MINUSMINUS {: RESULT=new MinMin(); :};
 
 Condition ::= (ConditionA)CondTerm:C1 {: RESULT=new ConditionA(C1); RESULT.setLine(C1left); :} 
 			|

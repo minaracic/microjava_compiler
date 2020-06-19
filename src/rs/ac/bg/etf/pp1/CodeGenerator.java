@@ -20,7 +20,7 @@ public class CodeGenerator extends VisitorAdaptor {
 			MUL.class, DIV.class, MOD.class, 
 			Lparent.class, Rparent.class,
 			PLUSEQ.class, MINUSEQ.class, MULEQ.class, DIVEQ.class, MODEQ.class,
-			LBRACKET.class, RBRACKET.class});
+			LBRACKET.class, RBRACKET.class, PlsPls.class, MinMin.class});
 			//- kao unarni operator, kako da razlikujem
 	
 	//dodaj - kao unarni operator
@@ -46,17 +46,21 @@ public class CodeGenerator extends VisitorAdaptor {
 	}
 	
 	public void visit(Dec dec) {
-		Code.put(Code.const_1);
-		Code.put(Code.sub);
-		Code.put(Code.dup);
-		Code.store(dec.getDesignator().obj);
+		generateCode();
+//		Code.put(Code.const_1);
+//		Code.put(Code.sub);
+//		Code.put(Code.dup);
+//		Code.store(dec.getDesignator().obj);
 	}
 	
 	public void visit(Inc dec) {
-		Code.put(Code.const_1);
-		Code.put(Code.add);
-		Code.put(Code.dup);
-		Code.store(dec.getDesignator().obj);
+		generateCode();
+//		Obj var = dec.getDesignator().obj;
+//		loadObject(var, vars);
+//		Code.put(Code.const_1);
+//		Code.put(Code.add);
+//		Code.put(Code.dup);
+//		Code.store(dec.getDesignator().obj);
 	}
 	
 	public void visit(FunctionVoid name) {
@@ -100,6 +104,8 @@ public class CodeGenerator extends VisitorAdaptor {
 		if(op instanceof Lparent  || op instanceof Rparent)
 			return 1;
 		if(op instanceof LBRACKET || op instanceof RBRACKET)
+			return 1;
+		if(op instanceof MinMin || op instanceof PlsPls)
 			return 1;
 //		if(op.equals("-u"))
 //			return 2;
@@ -166,6 +172,13 @@ public class CodeGenerator extends VisitorAdaptor {
 	}
 	
 	//todo: dodaj ++ i --
+	public void visit(PlsPls var) {
+		addOperatorToOutput(var);
+	}
+	
+	public void visit(MinMin var) {
+		addOperatorToOutput(var);
+	}
 	
 	public void visit(LBRACKET var) {
 		addOperatorToOutput(var);
@@ -267,6 +280,7 @@ public class CodeGenerator extends VisitorAdaptor {
 	private Obj getObject(SyntaxNode in) {
 		if(in instanceof DesignatorIdent)return ((DesignatorIdent) in).obj;
 		if(in instanceof NUMBER)return ((NUMBER) in).obj;
+		if(in instanceof CHAR)return ((CHAR) in).obj;
 		return null;
 	}
 	
@@ -294,10 +308,11 @@ public class CodeGenerator extends VisitorAdaptor {
 	//load object on stack
 	public void loadObject(Obj obj, Stack<Obj> vars) {
 		if(obj.getType().getKind() == Tab.noType.getKind())return;
+		
 		if(isArrayElement(obj)) {
 			Obj index = vars.pop();
-			Obj arr = vars.pop();
 			loadObject(index, vars);
+			Obj arr = vars.pop();
 			Code.load(arr);
 			Code.put(Code.dup_x1);
 			Code.put(Code.pop);
@@ -316,12 +331,12 @@ public class CodeGenerator extends VisitorAdaptor {
 		if(obj.getType().getKind() == Tab.noType.getKind())return;
 		if(isArrayElement(obj)) {
 			Obj index = vars.pop();
-			if(isNoType(index)) {
-				Code.store(index);
-			}
+			loadObject(index, vars);
 			Obj arr = vars.pop();
 			Code.load(arr);
-			Code.load(index);
+			
+			Code.put(Code.dup_x1);
+			Code.put(Code.pop);
 		}
 		else {
 			Code.load(obj);
@@ -415,6 +430,30 @@ public class CodeGenerator extends VisitorAdaptor {
 			tmp = new Obj(Obj.Var, "$", Tab.noType);
 			vars.push(tmp);
 		}
+		if(in instanceof MinusMinus) {
+			Obj var1 = vars.pop();
+			loadObject(var1, vars);
+//			Obj var2 = vars.pop();
+//			loadObject(var2, vars);
+			Code.put(Code.dup);
+			Code.put(Code.mul);
+			Obj tmp = new Obj(Obj.Var, "$", Tab.noType);
+			vars.push(tmp);
+		}
+		if(in instanceof PlusPlus) {
+			Obj var1 = vars.pop();
+//			putObjectOnStack(var1, vars);
+//			if(isArrayElement(var1)) {
+//				Code.put(Code.dup2);
+//				Code.put(Code.aload);
+//			}
+			Code.put(Code.const_1);
+			Code.put(Code.add);
+			Code.put(Code.dup);
+			Obj tmp = new Obj(Obj.Var, "$", Tab.noType);
+			vars.push(tmp);
+			storeInObject(var1, vars);
+		}
 		if(in instanceof Equal) {
 //			Obj val = new Obj(Obj.Var, "val", Tab.noType);
 			
@@ -448,61 +487,137 @@ public class CodeGenerator extends VisitorAdaptor {
 		if(in instanceof PLUSEQ) {
 			Obj var1 = vars.pop();
 			loadObject(var1, vars);
+			Obj tmp = new Obj(Obj.Var,"$", Tab.noType);
+			Code.store(tmp);
 			
 			Obj var2 = vars.pop();
 			if(isArrayElement(var2)) {	
 				putObjectOnStack(var2, vars);
 				Code.put(Code.dup2);
 				Code.put(Code.aload);
+				Code.load(tmp);
 				Code.put(Code.add);
+				Code.put(Code.dup_x2);
 			}
 			else {
 				loadObject(var2, vars);
-//				Code.load(tmp);
+				Code.load(tmp);
 				Code.put(Code.add);
 				Code.put(Code.dup);
 			}
 			
+			
 			storeInObject(var2, vars);
 			Obj tmp1 = new Obj(Obj.Var, "$", Tab.noType);
-			vars.push(tmp1);
-							
+			vars.push(tmp1);					
 		}
 		if(in instanceof MINUSEQ) {
 			Obj var1 = vars.pop();
+			loadObject(var1, vars);
+			Obj tmp = new Obj(Obj.Var,"$", Tab.noType);
+			Code.store(tmp);
+			
 			Obj var2 = vars.pop();
-			Code.load(var2);
-			Code.load(var1);
-			Code.put(Code.sub);
-			Code.store(var2);
-			vars.push(var2);				
+			if(isArrayElement(var2)) {	
+				putObjectOnStack(var2, vars);
+				Code.put(Code.dup2);
+				Code.put(Code.aload);
+				Code.load(tmp);
+				Code.put(Code.sub);
+				Code.put(Code.dup_x2);
+			}
+			else {
+				loadObject(var2, vars);
+				Code.load(tmp);
+				Code.put(Code.sub);
+				Code.put(Code.dup);
+			}
+			
+			
+			storeInObject(var2, vars);
+			Obj tmp1 = new Obj(Obj.Var, "$", Tab.noType);
+			vars.push(tmp1);					
 		}
 		if(in instanceof MULEQ) {
 			Obj var1 = vars.pop();
+			loadObject(var1, vars);
+			Obj tmp = new Obj(Obj.Var,"$", Tab.noType);
+			Code.store(tmp);
+			
 			Obj var2 = vars.pop();
-			Code.load(var2);
-			Code.load(var1);
-			Code.put(Code.mul);
-			Code.store(var2);
-			vars.push(var2);	
+			if(isArrayElement(var2)) {	
+				putObjectOnStack(var2, vars);
+				Code.put(Code.dup2);
+				Code.put(Code.aload);
+				Code.load(tmp);
+				Code.put(Code.mul);
+				Code.put(Code.dup_x2);
+			}
+			else {
+				loadObject(var2, vars);
+				Code.load(tmp);
+				Code.put(Code.mul);
+				Code.put(Code.dup);
+			}
+			
+			
+			storeInObject(var2, vars);
+			Obj tmp1 = new Obj(Obj.Var, "$", Tab.noType);
+			vars.push(tmp1);					
 		}
 		if(in instanceof DIVEQ) {
 			Obj var1 = vars.pop();
+			loadObject(var1, vars);
+			Obj tmp = new Obj(Obj.Var,"$", Tab.noType);
+			Code.store(tmp);
+			
 			Obj var2 = vars.pop();
-			Code.load(var2);
-			Code.load(var1);
-			Code.put(Code.div);
-			Code.store(var2);
-			vars.push(var2);	
+			if(isArrayElement(var2)) {	
+				putObjectOnStack(var2, vars);
+				Code.put(Code.dup2);
+				Code.put(Code.aload);
+				Code.load(tmp);
+				Code.put(Code.div);
+				Code.put(Code.dup_x2);
+			}
+			else {
+				loadObject(var2, vars);
+				Code.load(tmp);
+				Code.put(Code.div);
+				Code.put(Code.dup);
+			}
+			
+			
+			storeInObject(var2, vars);
+			Obj tmp1 = new Obj(Obj.Var, "$", Tab.noType);
+			vars.push(tmp1);		
 		}
 		if(in instanceof MODEQ) {
 			Obj var1 = vars.pop();
+			loadObject(var1, vars);
+			Obj tmp = new Obj(Obj.Var,"$", Tab.noType);
+			Code.store(tmp);
+			
 			Obj var2 = vars.pop();
-			Code.load(var2);
-			Code.load(var1);
-			Code.put(Code.rem);
-			Code.store(var2);
-			vars.push(var2);	
+			if(isArrayElement(var2)) {	
+				putObjectOnStack(var2, vars);
+				Code.put(Code.dup2);
+				Code.put(Code.aload);
+				Code.load(tmp);
+				Code.put(Code.rem);
+				Code.put(Code.dup_x2);
+			}
+			else {
+				loadObject(var2, vars);
+				Code.load(tmp);
+				Code.put(Code.rem);
+				Code.put(Code.dup);
+			}
+			
+			
+			storeInObject(var2, vars);
+			Obj tmp1 = new Obj(Obj.Var, "$", Tab.noType);
+			vars.push(tmp1);		
 		}	
 	}
 	
