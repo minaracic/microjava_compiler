@@ -92,7 +92,9 @@ public class SemanticAnalyzer extends VisitorAdaptor{
     	if(Tab.currentScope().findSymbol(name) == null) {
     		if(constValue.getType() == currentType) {
     			Obj constVal = Tab.insert(Obj.Var, constVar.getVarName(), currentType);
-    			constVal.setAdr(constValue.getAdr());
+    			//constVal.setAdr(constValue.getAdr());
+    			constVal.setLevel(0);
+    			constVar.obj = constVal;
     			totalGlobalConstVar++;
     			report_info("Deklarisana promenljiva "+ name, constVar);
     		}

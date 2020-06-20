@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 19/5/2020 23:21:54
+// 20/5/2020 13:14:11
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -12,6 +12,7 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(Assignop Assignop) { }
     public void visit(ExprInParentRPARENT ExprInParentRPARENT) { }
     public void visit(ExprInParentLPARENT ExprInParentLPARENT) { }
+    public void visit(Equal Equal) { }
     public void visit(StatementList StatementList) { }
     public void visit(MethodOrAbstractMethodDeclList MethodOrAbstractMethodDeclList) { }
     public void visit(Addop Addop) { }
@@ -88,7 +89,7 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(ActParsList ActParsList) { visit(); }
     public void visit(AssignMulopR AssignMulopR) { visit(); }
     public void visit(AssignAddopR AssignAddopR) { visit(); }
-    public void visit(Equal Equal) { visit(); }
+    public void visit(AEqual AEqual) { visit(); }
     public void visit(AddopPls AddopPls) { visit(); }
     public void visit(AddopMin AddopMin) { visit(); }
     public void visit(MINUSEQ MINUSEQ) { visit(); }
@@ -177,6 +178,7 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(WithConstValueList WithConstValueList) { visit(); }
     public void visit(ConstType ConstType) { visit(); }
     public void visit(ConstDecl ConstDecl) { visit(); }
+    public void visit(EQUALOP EQUALOP) { visit(); }
     public void visit(NoDeclList NoDeclList) { visit(); }
     public void visit(DeclListClass DeclListClass) { visit(); }
     public void visit(DeclListAbstractClass DeclListAbstractClass) { visit(); }

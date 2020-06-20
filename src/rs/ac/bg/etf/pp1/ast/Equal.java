@@ -1,37 +1,37 @@
 // generated with ast extension for cup
 // version 0.8
-// 19/5/2020 23:21:54
+// 20/5/2020 13:14:11
 
 
 package rs.ac.bg.etf.pp1.ast;
 
-public class Equal extends Assignop {
+public abstract class Equal implements SyntaxNode {
 
-    public Equal () {
+    private SyntaxNode parent;
+
+    private int line;
+
+    public SyntaxNode getParent() {
+        return parent;
     }
 
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
+    public void setParent(SyntaxNode parent) {
+        this.parent=parent;
     }
 
-    public void childrenAccept(Visitor visitor) {
+    public int getLine() {
+        return line;
     }
 
-    public void traverseTopDown(Visitor visitor) {
-        accept(visitor);
+    public void setLine(int line) {
+        this.line=line;
     }
 
-    public void traverseBottomUp(Visitor visitor) {
-        accept(visitor);
-    }
+    public abstract void accept(Visitor visitor);
+    public abstract void childrenAccept(Visitor visitor);
+    public abstract void traverseTopDown(Visitor visitor);
+    public abstract void traverseBottomUp(Visitor visitor);
 
-    public String toString(String tab) {
-        StringBuffer buffer=new StringBuffer();
-        buffer.append(tab);
-        buffer.append("Equal(\n");
-
-        buffer.append(tab);
-        buffer.append(") [Equal]");
-        return buffer.toString();
-    }
+    public String toString() { return toString(""); }
+    public abstract String toString(String tab);
 }

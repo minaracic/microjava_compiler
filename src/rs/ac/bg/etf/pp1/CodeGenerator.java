@@ -16,7 +16,7 @@ public class CodeGenerator extends VisitorAdaptor {
 	private LinkedList<SyntaxNode> output = new LinkedList<SyntaxNode>();
 //	private Set<Obj> objects = new HashSet<Obj>();
 	
-	private List<Class> operatorTokens = Arrays.asList(new Class[]{AddopPls.class, AddopMin.class, Equal.class, 
+	private List<Class> operatorTokens = Arrays.asList(new Class[]{AddopPls.class, AddopMin.class, EQUALOP.class, 
 			MUL.class, DIV.class, MOD.class, 
 			Lparent.class, Rparent.class,
 			PLUSEQ.class, MINUSEQ.class, MULEQ.class, DIVEQ.class, MODEQ.class,
@@ -25,7 +25,7 @@ public class CodeGenerator extends VisitorAdaptor {
 	
 	//dodaj - kao unarni operator
 	private List<Class> rightAssociativeOperators = Arrays.asList(new Class[]{PLUSEQ.class, MINUSEQ.class, MULEQ.class, 
-			DIVEQ.class, MODEQ.class, Equal.class});
+			DIVEQ.class, MODEQ.class, EQUALOP.class});
 	
 	public int getMainPC() {
 		return mainPC;
@@ -113,7 +113,7 @@ public class CodeGenerator extends VisitorAdaptor {
 			return 3;
 		if(op instanceof AddopPls || op instanceof AddopMin)
 			return 4;
-		if(op instanceof MULEQ || op instanceof DIVEQ || op instanceof MODEQ || op instanceof PLUSEQ || op instanceof MINUSEQ || op instanceof Equal)
+		if(op instanceof MULEQ || op instanceof DIVEQ || op instanceof MODEQ || op instanceof PLUSEQ || op instanceof MINUSEQ || op instanceof EQUALOP)
 			return 14;
 		return -1;
 		
@@ -192,7 +192,7 @@ public class CodeGenerator extends VisitorAdaptor {
 		addOperatorToOutput(plus);
 	}
 	
-	public void visit(Equal var) {
+	public void visit(EQUALOP var) {
 		addOperatorToOutput(var);
 	}
 	
@@ -279,6 +279,7 @@ public class CodeGenerator extends VisitorAdaptor {
 	
 	private Obj getObject(SyntaxNode in) {
 		if(in instanceof DesignatorIdent)return ((DesignatorIdent) in).obj;
+		if(in instanceof ConstVarDecl)return ((ConstVarDecl) in).obj;
 		if(in instanceof NUMBER)return ((NUMBER) in).obj;
 		if(in instanceof CHAR)return ((CHAR) in).obj;
 		return null;
@@ -305,13 +306,28 @@ public class CodeGenerator extends VisitorAdaptor {
 		
 	}
 	
+	public void visit(ConstVarDecl var) {
+//		Code.load(var.getConstValue().obj);
+//		Code.store(var.obj);
+		output.add(var);
+	}
+	
 	//load object on stack
-	public void loadObject(Obj obj, Stack<Obj> vars) {
-		if(obj.getType().getKind() == Tab.noType.getKind())return;
+	public boolean loadObject(Obj obj, Stack<Obj> vars) {
+		if(obj.getType().getKind() == Tab.noType.getKind())return true;
 		
 		if(isArrayElement(obj)) {
 			Obj index = vars.pop();
-			loadObject(index, vars);
+			boolean swap = loadObject(index, vars);
+			//ovo treba kada je izraz sa leve strane
+//			if(isNoType(index)) {
+//				Code.put(Code.dup_x1);
+//				Code.put(Code.pop);
+//			}
+			if(swap) {
+				Code.put(Code.dup_x1);
+				Code.put(Code.pop);
+			}
 			Obj arr = vars.pop();
 			Code.load(arr);
 			Code.put(Code.dup_x1);
@@ -321,9 +337,14 @@ public class CodeGenerator extends VisitorAdaptor {
 				Code.put(Code.baload);
 			else 
 				Code.put(Code.aload);
+			
+//			Obj tmp = new Obj(Obj.Var, "$", Tab.noType);
+//			vars.push(tmp);
+			return false;
 		}
 		else {
 			Code.load(obj);
+			return false;
 		}
 	}
 	
@@ -409,11 +430,14 @@ public class CodeGenerator extends VisitorAdaptor {
 		if(in instanceof MOD) {
 			Obj var1 = vars.pop();
 			loadObject(var1, vars);
+			Obj tmp = new Obj(Obj.Var, "$", Tab.noType);
+			Code.store(tmp);
 			Obj var2 = vars.pop();
 			loadObject(var2, vars);
+			Code.load(tmp);
 			
 			Code.put(Code.rem);
-			Obj tmp = new Obj(Obj.Var, "$", Tab.noType);
+			tmp = new Obj(Obj.Var, "$", Tab.noType);
 			vars.push(tmp);
 		}
 		if(in instanceof AddopMin) {
@@ -432,34 +456,42 @@ public class CodeGenerator extends VisitorAdaptor {
 		}
 		if(in instanceof MinusMinus) {
 			Obj var1 = vars.pop();
-			loadObject(var1, vars);
-//			Obj var2 = vars.pop();
-//			loadObject(var2, vars);
-			Code.put(Code.dup);
-			Code.put(Code.mul);
-			Obj tmp = new Obj(Obj.Var, "$", Tab.noType);
-			vars.push(tmp);
+			putObjectOnStack(var1, vars);
+			if(isArrayElement(var1)) {
+				Code.put(Code.dup2);
+				Code.put(Code.aload);
+			}
+			Code.put(Code.const_1);
+			Code.put(Code.sub);
+			
+//			Code.put(Code.dup);
+//			Obj tmp = new Obj(Obj.Var, "$", Tab.noType);
+//			vars.push(tmp);
+			storeInObject(var1, vars);
 		}
 		if(in instanceof PlusPlus) {
 			Obj var1 = vars.pop();
-//			putObjectOnStack(var1, vars);
-//			if(isArrayElement(var1)) {
-//				Code.put(Code.dup2);
-//				Code.put(Code.aload);
-//			}
+			putObjectOnStack(var1, vars);
+			if(isArrayElement(var1)) {
+				Code.put(Code.dup2);
+				Code.put(Code.aload);
+			}
 			Code.put(Code.const_1);
 			Code.put(Code.add);
-			Code.put(Code.dup);
-			Obj tmp = new Obj(Obj.Var, "$", Tab.noType);
-			vars.push(tmp);
+			
+//			Code.put(Code.dup);
+//			Obj tmp = new Obj(Obj.Var, "$", Tab.noType);
+//			vars.push(tmp);
 			storeInObject(var1, vars);
 		}
-		if(in instanceof Equal) {
+		if(in instanceof EQUALOP) {
 //			Obj val = new Obj(Obj.Var, "val", Tab.noType);
 			
 			Obj var1 = vars.pop(); 
 			loadObject(var1, vars);
-			
+//			Code.loadConst(5);
+//			Code.put(Code.print);
+		
 			Obj var2 = vars.pop();
 			if(isArrayElement(var2)) {
 				
@@ -559,7 +591,6 @@ public class CodeGenerator extends VisitorAdaptor {
 				Code.put(Code.mul);
 				Code.put(Code.dup);
 			}
-			
 			
 			storeInObject(var2, vars);
 			Obj tmp1 = new Obj(Obj.Var, "$", Tab.noType);

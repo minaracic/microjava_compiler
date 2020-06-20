@@ -52,7 +52,7 @@ nonterminal ConstValueList, VarDeclList, OptionalBracket, VarDeclListList;
 nonterminal MethodOrAbstractMethodDeclList, MethodDecl, AbstractMethodDecl, OptionalFormPars, StatementList, FormPars, FormParsList, Statement;
 nonterminal DesignatorStatement, Condition, OptionalDesignatorStatement, OptionalCondition, Neg, PlusPlus, MinusMinus;
 nonterminal OptionalExpr, CondTerm, CondFact, Relop, Addop, AddopLeft, AddopRight, ExprInParentLPARENT, ExprInParentRPARENT, DesignatorLBRACKET, DesignatorRBRACKET;
-nonterminal Assignop, ActPars, OptionalActPars, MulopRight, MulopLeft, Mulop, ClassMethods, ConstVarDecl, ArrayDecl, TypeOrVoid;
+nonterminal Assignop, ActPars, OptionalActPars, MulopRight, MulopLeft, Mulop, ClassMethods, Equal, ArrayDecl, TypeOrVoid;
 
 terminal PROG, LBRACE, RBRACE, EQUAL, COMMA, CONST, SEMI, LBRACKET, RBRACKET, ABSTRACT;
 terminal EXTENDS, LPARENT, RPARENT, CLASS, IF, FOR, BREAK, CONTINUE, READ, RETURN, PRINT, PLUSPLUS, MINUSMINUS, ELSE, MINUS, AND;
@@ -63,7 +63,7 @@ terminal Character CHARCONST;
 terminal Boolean BOOLCONST; //add type of Boolean
 terminal String IDENT;
 
-nonterminal rs.etf.pp1.symboltable.concepts.Obj ProgName, Program, ConstValue, FunctionIdent, Designator;
+nonterminal rs.etf.pp1.symboltable.concepts.Obj ProgName, Program, ConstValue, FunctionIdent, Designator, ConstVarDecl;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, ConstType, Term, Expr, Factor;
 
 precedence left ELSE;
@@ -81,6 +81,8 @@ DeclList ::= (DeclListConstDecl) DeclList ConstDecl
 		(DeclListClass) DeclList ClassDecl
 		| 
 		(NoDeclList);
+		
+Equal ::= (EQUALOP) EQUAL;
 
 ConstDecl ::= (ConstDecl) CONST ConstType ConstVarDecl ConstValueList SEMI;
 
@@ -91,7 +93,7 @@ ConstValueList ::= (WithConstValueList) ConstValueList COMMA ConstVarDecl
 				(NoConstValueList) /* epsilon */
 				;
 
-ConstVarDecl ::= (ConstVarDecl) IDENT:varName EQUAL ConstValue;
+ConstVarDecl ::= (ConstVarDecl) IDENT:varName Equal ConstValue;
 
 ConstValue ::= (NUMBER)NUMCONST
 			|
@@ -244,7 +246,7 @@ AddopRight ::= (PLUSEQ) PLUSEQ | (MINUSEQ)MINUSEQ;
 
 AddopLeft ::= (AddopMin)MINUS | (AddopPls)PLUS;
 
-Assignop ::= (Equal)EQUAL
+Assignop ::= (AEqual)Equal
 			|
 			(AssignAddopR)AddopRight
 			|

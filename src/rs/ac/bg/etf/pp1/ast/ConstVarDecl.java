@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 19/5/2020 23:21:54
+// 20/5/2020 13:14:11
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -9,11 +9,16 @@ public class ConstVarDecl implements SyntaxNode {
 
     private SyntaxNode parent;
     private int line;
+    public rs.etf.pp1.symboltable.concepts.Obj obj = null;
+
     private String varName;
+    private Equal Equal;
     private ConstValue ConstValue;
 
-    public ConstVarDecl (String varName, ConstValue ConstValue) {
+    public ConstVarDecl (String varName, Equal Equal, ConstValue ConstValue) {
         this.varName=varName;
+        this.Equal=Equal;
+        if(Equal!=null) Equal.setParent(this);
         this.ConstValue=ConstValue;
         if(ConstValue!=null) ConstValue.setParent(this);
     }
@@ -24,6 +29,14 @@ public class ConstVarDecl implements SyntaxNode {
 
     public void setVarName(String varName) {
         this.varName=varName;
+    }
+
+    public Equal getEqual() {
+        return Equal;
+    }
+
+    public void setEqual(Equal Equal) {
+        this.Equal=Equal;
     }
 
     public ConstValue getConstValue() {
@@ -55,15 +68,18 @@ public class ConstVarDecl implements SyntaxNode {
     }
 
     public void childrenAccept(Visitor visitor) {
+        if(Equal!=null) Equal.accept(visitor);
         if(ConstValue!=null) ConstValue.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
+        if(Equal!=null) Equal.traverseTopDown(visitor);
         if(ConstValue!=null) ConstValue.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
+        if(Equal!=null) Equal.traverseBottomUp(visitor);
         if(ConstValue!=null) ConstValue.traverseBottomUp(visitor);
         accept(visitor);
     }
@@ -74,6 +90,12 @@ public class ConstVarDecl implements SyntaxNode {
         buffer.append("ConstVarDecl(\n");
 
         buffer.append(" "+tab+varName);
+        buffer.append("\n");
+
+        if(Equal!=null)
+            buffer.append(Equal.toString("  "+tab));
+        else
+            buffer.append(tab+"  null");
         buffer.append("\n");
 
         if(ConstValue!=null)

@@ -91,7 +91,7 @@ nonterminal MulopRight MulopRight;
 nonterminal MulopLeft MulopLeft;
 nonterminal Mulop Mulop;
 nonterminal ClassMethods ClassMethods;
-nonterminal ConstVarDecl ConstVarDecl;
+nonterminal Equal Equal;
 nonterminal ArrayDecl ArrayDecl;
 nonterminal TypeOrVoid TypeOrVoid;
 
@@ -104,7 +104,7 @@ terminal Character CHARCONST;
 terminal Boolean BOOLCONST; //add type of Boolean
 terminal String IDENT;
 
-nonterminal rs.etf.pp1.symboltable.concepts.Obj ProgName, Program, ConstValue, FunctionIdent, Designator;
+nonterminal rs.etf.pp1.symboltable.concepts.Obj ProgName, Program, ConstValue, FunctionIdent, Designator, ConstVarDecl;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, ConstType, Term, Expr, Factor;
 
 precedence left ELSE;
@@ -122,6 +122,8 @@ DeclList ::= (DeclListConstDecl) DeclList:D1 ConstDecl:C2 {: RESULT=new DeclList
 		(DeclListClass) DeclList:D1 ClassDecl:C2 {: RESULT=new DeclListClass(D1, C2); RESULT.setLine(D1left); :}
 		| 
 		(NoDeclList) {: RESULT=new NoDeclList(); :};
+		
+Equal ::= (EQUALOP) EQUAL {: RESULT=new EQUALOP(); :};
 
 ConstDecl ::= (ConstDecl) CONST ConstType:C1 ConstVarDecl:C2 ConstValueList:C3 SEMI {: RESULT=new ConstDecl(C1, C2, C3); RESULT.setLine(C1left); :};
 
@@ -132,7 +134,7 @@ ConstValueList ::= (WithConstValueList) ConstValueList:C1 COMMA ConstVarDecl:C2 
 				(NoConstValueList) {: RESULT=new NoConstValueList(); :} /* epsilon */
 				;
 
-ConstVarDecl ::= (ConstVarDecl) IDENT:varName EQUAL ConstValue:C1 {: RESULT=new ConstVarDecl(varName, C1); RESULT.setLine(varNameleft); :};
+ConstVarDecl ::= (ConstVarDecl) IDENT:varName Equal:E1 ConstValue:C2 {: RESULT=new ConstVarDecl(varName, E1, C2); RESULT.setLine(varNameleft); :};
 
 ConstValue ::= (NUMBER)NUMCONST:N1 {: RESULT=new NUMBER(N1); RESULT.setLine(N1left); :}
 			|
@@ -285,7 +287,7 @@ AddopRight ::= (PLUSEQ) PLUSEQ {: RESULT=new PLUSEQ(); :} | (MINUSEQ)MINUSEQ {: 
 
 AddopLeft ::= (AddopMin)MINUS {: RESULT=new AddopMin(); :} | (AddopPls)PLUS {: RESULT=new AddopPls(); :};
 
-Assignop ::= (Equal)EQUAL {: RESULT=new Equal(); :}
+Assignop ::= (AEqual)Equal:E1 {: RESULT=new AEqual(E1); RESULT.setLine(E1left); :}
 			|
 			(AssignAddopR)AddopRight:A1 {: RESULT=new AssignAddopR(A1); RESULT.setLine(A1left); :}
 			|
