@@ -20,12 +20,12 @@ public class CodeGenerator extends VisitorAdaptor {
 			MUL.class, DIV.class, MOD.class, 
 			Lparent.class, Rparent.class,
 			PLUSEQ.class, MINUSEQ.class, MULEQ.class, DIVEQ.class, MODEQ.class,
-			LBRACKET.class, RBRACKET.class, PlsPls.class, MinMin.class});
+			LBRACKET.class, RBRACKET.class, PlsPls.class, MinMin.class, Negative.class});
 			//- kao unarni operator, kako da razlikujem
 	
 	//dodaj - kao unarni operator
 	private List<Class> rightAssociativeOperators = Arrays.asList(new Class[]{PLUSEQ.class, MINUSEQ.class, MULEQ.class, 
-			DIVEQ.class, MODEQ.class, EQUALOP.class});
+			DIVEQ.class, MODEQ.class, EQUALOP.class, Negative.class});
 	
 	public int getMainPC() {
 		return mainPC;
@@ -87,10 +87,10 @@ public class CodeGenerator extends VisitorAdaptor {
 		}
 	}
 	
-//	public void visit(Negative op) {
-//		addOperatorToOutput("-u");
-//	}
-//	
+	public void visit(Negative op) {
+		addOperatorToOutput(op);
+	}
+	
 	private boolean isLeftAssociative(SyntaxNode op) {
 		if(rightAssociativeOperators.indexOf(op.getClass()) != -1)
 			return false;
@@ -107,8 +107,8 @@ public class CodeGenerator extends VisitorAdaptor {
 			return 1;
 		if(op instanceof MinMin || op instanceof PlsPls)
 			return 1;
-//		if(op.equals("-u"))
-//			return 2;
+		if(op instanceof Negative)
+			return 2;
 		if(op instanceof MUL || op instanceof DIV || op instanceof MOD)
 			return 3;
 		if(op instanceof AddopPls || op instanceof AddopMin)
@@ -380,6 +380,34 @@ public class CodeGenerator extends VisitorAdaptor {
 		}
 	}
 	
+	public void visit(Read read) {
+		Obj var = read.getDesignator().obj;
+		Stack<Obj> vars = generateCode();
+		
+		if(var.getType().getKind() == Struct.Array) {
+			if(var.getType().getElemType().getKind() == Struct.Char) {
+				Code.put(Code.bread);
+			}
+			else {
+				Code.put(Code.read);
+			}
+		}
+		else if(var.getType().getKind() == Struct.Char) {
+			Code.put(Code.bread);
+		}
+		else {
+			Code.put(Code.read);
+		}
+		
+		Obj tmp = new Obj(Obj.Var, "$", Tab.noType);
+		Code.store(tmp);
+		
+		putObjectOnStack(vars.pop(), vars);
+		Code.load(tmp);
+		storeInObject(var, vars);
+		
+	}
+	
 	private boolean isNoType(Obj obj) {
 		if(obj.getType().getKind() == Tab.noType.getKind())return true;
 		return false;
@@ -398,8 +426,12 @@ public class CodeGenerator extends VisitorAdaptor {
 			vars.push(tmp);
 			
 		}
-		if(in.equals("-u")) {
-			
+		if(in instanceof Negative) {
+			Obj var1 = vars.pop();
+			loadObject(var1, vars);
+			Code.put(Code.neg);
+			Obj tmp = new Obj(Obj.Var, "$", Tab.noType);
+			vars.push(tmp);
 		}
 		if(in instanceof MUL) {
 			Obj var1 = vars.pop();

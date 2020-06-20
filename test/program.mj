@@ -1,13 +1,18 @@
 program test302
-const int nula = 0;
-const int jedan = 1;
-const int pet = 5;
+//const int nula = 0;
+//const int jedan = 1;
+//const int pet = 5;
 
 int niz[];
 {		
 
 	void main()int bodovi,poeni, slova, temp, prom;{
-			
+		niz = new int[20];
+		read(niz[1]);
+		print(niz[1/1+1-1]);
+	 //	niz[1/1-1+1] = 40;
+	//	read(niz[1/1-1+1]);
+		//print(niz[1/1-1+1]);
 	}
 	
 }
