@@ -1,15 +1,21 @@
 program mojTest
-int niz[];
+
 {		
 
-	void main()int x;{
-		niz = new int[10];
-		niz[2] = 10;
-		x = niz[1/1+1];
+	void main()int x, niz[];{
+	//	niz = new int[10];
+	//	x =2;
+	//	niz[1] = 9;
+		//niz[2] = 1;
+	//	niz[5] = 2;
+		//niz[9] = 5;
+		//niz[8] = 7;
+		//niz[1] = niz[niz[niz[1]-1+1]];
+		//niz[niz[niz[niz[1]]-1+1]] = niz[1];
+		niz[2] = niz[1];
 		
-		//print(niz[niz[1]-2]);
-		
-		print(x);
+		//print(niz[niz[niz[niz[1]]-1+1]]); ne radi
+	//	print(niz[niz[1]-1]);
 		
 	}
 	

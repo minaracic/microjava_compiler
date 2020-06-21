@@ -315,22 +315,41 @@ public class CodeGenerator extends VisitorAdaptor {
 		//output.add(var);
 	}
 	
+	public boolean loadObject2(Stack<Obj> vars) {
+		Obj curr = vars.pop();
+		if(curr.getType().getKind() == Tab.noType.getKind())return true;
+		
+		if(isArrayElement(curr)) {
+			Obj index = vars.pop();
+			boolean swap = loadObject2(vars);
+			if(swap) {
+				Code.put(Code.dup_x1);
+				Code.put(Code.pop);
+			}
+			
+			Obj arr = vars.pop();
+			
+			
+		}
+		else {
+			Code.load(curr);
+			return false;
+		}
+	}
+	
 	//load object on stack
 	public boolean loadObject(Obj obj, Stack<Obj> vars) {
 		if(obj.getType().getKind() == Tab.noType.getKind())return true;
 		
 		if(isArrayElement(obj)) {
+			//staro
 			Obj index = vars.pop();
 			boolean swap = loadObject(index, vars);
-			//ovo treba kada je izraz sa leve strane
-//			if(isNoType(index)) {
-//				Code.put(Code.dup_x1);
-//				Code.put(Code.pop);
-//			}
 			if(swap) {
 				Code.put(Code.dup_x1);
 				Code.put(Code.pop);
 			}
+		
 			Obj arr = vars.pop();
 			Code.load(arr);
 			Code.put(Code.dup_x1);
@@ -520,7 +539,6 @@ public class CodeGenerator extends VisitorAdaptor {
 			storeInObject(var1, vars);
 		}
 		if(in instanceof EQUALOP) {
-//			Obj val = new Obj(Obj.Var, "val", Tab.noType);
 			
 			Obj var1 = vars.pop(); 
 			loadObject(var1, vars);
@@ -548,7 +566,8 @@ public class CodeGenerator extends VisitorAdaptor {
 				Code.store(var2);
 				
 			}
-
+//			Obj val = new Obj(Obj.Var, "val", Tab.noType);
+			
 		}
 		if(in instanceof PLUSEQ) {
 			Obj var1 = vars.pop();
