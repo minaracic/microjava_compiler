@@ -48,7 +48,7 @@ scan with {:
 :}
 
 nonterminal DeclList, MethodDeclList, VarDecl, AbstractClassDecl, ClassDecl, ConstDecl, ExtendsDecl;
-nonterminal ConstValueList, VarDeclList, OptionalBracket, VarDeclListList;
+nonterminal ConstValueList, VarDeclList, OptionalBracket, VarDeclListList, ConstVarDecl;
 nonterminal MethodOrAbstractMethodDeclList, MethodDecl, AbstractMethodDecl, OptionalFormPars, StatementList, FormPars, FormParsList, Statement;
 nonterminal DesignatorStatement, Condition, OptionalDesignatorStatement, OptionalCondition, Neg, PlusPlus, MinusMinus;
 nonterminal OptionalExpr, CondTerm, CondFact, Relop, Addop, AddopLeft, AddopRight, ExprInParentLPARENT, ExprInParentRPARENT, DesignatorLBRACKET, DesignatorRBRACKET;
@@ -63,7 +63,7 @@ terminal Character CHARCONST;
 terminal Boolean BOOLCONST; //add type of Boolean
 terminal String IDENT;
 
-nonterminal rs.etf.pp1.symboltable.concepts.Obj ProgName, Program, ConstValue, FunctionIdent, Designator, ConstVarDecl;
+nonterminal rs.etf.pp1.symboltable.concepts.Obj ProgName, Program, ConstValue, FunctionIdent, Designator, ConstVarDeclIdent;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, ConstType, Term, Expr, Factor;
 
 precedence left ELSE;
@@ -90,10 +90,12 @@ ConstType ::= (ConstType) Type;
 
 ConstValueList ::= (WithConstValueList) ConstValueList COMMA ConstVarDecl
 				|
-				(NoConstValueList) /* epsilon */
+				(NoConstValueList)
 				;
 
-ConstVarDecl ::= (ConstVarDecl) IDENT:varName Equal ConstValue;
+ConstVarDecl ::= (ConstVarDecl) ConstVarDeclIdent Equal ConstValue;
+
+ConstVarDeclIdent ::= (ConstVarIdent) IDENT;
 
 ConstValue ::= (NUMBER)NUMCONST
 			|

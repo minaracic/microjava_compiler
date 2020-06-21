@@ -58,6 +58,7 @@ nonterminal ConstValueList ConstValueList;
 nonterminal VarDeclList VarDeclList;
 nonterminal OptionalBracket OptionalBracket;
 nonterminal VarDeclListList VarDeclListList;
+nonterminal ConstVarDecl ConstVarDecl;
 nonterminal MethodOrAbstractMethodDeclList MethodOrAbstractMethodDeclList;
 nonterminal MethodDecl MethodDecl;
 nonterminal AbstractMethodDecl AbstractMethodDecl;
@@ -104,7 +105,7 @@ terminal Character CHARCONST;
 terminal Boolean BOOLCONST; //add type of Boolean
 terminal String IDENT;
 
-nonterminal rs.etf.pp1.symboltable.concepts.Obj ProgName, Program, ConstValue, FunctionIdent, Designator, ConstVarDecl;
+nonterminal rs.etf.pp1.symboltable.concepts.Obj ProgName, Program, ConstValue, FunctionIdent, Designator, ConstVarDeclIdent;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, ConstType, Term, Expr, Factor;
 
 precedence left ELSE;
@@ -131,10 +132,12 @@ ConstType ::= (ConstType) Type:T1 {: RESULT=new ConstType(T1); RESULT.setLine(T1
 
 ConstValueList ::= (WithConstValueList) ConstValueList:C1 COMMA ConstVarDecl:C2 {: RESULT=new WithConstValueList(C1, C2); RESULT.setLine(C1left); :}
 				|
-				(NoConstValueList) {: RESULT=new NoConstValueList(); :} /* epsilon */
+				(NoConstValueList) {: RESULT=new NoConstValueList(); :}
 				;
 
-ConstVarDecl ::= (ConstVarDecl) IDENT:varName Equal:E1 ConstValue:C2 {: RESULT=new ConstVarDecl(varName, E1, C2); RESULT.setLine(varNameleft); :};
+ConstVarDecl ::= (ConstVarDecl) ConstVarDeclIdent:C1 Equal:E2 ConstValue:C3 {: RESULT=new ConstVarDecl(C1, E2, C3); RESULT.setLine(C1left); :};
+
+ConstVarDeclIdent ::= (ConstVarIdent) IDENT:I1 {: RESULT=new ConstVarIdent(I1); RESULT.setLine(I1left); :};
 
 ConstValue ::= (NUMBER)NUMCONST:N1 {: RESULT=new NUMBER(N1); RESULT.setLine(N1left); :}
 			|

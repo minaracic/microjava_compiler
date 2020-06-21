@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 20/5/2020 13:14:11
+// 21/5/2020 14:8:38
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -9,26 +9,25 @@ public class ConstVarDecl implements SyntaxNode {
 
     private SyntaxNode parent;
     private int line;
-    public rs.etf.pp1.symboltable.concepts.Obj obj = null;
-
-    private String varName;
+    private ConstVarDeclIdent ConstVarDeclIdent;
     private Equal Equal;
     private ConstValue ConstValue;
 
-    public ConstVarDecl (String varName, Equal Equal, ConstValue ConstValue) {
-        this.varName=varName;
+    public ConstVarDecl (ConstVarDeclIdent ConstVarDeclIdent, Equal Equal, ConstValue ConstValue) {
+        this.ConstVarDeclIdent=ConstVarDeclIdent;
+        if(ConstVarDeclIdent!=null) ConstVarDeclIdent.setParent(this);
         this.Equal=Equal;
         if(Equal!=null) Equal.setParent(this);
         this.ConstValue=ConstValue;
         if(ConstValue!=null) ConstValue.setParent(this);
     }
 
-    public String getVarName() {
-        return varName;
+    public ConstVarDeclIdent getConstVarDeclIdent() {
+        return ConstVarDeclIdent;
     }
 
-    public void setVarName(String varName) {
-        this.varName=varName;
+    public void setConstVarDeclIdent(ConstVarDeclIdent ConstVarDeclIdent) {
+        this.ConstVarDeclIdent=ConstVarDeclIdent;
     }
 
     public Equal getEqual() {
@@ -68,17 +67,20 @@ public class ConstVarDecl implements SyntaxNode {
     }
 
     public void childrenAccept(Visitor visitor) {
+        if(ConstVarDeclIdent!=null) ConstVarDeclIdent.accept(visitor);
         if(Equal!=null) Equal.accept(visitor);
         if(ConstValue!=null) ConstValue.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
+        if(ConstVarDeclIdent!=null) ConstVarDeclIdent.traverseTopDown(visitor);
         if(Equal!=null) Equal.traverseTopDown(visitor);
         if(ConstValue!=null) ConstValue.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
+        if(ConstVarDeclIdent!=null) ConstVarDeclIdent.traverseBottomUp(visitor);
         if(Equal!=null) Equal.traverseBottomUp(visitor);
         if(ConstValue!=null) ConstValue.traverseBottomUp(visitor);
         accept(visitor);
@@ -89,7 +91,10 @@ public class ConstVarDecl implements SyntaxNode {
         buffer.append(tab);
         buffer.append("ConstVarDecl(\n");
 
-        buffer.append(" "+tab+varName);
+        if(ConstVarDeclIdent!=null)
+            buffer.append(ConstVarDeclIdent.toString("  "+tab));
+        else
+            buffer.append(tab+"  null");
         buffer.append("\n");
 
         if(Equal!=null)

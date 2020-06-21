@@ -86,26 +86,19 @@ public class SemanticAnalyzer extends VisitorAdaptor{
     
     public void visit(ConstVarDecl constVar) {
     	int line = constVar.getLine();
-    	String name = constVar.getVarName();
+    	String name = ((ConstVarDeclIdent)constVar.getConstVarDeclIdent()).obj.getName();
     	Obj constValue = constVar.getConstValue().obj;
+    	Obj var = Tab.find(name);
     	
-    	if(Tab.currentScope().findSymbol(name) == null) {
-    		if(constValue.getType() == currentType) {
-    			Obj constVal = Tab.insert(Obj.Var, constVar.getVarName(), currentType);
-    			//constVal.setAdr(constValue.getAdr());
-    			constVal.setLevel(0);
-    			constVar.obj = constVal;
-    			totalGlobalConstVar++;
-    			report_info("Deklarisana promenljiva "+ name, constVar);
-    		}
-    		else {
-    			report_error("Greska na liniji " + line + " nekompatibilni tipovi podataka", null);
-    		}
+		if(constValue.getType() == currentType) {
+			var.setAdr(constValue.getAdr());
+		//	constVar.obj = var;
+			totalGlobalConstVar++;
+		}
+		else {
+			report_error("Greska na liniji " + line + " nekompatibilni tipovi podataka", null);
+		}
 
-    	}
-    	else {
-			report_error("Greska na liniji " + line + " (" + name + ") vec deklarisano", null);
-    	}
     }
     
     public void visit(FactorNewExpr var) {
@@ -128,6 +121,11 @@ public class SemanticAnalyzer extends VisitorAdaptor{
     	
     	if(Tab.currentScope().findSymbol(name) == null) {
     		Obj constVal = Tab.insert(Obj.Var, name, new Struct(Struct.Array, currentType));
+    		
+    		
+    		if(mainFound) {
+    			constVal.setLevel(1);
+    		}
     		totalGlobalArray++;
     		report_info("Deklarisana promenljiva "+ name, arr);
     		//arr.obj = constVal
@@ -148,6 +146,7 @@ public class SemanticAnalyzer extends VisitorAdaptor{
     	
     	if(Tab.currentScope().findSymbol(name) == null) {
     		Obj constVal = Tab.insert(Obj.Var, name, currentType);
+    		constVal.setLevel(1);
     		totalGlobalVar++;
     		report_info("Deklarisana promenljiva "+ name, var);
 
@@ -167,6 +166,9 @@ public class SemanticAnalyzer extends VisitorAdaptor{
     	
     	if(Tab.currentScope().findSymbol(name) == null) {
     		Obj constVal = Tab.insert(Obj.Var, name, currentType);
+    		if(mainFound) {
+    			constVal.setLevel(1);
+    		}
     		totalGlobalVar++;
     		report_info("Deklarisana promenljiva "+ name, var);
 
@@ -223,10 +225,30 @@ public class SemanticAnalyzer extends VisitorAdaptor{
     	Obj obj = Tab.find(var.getI1());
     	if(obj == Tab.noObj) {
 			report_error("Identifikator ne postoji", var);
-			var.obj = new Obj(obj.getKind(), var.getI1(), obj.getType());
+			obj = new Obj(obj.getKind(), var.getI1(), obj.getType());
     	}
     	
     	var.obj = obj;
+    }
+    
+    public void visit(ConstVarIdent var) {
+    	String name = var.getI1();
+    	int line = var.getLine();
+    	Obj constVal;
+    	
+    	if(Tab.currentScope().findSymbol(name) == null) {
+			constVal = Tab.insert(Obj.Con, name, currentType);
+			constVal.setLevel(0);
+			totalGlobalConstVar++;
+			report_info("Deklarisana promenljiva "+ name, var);
+		}
+   
+    	else {
+			report_error("Greska na liniji " + line + " (" + name + ") vec deklarisano", null);
+			constVal = new Obj(Obj.Var, name, Tab.noType);
+    	}
+    	
+    	var.obj = constVal;
     }
     
     public void visit(DesignatorArr var) {

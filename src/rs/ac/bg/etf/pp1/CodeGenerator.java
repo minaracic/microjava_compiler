@@ -36,13 +36,11 @@ public class CodeGenerator extends VisitorAdaptor {
 	}
 	
 	public void visit(CHAR ch) {
-		ch.obj.setLevel(0);
-		Code.load(ch.obj);
+		output.add(ch);
 	}
 	
 	public void visit(BOOL bool) {
-		bool.obj.setLevel(0);
-		Code.load(bool.obj);
+		output.add(bool);
 	}
 	
 	public void visit(Dec dec) {
@@ -278,11 +276,18 @@ public class CodeGenerator extends VisitorAdaptor {
 	}
 	
 	private Obj getObject(SyntaxNode in) {
+		//if(in instanceof ConstVarDeclIdent)return ((ConstVarIdent) in).obj;
 		if(in instanceof DesignatorIdent)return ((DesignatorIdent) in).obj;
-		if(in instanceof ConstVarDecl)return ((ConstVarDecl) in).obj;
 		if(in instanceof NUMBER)return ((NUMBER) in).obj;
 		if(in instanceof CHAR)return ((CHAR) in).obj;
 		return null;
+	}
+	
+	public void visit(ConstVarDecl var) {
+		//Stack<Obj> o = generateCode();
+		output.clear();
+		operators.clear();
+		
 	}
 	
 	private boolean isOperator(Class in) {
@@ -306,10 +311,8 @@ public class CodeGenerator extends VisitorAdaptor {
 		
 	}
 	
-	public void visit(ConstVarDecl var) {
-//		Code.load(var.getConstValue().obj);
-//		Code.store(var.obj);
-		output.add(var);
+	public void visit(ConstVarIdent var) {
+		//output.add(var);
 	}
 	
 	//load object on stack
@@ -333,7 +336,7 @@ public class CodeGenerator extends VisitorAdaptor {
 			Code.put(Code.dup_x1);
 			Code.put(Code.pop);
 			
-			if(obj.getType().getKind() == Struct.Char) 
+			if(arr.getType().getElemType().getKind() == Struct.Char) 
 				Code.put(Code.baload);
 			else 
 				Code.put(Code.aload);
@@ -367,7 +370,7 @@ public class CodeGenerator extends VisitorAdaptor {
 	public void storeInObject(Obj obj, Stack<Obj> vars) {
 		
 		if(isArrayElement(obj)) {
-			if(obj.getType().getKind() == Struct.Char) {
+			if(obj.getType().getElemType().getKind() == Struct.Char) {
 				Code.put(Code.bastore);
 			}
 			else {
@@ -521,8 +524,6 @@ public class CodeGenerator extends VisitorAdaptor {
 			
 			Obj var1 = vars.pop(); 
 			loadObject(var1, vars);
-//			Code.loadConst(5);
-//			Code.put(Code.print);
 		
 			Obj var2 = vars.pop();
 			if(isArrayElement(var2)) {
@@ -539,12 +540,13 @@ public class CodeGenerator extends VisitorAdaptor {
 				Code.put(Code.dup_x2);
 				Code.put(Code.pop);
 
-				if(arr.getType().getKind() == Struct.Char)Code.put(Code.bastore);
+				if(arr.getType().getElemType().getKind() == Struct.Char)Code.put(Code.bastore);
 				else Code.put(Code.astore);
 			}
 			else {
 //				Code.load(val);
 				Code.store(var2);
+				
 			}
 
 		}
@@ -596,7 +598,6 @@ public class CodeGenerator extends VisitorAdaptor {
 				Code.put(Code.sub);
 				Code.put(Code.dup);
 			}
-			
 			
 			storeInObject(var2, vars);
 			Obj tmp1 = new Obj(Obj.Var, "$", Tab.noType);
