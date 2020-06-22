@@ -1,22 +1,85 @@
-program mojTest
+// Test301
 
-{		
+program test301
 
-	void main()int x, niz[];{
-	//	niz = new int[10];
-	//	x =2;
-	//	niz[1] = 9;
-		//niz[2] = 1;
-	//	niz[5] = 2;
-		//niz[9] = 5;
-		//niz[8] = 7;
-		//niz[1] = niz[niz[niz[1]-1+1]];
-		//niz[niz[niz[niz[1]]-1+1]] = niz[1];
-		niz[2] = niz[1];
+	const int nula = 0;
+	const int jedan = 1;
+	const int pet = 5;
+
+	int niz[];
+	char nizch[];
+	
+{
+	void main()	
+		int bodovi,poeni, slova, temp, prom;
+	{
+		bodovi = 0;
+		bodovi++;
+		bodovi = bodovi + jedan;
+		bodovi = bodovi * pet;
+		bodovi--;
+		print(bodovi); 					//9 
+			
 		
-		//print(niz[niz[niz[niz[1]]-1+1]]); ne radi
-	//	print(niz[niz[1]-1]);
+		niz = new int[3];
+		niz[nula] = jedan;
+		niz[1] = 2;
+		niz[niz[jedan]] = niz[niz[0]] * 3;
+		bodovi = niz[2]/niz[0];
+		print(bodovi); 					//6
+		print(niz[2]); 					//6
+		
+		
+		nizch = new char[3];
+		nizch[0] = 'a';
+		nizch[jedan] = 'b';
+		nizch[pet - 3] = 'c';
+		print(nizch[1]); 				//b
+		print(nizch[jedan * 2]); 		//c
+			
+
+		bodovi = bodovi + (pet * jedan - 1) * bodovi - (3 % 2 + 3 * 2 - 3); 
+		print(bodovi); //26
+		
+		niz[niz[jedan]]++;
+		print(niz[niz[1]]); 			//7
+		niz[niz[jedan]] = niz[niz[jedan]] + 5;
+		niz[2]--;
+		print(niz[niz[1]]);				//11
+		
+		
+		niz[0]=5;
+		niz[1]=2;
+		niz[2]=4;
+		poeni = 2;
+		slova = 2;
+		temp = 3;
+		prom = 5;
+		bodovi= 10;
+		
+		niz[niz[2]-=3]+=poeni*=niz[0]%=prom+=temp+=bodovi-=niz[2]*=2;
+		print(niz[2]); 					//2
+		print(bodovi); 					//8
+		print(temp);					//11
+		print(prom); 					//16
+		print(niz[0]); 					//5
+		print(poeni); 					//10;
+		print(niz[1]); 					//12
+
+		niz[niz[2]-=1]*=poeni+5*(prom-=temp%=5*4)*2-40;
+		print(niz[2]); 					//1
+		print(poeni);					//10
+		print(temp);					//11
+		print(prom); 					//5
+		print(niz[1]);					//240
+		
+		temp=30%2+poeni*10*(prom*=3*4/(3+3))/10;
+		print(prom);					//10
+		print(temp);					//100
 		
 	}
-	
 }
+
+
+
+
