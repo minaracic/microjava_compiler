@@ -280,6 +280,7 @@ public class CodeGenerator extends VisitorAdaptor {
 		if(in instanceof DesignatorIdent)return ((DesignatorIdent) in).obj;
 		if(in instanceof NUMBER)return ((NUMBER) in).obj;
 		if(in instanceof CHAR)return ((CHAR) in).obj;
+		if(in instanceof BOOL)return ((BOOL) in).obj;
 		return null;
 	}
 	
@@ -289,6 +290,22 @@ public class CodeGenerator extends VisitorAdaptor {
 		operators.clear();
 		
 	}
+	
+	public void visit(DesignatorFuncCall var) {
+//		String funcName = ((DesignatorIdent) var.getDesignator()).getI1();
+//		if(funcName.equalsIgnoreCase("len")){
+//			Stack<Obj> o = generateCode();
+//			o.remove(0);
+//			Obj arr = o.pop();
+//			Code.load(arr);
+//			Code.put(Code.arraylength);
+//		}
+//		if(funcName.equalsIgnoreCase("chr")){
+//			
+//		}
+	}
+	
+	
 	
 	private boolean isOperator(Class in) {
 		if(operatorTokens.indexOf(in) != -1) {
@@ -303,19 +320,6 @@ public class CodeGenerator extends VisitorAdaptor {
 		return false;
 	}
 	
-	public void loadElementOfArray(Obj obj) {
-		
-	}
-	
-	public void storeInElementOfArray(Obj obj) {
-		
-	}
-	
-	public void visit(ConstVarIdent var) {
-		//output.add(var);
-	}
-	
-	//load object on stack
 	public void loadObject(Obj obj, Stack<Obj> vars) {
 		if(obj.getType().getKind() == Tab.noType.getKind())return;
 		
@@ -680,10 +684,34 @@ public class CodeGenerator extends VisitorAdaptor {
 			Obj tmp1 = new Obj(Obj.Var, "$", Tab.noType);
 			vars.push(tmp1);					
 		}	
+		
+	}
+	
+	private boolean isBuiltInFunction(Obj var) {
+		if(var.getName().equalsIgnoreCase("len")
+		|| var.getName().equalsIgnoreCase("chr")
+		|| var.getName().equalsIgnoreCase("ord"))
+			return true;
+		return false;
+	}
+	
+	public void callFunc(Obj var, Stack<Obj> vars) {
+		if(var.getName().equalsIgnoreCase("len")){
+			SyntaxNode in = output.poll();
+			Obj arr = getObject(in);
+			Code.load(arr);
+			Code.put(Code.arraylength);
+			Obj tmp = new Obj(Obj.Var, "$", Tab.noType);
+			vars.push(tmp);
+		}
+		if(var.getName().equalsIgnoreCase("ord")){
+			
+		}
 	}
 
 	public Stack<Obj> generateCode() {
 		Stack<Obj> vars = new Stack<Obj>();
+		boolean funcCall = false;
 	
 		//add rest of operators
 		while(!operators.isEmpty()) {

@@ -86,8 +86,6 @@ nonterminal ExprInParentRPARENT ExprInParentRPARENT;
 nonterminal DesignatorLBRACKET DesignatorLBRACKET;
 nonterminal DesignatorRBRACKET DesignatorRBRACKET;
 nonterminal Assignop Assignop;
-nonterminal ActPars ActPars;
-nonterminal OptionalActPars OptionalActPars;
 nonterminal MulopRight MulopRight;
 nonterminal MulopLeft MulopLeft;
 nonterminal Mulop Mulop;
@@ -106,7 +104,7 @@ terminal Boolean BOOLCONST; //add type of Boolean
 terminal String IDENT;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Obj ProgName, Program, ConstValue, FunctionIdent, Designator, ConstVarDeclIdent;
-nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, ConstType, Term, Expr, Factor;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, ConstType, Term, Expr, Factor, ActPars, OptionalActPars;
 
 precedence left ELSE;
 

@@ -66,6 +66,9 @@ public class SemanticAnalyzer extends VisitorAdaptor{
 	public void visit(ProgName progName){
     	progName.obj = Tab.insert(Obj.Prog, progName.getProgName(), Tab.noType);
     	Tab.insert(Obj.Type, "bool", new Struct(Struct.Bool));
+    	Tab.insert(Obj.Meth, "len", Tab.intType);
+    	Tab.insert(Obj.Meth, "chr", Tab.charType);
+    	Tab.insert(Obj.Meth, "odr", Tab.intType);
     	Tab.openScope();
     }
     
@@ -101,16 +104,49 @@ public class SemanticAnalyzer extends VisitorAdaptor{
 
     }
     
+    public void visit(ActParsExpr var) {
+		var.struct = ((ActParsExpr) var).getExpr().struct;
+    }
+    
+    public void visit(WithActPars var) {
+		var.struct = ((WithActPars) var).getActPars().struct;
+    }
+    
     public void visit(FactorNewExpr var) {
-//    	System.out.println(var.getType().struct);
     	var.struct = new Struct(Struct.Array, var.getType().struct);
-//    	var.struct = var.getType().struct;
     	if(var.getExpr().struct.getKind() != Struct.Int) {
     		report_info("Izraz u [] nije int tipa ", var);
     	}
-    	
     }
     
+    public void visit(DesignatorFuncCall var) {
+		if(((DesignatorIdent)var.getDesignator()).getI1().equalsIgnoreCase("len")){
+    		if(((DesignatorFuncCall) var).getOptionalActPars().struct.getKind() != Struct.Array) {
+    			report_error("Izraz u len funkciji nije tipa niz", var);
+    		}
+    	}
+		if(((DesignatorIdent)var.getDesignator()).getI1().equalsIgnoreCase("ord")){
+			if(((DesignatorFuncCall) var).getOptionalActPars().struct.getKind() == Struct.Array) {
+				if(((DesignatorFuncCall) var).getOptionalActPars().struct.getElemType().getKind() != Struct.Char) {
+	    			report_error("Izraz u ord funkciji nije tipa char", var);
+				}
+			}
+			else if(((DesignatorFuncCall) var).getOptionalActPars().struct.getKind() != Struct.Char) {
+    			report_error("Izraz u ord funkciji nije tipa char", var);
+    		}
+    	}
+		if(((DesignatorIdent)var.getDesignator()).getI1().equalsIgnoreCase("chr")){
+			if(((DesignatorFuncCall) var).getOptionalActPars().struct.getKind() == Struct.Array) {
+				if(((DesignatorFuncCall) var).getOptionalActPars().struct.getElemType().getKind() != Struct.Int) {
+	    			report_error("Izraz u chr funkciji nije tipa int", var);
+				}
+			}
+			else if(((DesignatorFuncCall) var).getOptionalActPars().struct.getKind() != Struct.Int) {
+    			report_error("Izraz u chr funkciji nije tipa int", var);
+    		}
+    	}
+    }	
+   
     public void visit(ArrayInit arr) {
     	int line = arr.getLine();
     	String name = arr.getArrayName();
@@ -296,26 +332,7 @@ public class SemanticAnalyzer extends VisitorAdaptor{
     	var.struct = var.getTerm().struct;
     }
     
-    //if Array then if elemnts of int type
-    //if not array, check if int type of var
     public void visit(ExprTerm var) {
-    	//is Array
-//    	if(var.getParent() instanceof DesignatorAssign && ((DesignatorAssign)var.getParent()).getAssignop() instanceof Equal) {
-//    		System.out.println("Inicijalizacija niza");
-//    		
-//    		int designatorType = ((DesignatorAssign)var.getParent()).getDesignator().obj.getType().getElemType().getKind();
-//    		int typeInNEW = ((FactorNewExpr)((TermFactor)var.getTerm()).getFactor()).struct.getElemType().getKind();
-//    		if(designatorType != typeInNEW) {
-//    			report_error("Nekompatibilni tipovi dodele!", var);
-//    		}
-//    	}
-//    	else {
-//    		
-//    	}
-    	
-//    		else if(var.getTerm().struct.getKind() != Struct.Int) 
-//    			report_error("Promenljiva ne predstavlja int tip!", var);
-//    	}
     	var.struct = var.getTerm().struct;
     }
     
@@ -341,14 +358,14 @@ public class SemanticAnalyzer extends VisitorAdaptor{
     		report_error("Main metoda vec deklarisana!", var);
     	}
     	
-		if(var.getFuncName().equals("main") && !mainFound) {
+    	else if(var.getFuncName().equals("main") && !mainFound) {
 			mainFound = true;
 			Obj obj = Tab.insert(Obj.Meth, var.getFuncName(), Tab.noType);
 			currentMethod = obj;
 			var.obj = obj;
 			report_info("Deklarisana metoda "+ var.getFuncName(), var);
 		}
-    	
+    	else var.obj = Tab.insert(Obj.Meth, var.getFuncName(), Tab.noType);
     }
     
     public void visit(WithFormPars var) {
@@ -417,6 +434,34 @@ public class SemanticAnalyzer extends VisitorAdaptor{
     	if(designatorKind != Obj.Meth) {
     		report_error("Identifikator nije funkcija", var);
     	}
+    	else {
+    		if(((DesignatorIdent)var.getDesignator()).getI1().equalsIgnoreCase("len")){
+        		if(((FuncCall) var).getOptionalActPars().struct.getKind() != Struct.Array) {
+        			report_error("Izraz u len funkciji nije tipa niz", var);
+        		}
+        	}
+    		if(((DesignatorIdent)var.getDesignator()).getI1().equalsIgnoreCase("ord")){
+    			if(((FuncCall) var).getOptionalActPars().struct.getKind() == Struct.Array) {
+    				if(((FuncCall) var).getOptionalActPars().struct.getElemType().getKind() != Struct.Char) {
+    	    			report_error("Izraz u ord funkciji nije tipa char", var);
+    				}
+    			}
+    			else if(((FuncCall) var).getOptionalActPars().struct.getKind() != Struct.Char) {
+        			report_error("Izraz u ord funkciji nije tipa char", var);
+        		}
+        	}
+    		if(((DesignatorIdent)var.getDesignator()).getI1().equalsIgnoreCase("chr")){
+    			if(((FuncCall) var).getOptionalActPars().struct.getKind() == Struct.Array) {
+    				if(((FuncCall) var).getOptionalActPars().struct.getElemType().getKind() != Struct.Int) {
+    	    			report_error("Izraz u chr funkciji nije tipa int", var);
+    				}
+    			}
+    			else if(((FuncCall) var).getOptionalActPars().struct.getKind() != Struct.Int) {
+        			report_error("Izraz u chr funkciji nije tipa int", var);
+        		}
+        	}
+    	}
+    	
     	
     	var.struct = var.getDesignator().obj.getType();
     	
